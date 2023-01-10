@@ -1,10 +1,18 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'
 import { Card, Col, Image } from 'react-bootstrap';
-import { ITEM_ROUTE } from '../utils/consts';
+import { CATEGORIES_ROUTE, BRANDS_ROUTE } from '../utils/routeConsts';
 
-const Item = ({item}) => {
+const Item = ({ path, purpose }) => {
     const navigate = useNavigate();
+
+    let route;
+
+    if (purpose === "categories") {
+        route = CATEGORIES_ROUTE;
+    } else if (purpose === "brands") {
+        route = BRANDS_ROUTE;
+    }
 
     return (
         <Col 
@@ -14,17 +22,10 @@ const Item = ({item}) => {
             <Card 
                 style={{width: 150, cursor: 'pointer'}}
                 border={"light"}
-                onClick={() => navigate(ITEM_ROUTE + '/' + item.id)}
+                onClick={() => navigate(route + '/' + path.id)}
             >
-                <Image width={150} height={150} src={item.img} />
-                <div className="mt-1 d-flex justify-content-between">
-                    <div className="text-black-50">Samsung...</div>
-                    <div className="d-flex align-items-center">
-                        <div>{item.rating}</div>
-                        <div>⭐</div>
-                    </div>
-                </div>
-                <div>{item.name}</div>
+                <Image width={150} height={150} src={path.image} />
+                <div>{path.name}</div>
             </Card>
         </Col>
     );

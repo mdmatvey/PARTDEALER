@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import CreateBrand from "../components/modals/CreateBrand";
-import CreateItem from "../components/modals/CreateItem";
-import CreateType from "../components/modals/CreateType";
+import CreateProduct from "../components/modals/CreateProduct";
+import CreateCategory from "../components/modals/CreateCategory";
 
 const Admin = () => {
     const [brandVisible, setBrandVisible] = useState(false);
@@ -23,7 +23,7 @@ const Admin = () => {
                 variant={"outline-dark"} 
                 className="mt-3 p-2"
             >
-                Добавить тип
+                Добавить категорию
             </Button>
             <Button
                 onClick={() => setItemVisible(true)} 
@@ -33,8 +33,8 @@ const Admin = () => {
                 Добавить товар
             </Button>
             <CreateBrand show={brandVisible} onHide={() => setBrandVisible(false)} />
-            <CreateItem show={itemVisible} onHide={() => setItemVisible(false)} />
-            <CreateType show={typeVisible} onHide={() => setTypeVisible(false)} />
+            <CreateProduct show={itemVisible} onHide={() => setItemVisible(false)} />
+            <CreateCategory show={typeVisible} onHide={() => setTypeVisible(false)} />
         </Container>
     );
 };

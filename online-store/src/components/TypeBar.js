@@ -4,18 +4,18 @@ import { Context } from '../index';
 import { ListGroup } from 'react-bootstrap';
 
 const TypeBar = observer(() => {
-    const {item} = useContext(Context);
+    const {product} = useContext(Context);
 
     return (
         <ListGroup>
-            {item.types.map(type => 
+            {product.categories.map(category => 
                 <ListGroup.Item 
                     style={{cursor: "pointer"}}
-                    active={type.id === item.selectedType.id}
-                    onClick={() => item.setSelectedType(type)}
-                    key={type.id}
+                    active={category.id === product.selectedType.id}
+                    onClick={() => product.setSelectedType(category)}
+                    key={category.id}
                 >
-                    {type.name}
+                    {category.name}
                 </ListGroup.Item>
             )}
         </ListGroup>
