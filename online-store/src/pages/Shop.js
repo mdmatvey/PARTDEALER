@@ -2,11 +2,11 @@ import { observer } from 'mobx-react-lite';
 import React, { useContext, useEffect } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Context } from '..';
-import BrandBar from '../components/BrandBar';
+import SortBar from '../components/SortBar';
 import { fetchBrands, fetchCategories, fetchProducts } from '../components/http/productAPI';
 import Pages from '../components/Pages';
 import ProductList from '../components/ProductList';
-import TypeBar from '../components/TypeBar';
+import FilterBar from '../components/FilterBar';
 
 const Shop = observer(() => {
     const {product} = useContext(Context);
@@ -31,16 +31,16 @@ const Shop = observer(() => {
                 product.setProducts(data);
                 // product.setTotalCount(data.length)
             });
-    }, [product.page, product.selectedCategory, product.selectedBrand])
+    }, [product.page, product.limit, product.selectedCategory, product.selectedBrand])
 
     return (
         <Container>
             <Row className="mt-2">
                 <Col md={3}>
-                    {/* <TypeBar /> */}
+                    <FilterBar />
                 </Col>
                 <Col md={9}>
-                    <BrandBar />
+                    <SortBar />
                     <ProductList />
                     <Pages />
                 </Col>
