@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { Context } from '../index';
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, Col, Image, Form } from 'react-bootstrap';
 import { ITEM_ROUTE } from '../utils/routeConsts';
 
 const Product = ({item}) => {
+    const {cart} = useContext(Context)
     const navigate = useNavigate();
 
     const [count, setCount] = useState(1);
@@ -56,7 +58,16 @@ const Product = ({item}) => {
                             +
                         </Button>
                     </div>
-                    <Button style={{display: 'block', marginLeft: 'auto', background: '#fff', color: '#000', border: 'none', borderRadius: 0}}>🛒{(item.price * count).toFixed(2)}₽</Button>
+                    <Button 
+                        onClick={() => {
+                            if (!cart.cartItems.map(item => item.id).includes(item.id)) {
+                                cart.addCartItem(item)
+                            }
+                        }}
+                        style={{display: 'block', marginLeft: 'auto', background: '#fff', color: '#000', border: 'none', borderRadius: 0}}
+                    >
+                            🛒{(item.price * count).toFixed(2)}₽
+                    </Button>
                 </div>
             </div>
         </Col>

@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../index";
-import { ADMIN_ROUTE, LOGIN_ROUTE } from "../utils/routeConsts";
+import { MAIN_ROUTE, ADMIN_ROUTE, LOGIN_ROUTE, CART_ROUTE } from "../utils/routeConsts";
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -9,10 +9,13 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { observer } from "mobx-react-lite";
 import { PRIMARY_COLOR, SECONDARY_COLOR, NAVLINK_STYLE, NAVBUTTON_STYLE } from "../utils/uiConsts";
+import CartList from "./CartList";
 
 const NavBar = observer(() => {
     const {user} = useContext(Context);
     const navigate = useNavigate();
+
+    const [cartOpen, setCartOpen] = useState(false);
 
     const logOut = () => {
         user.setUser({});
@@ -33,7 +36,7 @@ const NavBar = observer(() => {
                     style={{background: PRIMARY_COLOR}} 
                     fluid
                 >
-                    <Navbar.Brand href="/">COMPANY NAME</Navbar.Brand>
+                    <Navbar.Brand onClick={() => navigate(MAIN_ROUTE)} style={{cursor: "pointer"}}>COMPANY NAME</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav className="ms-auto">
@@ -79,9 +82,30 @@ const NavBar = observer(() => {
                         {user.isAuth ? 
                             <Nav
                                 className="ms-auto my-2 my-lg-0"
-                                style={{ maxHeight: '100px' }}
+                                style={{ maxHeight: '100px'}}
                                 navbarScroll
                             >
+                                <Button 
+                                    className={`ms-2 me-2 ${cartOpen && 'open'}`} 
+                                    style={NAVLINK_STYLE}
+                                    onClick={() => setCartOpen(!cartOpen)}
+                                >
+                                    🛒
+                                </Button>
+                                {cartOpen && (
+                                    <div style={{position: "absolute", top: 60, right: 0, width: "35vw", height: 400, background: PRIMARY_COLOR}} className="shop-cart">
+                                        <CartList />
+                                        <Button 
+                                        onClick={() => {
+                                            setCartOpen(false);
+                                            navigate(CART_ROUTE)
+                                        }} 
+                                        style={{display: 'block', margin: '20px auto 0 auto', border: 'none', borderRadius: 0, background: SECONDARY_COLOR}}
+                                        >
+                                            Перейти в корзину
+                                        </Button>
+                                    </div>
+                                )}
                                 <Button 
                                     style={NAVBUTTON_STYLE}
                                     onClick={() => navigate(ADMIN_ROUTE)}
