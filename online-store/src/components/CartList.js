@@ -9,11 +9,11 @@ const CartList = observer(() => {
 
     return (
             <div style={{padding: 20, height: '80%', overflowY: 'scroll', overflowX: 'hidden'}}>
-                <Row style={{width: '100%', margin: 0}}>
                     {cart.cartItems.map(item => 
-                        <CartItem key={item.key} item={item} />    
+                        <Row style={{width: '100%', margin: 0}}>
+                            <CartItem key={item.key} item={item} />    
+                        </Row>
                     )}
-                </Row>
             </div>
     );
 });

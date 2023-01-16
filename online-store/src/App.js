@@ -32,6 +32,11 @@ const App = observer(() => {
       }, 1000);
   }, []);
 
+  window.addEventListener("resize", function(event) {
+    user.setUserWidth(document.body.clientWidth)
+    user.setUserHeight(document.body.clientHeight)
+  })
+
   if (loading) {
     return (
       <div 
@@ -46,11 +51,11 @@ const App = observer(() => {
   }
 
   return (
-    <BrowserRouter>
-      <NavBar />
-      <AppRouter />
-      <Footer />
-    </BrowserRouter>
+      <BrowserRouter>
+        <NavBar />
+        <AppRouter />
+        <Footer />
+      </BrowserRouter>
   );
 });
 

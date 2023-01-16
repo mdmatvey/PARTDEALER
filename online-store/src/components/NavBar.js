@@ -17,6 +17,12 @@ const NavBar = observer(() => {
 
     const [cartOpen, setCartOpen] = useState(false);
 
+    const [query, setQuery] = useState("");
+
+    const searchAPI = searchQuery => {
+        console.log(searchQuery)
+    }
+
     const logOut = () => {
         user.setUser({});
         user.setIsAuth(false);
@@ -72,12 +78,19 @@ const NavBar = observer(() => {
                     <Navbar.Collapse id="navbarScroll">
                         <Form className="d-flex">
                             <Form.Control
-                            type="search"
-                            placeholder="Search term..."
-                            className="ms-5 me-2"
-                            aria-label="Search"
+                                value={query}
+                                onChange={(e) => setQuery(e.target.value)}
+                                type="search"
+                                placeholder="Search term..."
+                                className="ms-5 me-2"
+                                aria-label="Search"
                         />
-                            <Button variant="outline-secondary">Search</Button>
+                            <Button 
+                                onClick={() => searchAPI(query)}
+                                variant="outline-secondary"
+                            >
+                                Search
+                            </Button>
                         </Form>
                         {user.isAuth ? 
                             <Nav
@@ -87,7 +100,7 @@ const NavBar = observer(() => {
                             >
                                 <Button 
                                     className={`ms-2 me-2 ${cartOpen && 'open'}`} 
-                                    style={NAVLINK_STYLE}
+                                    style={{background: '#fff', border: 'none'}}
                                     onClick={() => setCartOpen(!cartOpen)}
                                 >
                                     🛒

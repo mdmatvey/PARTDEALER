@@ -42,9 +42,11 @@ const Categories = observer(({ purpose }) => {
                 <Button variant="outline-success">Поиск</Button>
           </Form>
             <Row className="d-flex">
-                {path.map(item => 
-                    <Item key={item.key} path={item} purpose={purpose} />
-                )}
+                {
+                    path.map(item => 
+                        <Item key={item.key} path={item} purpose={purpose} />
+                    )
+                }
             </Row>
         </>
     );

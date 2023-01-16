@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { Card, Col, Image } from 'react-bootstrap';
 import { CATEGORIES_ROUTE, BRANDS_ROUTE } from '../utils/routeConsts';
+import { Context } from '..';
 
 const Item = ({ path, purpose }) => {
     const navigate = useNavigate();
+    const {product} = useContext(Context)
 
     let route;
 
@@ -22,7 +24,14 @@ const Item = ({ path, purpose }) => {
             <Card 
                 style={{width: 150, cursor: 'pointer'}}
                 border={"light"}
-                onClick={() => navigate(route + '/' + path.id)}
+                onClick={() => {
+                    if (!product.categoriesToDisplay.map(category => category.name).includes(path.name)) {
+                        product.setCategoriesToDisplay([]);
+                        product.setCategoriesToDisplay([...product.categoriesToDisplay, path])
+                    }
+        
+                    navigate(route + '/' + path.id)
+                }}
             >
                 <Image width={150} height={150} src={path.image} />
                 <div>{path.name}</div>

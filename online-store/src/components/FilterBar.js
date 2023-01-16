@@ -4,36 +4,43 @@ import { Context } from '../index';
 import { Form } from 'react-bootstrap';
 
 const FilterBar = observer(() => {
-    const {product} = useContext(Context);
+    const {user, product} = useContext(Context);
 
     const [query, setQuery] = useState("");
+
+    const [columns, setColumns] = useState(2) 
+
+    useEffect(() => {
+        if (user.userWidth < 992) {
+            setColumns(1)
+        } else if (user.userWidth >= 992) {
+            setColumns(2)
+        }
+    }, [user.userWidth]);
 
     // const [brands, setBrands] = useState([]);
     // useEffect(() => {
     //     setBrands(product.brands)
     // }, [product.brands])
 
-    const categoryToDisplay = [];
+    useEffect(() => {
+        if (document.getElementsByClassName("checked")[0]) {
+            document.getElementsByClassName("checked")[0].children[0].checked = true;
+        }
+    }, [product.categories])
 
     const chooseCategory = (e, category) => {
         if (e.target.checked) {
-            categoryToDisplay.push(category);
+            product.setCategoriesToDisplay([...product.categoriesToDisplay, category])
         } else {
-            categoryToDisplay.splice(categoryToDisplay.indexOf(category), 1);
+            product.setCategoriesToDisplay(product.categoriesToDisplay.filter(categoryToDisplay => category.id !== categoryToDisplay.id))
         }
-
-        if (categoryToDisplay.length === 0) {
-            product.setCurrentProducts(product.products);
-            return
-        }
-        
-        product.setCurrentProducts(product.products.filter(product => categoryToDisplay.includes(product.category)))
     }
 
     return (
         <div style={{background: "#dedede", width: "100%"}}>
             Бренды:
-            <Form style={{display: "grid",  gridTemplateColumns: 'repeat(2, 1fr)', width: '100%', background: "#dedede"}}>
+            <Form style={{display: "grid",  gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%', background: "#dedede"}}>
                 {product.brands.filter(brand => {
                     if (brand.name.toLowerCase().includes(query.toLowerCase())) {
                         return true;
@@ -53,8 +60,16 @@ const FilterBar = observer(() => {
                 />
             </Form><br/>
             Категории:
-            <Form style={{display: "grid",  gridTemplateColumns: 'repeat(2, 1fr)', width: '100%', background: "#dedede"}}>
-                {product.categories.map(category => <Form.Check onClick={(e) => chooseCategory(e, category.name)} key={category.id} label={category.name} />)}
+            <Form style={{display: "grid",  gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%', background: "#dedede"}}>
+                {
+                    product.categories.map(category => { return (
+                        product.categoriesToDisplay.map(category => category.name).includes(category.name) 
+                        ?
+                            <Form.Check onClick={(e) => chooseCategory(e, category)} key={category.id} label={category.name} className="checked" />
+                        :
+                            <Form.Check onClick={(e) => chooseCategory(e, category)} key={category.id} label={category.name} />
+                    )}
+                )}
             </Form>
         </div>
     );

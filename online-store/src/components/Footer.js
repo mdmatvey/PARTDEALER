@@ -6,7 +6,7 @@ import { SECONDARY_COLOR } from "../utils/uiConsts";
 const Footer = () => {
     return (
         <footer 
-            style={{ position: "absolute", top: "auto", width: "100%", backgroundColor: SECONDARY_COLOR}}
+            style={{width: '100%', backgroundColor: SECONDARY_COLOR}}
             className="mt-4 pt-4"
         >
             <div className="container-fluid text-center text-md-left">
