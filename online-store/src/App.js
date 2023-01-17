@@ -6,7 +6,7 @@ import { Context } from './index';
 import AppRouter from './components/AppRouter';
 import Footer from './components/Footer';
 import { check } from './components/http/userAPI';
-import NavBar from "./components/NavBar";
+import NavBar from './components/NavBar';
 
 const App = observer(() => {
   const {user} = useContext(Context);
@@ -53,7 +53,9 @@ const App = observer(() => {
   return (
       <BrowserRouter>
         <NavBar />
-        <AppRouter />
+        <main style={{minHeight: '100vh'}}>
+          <AppRouter />
+        </main>
         <Footer />
       </BrowserRouter>
   );
