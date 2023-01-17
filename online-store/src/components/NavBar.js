@@ -107,7 +107,7 @@ const NavBar = observer(() => {
                                 </Button>
                                 {cartOpen && (
                                     <div style={{position: "absolute", top: 60, right: 0, width: "35vw", height: 400, background: PRIMARY_COLOR}} className="shop-cart">
-                                        <CartList />
+                                        <CartList cartPage={false} />
                                         <Button 
                                         onClick={() => {
                                             setCartOpen(false);

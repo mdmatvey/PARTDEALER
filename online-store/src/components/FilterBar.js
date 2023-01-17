@@ -24,8 +24,8 @@ const FilterBar = observer(() => {
     // }, [product.brands])
 
     useEffect(() => {
-        if (document.getElementsByClassName("checked")[0]) {
-            document.getElementsByClassName("checked")[0].children[0].checked = true;
+        if (document.getElementsByClassName("filterBarChecked")[0]) {
+            document.getElementsByClassName("filterBarChecked")[0].children[0].checked = true;
         }
     }, [product.categories])
 
@@ -65,7 +65,7 @@ const FilterBar = observer(() => {
                     product.categories.map(category => { return (
                         product.categoriesToDisplay.map(category => category.name).includes(category.name) 
                         ?
-                            <Form.Check onClick={(e) => chooseCategory(e, category)} key={category.id} label={category.name} className="checked" />
+                            <Form.Check onClick={(e) => chooseCategory(e, category)} key={category.id} label={category.name} className="filterBarChecked" />
                         :
                             <Form.Check onClick={(e) => chooseCategory(e, category)} key={category.id} label={category.name} />
                     )}

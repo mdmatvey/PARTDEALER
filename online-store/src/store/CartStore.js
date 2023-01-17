@@ -3,18 +3,23 @@ import { makeAutoObservable } from "mobx"
 export default class UserStore {
     constructor() {
         this._cartItems = []
+        this._selectedItems = []
         makeAutoObservable(this)
     }
 
-    addCartItem(item) {
-        this._cartItems = [...this._cartItems, item]
+    setCartItems(items) {
+        this._cartItems = items
     }
 
-    removeCartItem(itemID) {
-        this._cartItems = this._cartItems.filter(item => item.id !== itemID)
+    setSelectedItems(items) {
+        this._selectedItems = items
     }
 
     get cartItems() {
         return this._cartItems
+    }
+    
+    get selectedItems() {
+        return this._selectedItems
     }
 }
