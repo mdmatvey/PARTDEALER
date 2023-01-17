@@ -45,7 +45,7 @@ const ProductPage = () => {
                     >
                         <h3>{(product.price * count).toFixed(2)}₽</h3>
                         <CountButton count={count} setCount={setCount} />
-                        Срок: 1     д.<br/>
+                        Срок: 1 д.<br/>
                         Наличие: 1 шт.
                         <CartButton item={product} />
                         Картой онлайн, наличными

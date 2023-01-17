@@ -9,7 +9,7 @@ const Product = ({item}) => {
         <Button 
             onClick={() => {
                 if (!cart.cartItems.map(item => item.id).includes(item.id)) {
-                    cart.addCartItem(item)
+                    cart.setCartItems([...cart.cartItems, item])
                 }
             }}
             style={{background: '#fff', color: '#000', border: 'none', borderRadius: 0}}
