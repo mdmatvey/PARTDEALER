@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 
-const CountButton = ({count, setCount}) => {
+const CountButton = ({item}) => {
     const changeCount = (num) => {
-        if (Number(count) + num > 0) {
-            setCount(() => Number(count) + num)
+        if (Number(item.count) + num > 0) {
+            item.count = Number(item.count) + num;
         }
     }
 
@@ -20,9 +20,9 @@ const CountButton = ({count, setCount}) => {
             <Form>
                 <Form.Control 
                     className="form-inline text-center shadow-none"
-                    value={count} 
+                    value={item.count} 
                     style={{border: 'none', borderRadius: 0}}
-                    onChange={e => isNaN(Number(e.target.value)) ? NaN : setCount(e.target.value)}
+                    onChange={e => isNaN(Number(e.target.value)) ? NaN : e.target.value.length !== 0 ? item.count = e.target.value : 1 }
                     type="text" 
                     minLength="0" 
                     maxLength="2"

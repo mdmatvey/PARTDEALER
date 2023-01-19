@@ -1,11 +1,16 @@
 import { observer } from "mobx-react-lite";
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Card, Container, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { Context } from "..";
 import CartList from "../components/CartList";
+import Total from "../components/Total";
+import { ORDERING_ROUTE } from "../utils/routeConsts";
+import { setEnding } from "../utils/functions"
 
 const Cart = observer(() => {
     const {cart} = useContext(Context);
+    const navigate = useNavigate();
 
     const [itemsCount, setItemsCount] = useState(cart.cartItems.length);
 
@@ -13,20 +18,7 @@ const Cart = observer(() => {
         setItemsCount(cart.cartItems.length);
     }, [cart.cartItems]);
 
-    const setEnding = () => {
-        const lastNumber = String(itemsCount).length === 1 ? Number(String(itemsCount)[0]) : Number(String(itemsCount)[1])
-        let ending = ''
-
-        if ((itemsCount > 10 && itemsCount < 15) || (lastNumber === 0 || (lastNumber > 4 && lastNumber < 10))) {
-            ending = 'ов'
-        } else if (lastNumber > 1 && lastNumber < 5) {
-            ending = 'а'
-        }
-
-        return ending
-    }
-
-    const ending = setEnding()
+    const ending = setEnding(itemsCount)
 
     return (
         <Container className="mt-3">
@@ -72,19 +64,8 @@ const Cart = observer(() => {
             <div style={{display: 'grid', gridTemplateColumns: '3fr 1fr'}}>
                 <CartList cartPage={true} />
                 <Card>
-                    <Button>Перейти к оформлению</Button>
-                    <Card>
-                        Итого: 
-                        {
-                            cart.cartItems.length !== 0 
-                            ? 
-                            cart.cartItems.map(item => item.price).reduce((accumulator, currentValue) => accumulator + currentValue).toFixed(2) + '₽' 
-                            : 
-                            '.........................................................................' + 0 + '₽'
-                        }
-                        <br/>Всего: {itemsCount} товар{ending} - 0.2кг.............................1390₽
-                        <br/>Скидки:..............................................................-139₽
-                    </Card>
+                    <Button disabled={cart.cartItems.length > 0 ? false : true} onClick={() => navigate(ORDERING_ROUTE)}>Перейти к оформлению</Button>
+                    <Total itemsCount={itemsCount} />
                 </Card>
             </div>
             <Row>

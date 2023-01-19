@@ -1,12 +1,11 @@
+import { observer } from 'mobx-react-lite';
 import React, { useContext, useState } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
 import { Context } from '..';
 import CountButton from './CountButton';
 
-const CartItem = ({item, cartPage}) => {
+const CartItem = observer(({item, cartPage}) => {
     const {cart} = useContext(Context);
-
-    const [count, setCount] = useState(1);
 
     const chooseProduct = (e, item) => {
         if (e.target.checked) {
@@ -23,9 +22,9 @@ const CartItem = ({item, cartPage}) => {
             <Card.Body>
                 <Card.Title style={{fontSize: '1.1rem'}}>{cartPage ? item.title : item.title.length > 50 ? item.title.substring(0, 50) + '...' : item.title}</Card.Title>
                 <Card.Subtitle>{item.category}</Card.Subtitle>
-                <Card.Text><h2>{(item.price * count).toFixed(2)}₽</h2></Card.Text>
+                <Card.Text><h2>{(item.price * item.count).toFixed(2)}₽</h2></Card.Text>
             </Card.Body>
-            <CountButton count={count} setCount={setCount} />
+            <CountButton item={item} />
             <Button 
                     onClick={() => cart.setCartItems(cart.cartItems.filter(cartItem => item.id !== cartItem.id))} 
                     className="shadow-none"
@@ -35,6 +34,6 @@ const CartItem = ({item, cartPage}) => {
             </Button>
         </Card>
     );
-};
+});
 
 export default CartItem;
