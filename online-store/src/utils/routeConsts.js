@@ -4,6 +4,7 @@ export const REGISTRATION_ROUTE = '/registration';
 export const SHOP_ROUTE = '/shop';
 export const MAIN_ROUTE = '/';
 export const CART_ROUTE = '/cart';
+export const ORDERING_ROUTE = '/ordering';
 export const ITEM_ROUTE = '/item';
 export const CATEGORIES_ROUTE = '/categories';
 export const BRANDS_ROUTE = '/brands';

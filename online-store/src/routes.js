@@ -1,7 +1,8 @@
-import { ADMIN_ROUTE, CART_ROUTE, CATEGORIES_ROUTE, BRANDS_ROUTE, ITEM_ROUTE, LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from './utils/routeConsts';
+import { ADMIN_ROUTE, CART_ROUTE, CATEGORIES_ROUTE, BRANDS_ROUTE, ITEM_ROUTE, LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE, ORDERING_ROUTE } from './utils/routeConsts';
 import Main from './pages/Main';
 import Admin from './pages/Admin';
 import Cart from './pages/Cart';
+import Ordering from './pages/Ordering';
 import Shop from './pages/Shop';
 import Auth from './pages/Auth';
 import ItemPage from './pages/ProductPage';
@@ -17,6 +18,10 @@ export const authRoutes = [
         path: CART_ROUTE,
         Component: Cart,
     },
+    {
+        path: ORDERING_ROUTE,
+        Component: Ordering,
+    }
 ]
 
 export const publicRoutes = [
