@@ -13,7 +13,6 @@ const App = observer(() => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-      setTimeout(() => {
         // check().then(data => {
 
         (async function asyncFunc() {
@@ -29,7 +28,6 @@ const App = observer(() => {
         })();
 
         // }).finally(() => setLoading(false))
-      }, 1000);
   }, []);
 
   window.addEventListener("resize", function(event) {

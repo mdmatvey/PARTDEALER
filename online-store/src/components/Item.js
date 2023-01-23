@@ -21,7 +21,7 @@ const Item = ({ path, purpose }) => {
             className={"mt-5 mb-4"}
         >
             <Card 
-                style={{display: "block", margin: "0 auto", width: 250, height: 260, cursor: 'pointer', textAlign: "center", boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"}}
+                style={{display: "block", margin: "0 auto", width: 250, height: 260, cursor: 'pointer', textAlign: "center", boxShadow: "0px 0px 8px 3px rgba(99, 99, 99, 0.2)"}}
                 border={"light"}
                 onClick={() => {
                     if (!product.categoriesToDisplay.map(category => category.name).includes(path.name)) {

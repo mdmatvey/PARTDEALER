@@ -1,29 +1,37 @@
 import { observer } from 'mobx-react-lite';
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Context } from '../index';
 import { Button, Row, Form, Container } from 'react-bootstrap';
 import Item from './Item';
 import { fetchBrands, fetchCategories } from './http/productAPI';
+import SkeletonItem from './skeleton_components/SkeletonItem';
 
 const Categories = observer(({ purpose }) => {
     const {product} = useContext(Context);
 
     let purp = "";
     let path;
+    const [isLoading, setIsLoading] = useState(true);
 
     if (purpose === "categories") {
         purp = "категориям";
         path = product.categories;
         useEffect(() => {
             fetchCategories()
-                .then(data=>product.setCategories(data));
+                .then(data=>{
+                    product.setCategories(data);
+                    setIsLoading(false);
+                });
         }, [])
     } else if (purpose === "brands") {
         purp = "брендам";
         path = product.brands;
         useEffect(() => {
             fetchBrands()
-                .then(data=>product.setBrands(data));
+                .then(data=>{
+                    product.setBrands(data);
+                    setIsLoading(false)
+                });
         }, [])
     }
 
@@ -43,9 +51,13 @@ const Categories = observer(({ purpose }) => {
             </Form>
             <Row md={4}>
                 {
-                    path.map(item => 
-                        <Item key={item.key} path={item} purpose={purpose} />
-                    )
+                    isLoading 
+                    ? 
+                        <SkeletonItem items={8} />
+                    :
+                        path.map(item => 
+                            <Item key={item.key} path={item} purpose={purpose} /> 
+                        )
                 }
             </Row>
         </Container>

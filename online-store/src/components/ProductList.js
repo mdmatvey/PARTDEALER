@@ -3,8 +3,9 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Context } from '../index';
 import { Container, Row } from 'react-bootstrap';
 import Product from './Product';
+import SkeletonProduct from './skeleton_components/SkeletonProduct'
 
-const ProductList = observer(() => {
+const ProductList = observer(({ isProductsLoading }) => {
     const {user, product} = useContext(Context);
 
     useEffect(() => {
@@ -15,8 +16,7 @@ const ProductList = observer(() => {
 
         const categoriesToDisplay = product.categoriesToDisplay.map(category => category.name)
 
-       if (product.products.length !== 0) {
-         console.log(product.products.length, product.products)
+       if (product.products.length !== undefined) {
          product.setCurrentProducts(product.products.filter(product => categoriesToDisplay.includes(product.category)))
        }
     }, [product.products, product.categoriesToDisplay]);
@@ -34,11 +34,18 @@ const ProductList = observer(() => {
     }, [user.userWidth]);
 
     return (
+        
         <Container style={{background: '#ededed', padding: 10, overflow: 'auto'}}>
             <Row style={{display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%'}}>
-                {product.currentProducts.map(product => 
-                    <Product key={product.key} item={product} />    
-                )}
+                {
+                    isProductsLoading 
+                    ? 
+                        <SkeletonProduct products={8} />
+                    :
+                        product.currentProducts.map(product => 
+                            <Product key={product.key} item={product} />    
+                        )
+                }
             </Row>
         </Container>
     );

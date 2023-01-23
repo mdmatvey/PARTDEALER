@@ -1,8 +1,9 @@
 import { observer } from 'mobx-react-lite';
 import React, { useContext, useEffect, useState } from 'react';
-import { Button, Col, Dropdown, Form, Modal, Row } from "react-bootstrap";
+import { Button, Col, Dropdown, Spinner, Form, Modal, Row } from "react-bootstrap";
 import { Context } from "../../index"
 import { createProduct, fetchBrands, fetchCategories } from '../http/productAPI';
+import { PRIMARY_COLOR } from "../../utils/uiConsts";
 
 const CreateProduct = observer(({show, onHide}) => {
     const {product} = useContext(Context);
@@ -10,13 +11,21 @@ const CreateProduct = observer(({show, onHide}) => {
     const [price, setPrice] = useState('');
     const [file, setFile] = useState(null);
     const [info, setInfo] = useState([]);
+    const [isCategoriesLoading, setIsCategoriesLoading] = useState(true);
+    const [isBrandsLoading, setIsBrandsLoading] = useState(true);
 
     useEffect(() => {
         fetchCategories()
-            .then(data=>product.setCategories(data));
+            .then(data=>{
+                product.setCategories(data);
+                setIsCategoriesLoading(false);
+            });
 
         fetchBrands()
-            .then(data=>product.setBrands(data))
+            .then(data=>{
+                product.setBrands(data);
+                setIsBrandsLoading(false);
+            });
     }, [])
 
     const addInfo = () => {
@@ -82,27 +91,39 @@ const CreateProduct = observer(({show, onHide}) => {
                     >
                         <Dropdown.Toggle>{product.selectedCategory.name || "Выберите категорию"}</Dropdown.Toggle>
                         <Dropdown.Menu>
-                            {product.categories.map(category => 
-                                <Dropdown.Item 
-                                    onClick={() => product.setSelectedCategory(category)} 
-                                    key={category.id}
-                                >
-                                    {category.name}
-                                </Dropdown.Item>    
-                            )}
+                            {
+                                isCategoriesLoading 
+                                ?
+                                    <Spinner style={{display: "block", margin: "0 auto", color: PRIMARY_COLOR}} />
+                                :
+                                    product.categories.map(category => 
+                                        <Dropdown.Item 
+                                            onClick={() => product.setSelectedCategory(category)} 
+                                            key={category.id}
+                                        >
+                                            {category.name}
+                                        </Dropdown.Item>    
+                                    )
+                            }
                         </Dropdown.Menu>
                     </Dropdown>
                     <Dropdown className="mt-2 mb-2">
                         <Dropdown.Toggle>{product.selectedBrand.name || "Выберите бренд"}</Dropdown.Toggle>
                         <Dropdown.Menu>
-                            {product.brands.map(brand => 
-                                <Dropdown.Item 
-                                    onClick={() => product.setSelectedBrand(brand)} 
-                                    key={brand.id}
-                                >
-                                    {brand.name}
-                                </Dropdown.Item>    
-                            )}
+                            {
+                                isBrandsLoading 
+                                ?
+                                    <Spinner style={{display: "block", margin: "0 auto", color: PRIMARY_COLOR}} />
+                                :
+                                    product.brands.map(brand => 
+                                        <Dropdown.Item 
+                                            onClick={() => product.setSelectedBrand(brand)} 
+                                            key={brand.id}
+                                        >
+                                            {brand.name}
+                                        </Dropdown.Item>    
+                                    )
+                            }
                         </Dropdown.Menu>
                     </Dropdown>
                     <Form.Control 

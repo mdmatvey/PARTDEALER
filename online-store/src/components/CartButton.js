@@ -7,6 +7,7 @@ const Product = ({item}) => {
     const {cart} = useContext(Context)
 
     return (
+        
         <Button 
             onClick={() => {
                 if (!cart.cartItems.map(item => item.id).includes(item.id)) {

@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Context } from '..';
 import SortBar from '../components/SortBar';
@@ -10,17 +10,27 @@ import FilterBar from '../components/FilterBar';
 
 const Shop = observer(() => {
     const {product} = useContext(Context);
+    const [isCategoriesLoading, setIsCategoriesIsLoading] = useState(true);
+    const [isBrandsLoading, setIsBrandsIsLoading] = useState(true);
+    const [isProductsLoading, setIsProductsLoading] = useState(true);
 
     useEffect(() => {
         fetchCategories()
-            .then(data=>product.setCategories(data));
+            .then(data=>{ 
+                product.setCategories(data);
+                setIsCategoriesIsLoading(false);
+            });
 
         fetchBrands()
-            .then(data=>product.setBrands(data))
+            .then(data=>{
+                product.setBrands(data);
+                setIsBrandsIsLoading(false);
+            });
 
         fetchProducts(null, null, 1, product.limit)
             .then(data=>{
                 product.setProducts(data);
+                setIsProductsLoading(false);
                 // product.setTotalCount(data.length)
             });
     }, [])
@@ -37,11 +47,11 @@ const Shop = observer(() => {
         <Container className='mt-4'>
             <Row className="mt-2">
                 <Col md={3}>
-                    <FilterBar />
+                    <FilterBar isCategoriesLoading={isCategoriesLoading} isBrandsLoading={isBrandsLoading} />
                 </Col>
                 <Col md={9}>
                     <SortBar />
-                    <ProductList />
+                    <ProductList isProductsLoading={isProductsLoading} />
                     <Pages />
                 </Col>
             </Row>

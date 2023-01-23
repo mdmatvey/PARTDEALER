@@ -2,8 +2,10 @@ import { observer } from 'mobx-react-lite';
 import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '../index';
 import { Form } from 'react-bootstrap';
+import Skeleton from 'react-loading-skeleton';
+import "react-loading-skeleton/dist/skeleton.css";
 
-const FilterBar = observer(() => {
+const FilterBar = observer(({isCategoriesLoading, isBrandsLoading}) => {
     const {user, product} = useContext(Context);
 
     const [query, setQuery] = useState("");
@@ -41,13 +43,22 @@ const FilterBar = observer(() => {
         <div style={{background: "#ededed", width: "100%", padding: 4}}>
             Бренды:
             <Form style={{display: "grid",  gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%', background: "#ededed"}}>
-                {product.brands.filter(brand => {
-                    if (brand.name.toLowerCase().includes(query.toLowerCase())) {
-                        return true;
-                    }
+                {
+                    isBrandsLoading 
+                    ? 
+                        <>
+                            <Skeleton count={4} style={{width: "100%"}} /> 
+                            <Skeleton count={4} style={{width: "100%"}} />
+                        </>
+                    :
+                        product.brands.filter(brand => {
+                            if (brand.name.toLowerCase().includes(query.toLowerCase())) {
+                                return true;
+                            }
 
-                    return false;
-                }).map((brand => <Form.Check key={brand.id} label={brand.name} />))}
+                            return false;
+                        }).map((brand => <Form.Check key={brand.id} label={brand.name} />))
+                }
             </Form>
             <Form className="d-inline-flex">
                 <Form.Control
@@ -62,14 +73,21 @@ const FilterBar = observer(() => {
             Категории:
             <Form style={{display: "grid",  gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%', background: "#ededed"}}>
                 {
-                    product.categories.map(category => { return (
-                        product.categoriesToDisplay.map(category => category.name).includes(category.name) 
-                        ?
-                            <Form.Check onClick={(e) => chooseCategory(e, category)} key={category.id} label={category.name} className="filterBarChecked" />
-                        :
-                            <Form.Check onClick={(e) => chooseCategory(e, category)} key={category.id} label={category.name} />
-                    )}
-                )}
+                    isCategoriesLoading 
+                    ? 
+                        <>
+                            <Skeleton count={4} style={{width: "100%"}} /> 
+                            <Skeleton count={4} style={{width: "100%"}} />
+                        </> 
+                    :
+                        product.categories.map(category => { return (
+                            product.categoriesToDisplay.map(category => category.name).includes(category.name) 
+                            ?
+                                <Form.Check onClick={(e) => chooseCategory(e, category)} key={category.id} label={category.name} className="filterBarChecked" />
+                            :
+                                <Form.Check onClick={(e) => chooseCategory(e, category)} key={category.id} label={category.name} />
+                        )})
+                }
             </Form>
         </div>
     );
