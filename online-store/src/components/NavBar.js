@@ -1,12 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../index";
 import { MAIN_ROUTE, ADMIN_ROUTE, LOGIN_ROUTE, CART_ROUTE } from "../utils/routeConsts";
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import { Button, Container, Form, Nav, Navbar} from 'react-bootstrap';
 import { observer } from "mobx-react-lite";
 import { PRIMARY_COLOR, SECONDARY_COLOR, NAVLINK_STYLE, NAVBUTTON_STYLE } from "../utils/uiConsts";
 import CartList from "./CartList";
@@ -39,7 +35,7 @@ const NavBar = observer(() => {
             >
                 <Container 
                     className="pt-2 pb-2"
-                    style={{background: PRIMARY_COLOR}} 
+                    style={{background: SECONDARY_COLOR}} 
                     fluid
                 >
                     <Navbar.Brand onClick={() => navigate(MAIN_ROUTE)} style={{cursor: "pointer"}}>COMPANY NAME</Navbar.Brand>
@@ -71,7 +67,7 @@ const NavBar = observer(() => {
             >
                 <Container 
                     className="pt-2 pb-2"
-                    style={{background: SECONDARY_COLOR}} 
+                    style={{background: PRIMARY_COLOR}} 
                     fluid
                 >
                     <Navbar.Toggle aria-controls="navbarScroll" />
@@ -106,14 +102,14 @@ const NavBar = observer(() => {
                                     🛒
                                 </Button>
                                 {cartOpen && (
-                                    <div style={{position: "absolute", top: 60, right: 0, width: "35vw", height: 400, background: PRIMARY_COLOR}} className="shop-cart">
+                                    <div style={{position: "absolute", top: 59, right: 0, width: "35vw", height: 400, background: SECONDARY_COLOR, zIndex: -1, boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px"}}>
                                         <CartList cartPage={false} />
                                         <Button 
                                         onClick={() => {
                                             setCartOpen(false);
                                             navigate(CART_ROUTE)
                                         }} 
-                                        style={{display: 'block', margin: '20px auto 0 auto', border: 'none', borderRadius: 0, background: SECONDARY_COLOR}}
+                                        style={{display: 'block', margin: '20px auto 0 auto', border: 'none', borderRadius: 0, background: PRIMARY_COLOR}}
                                         >
                                             Перейти в корзину
                                         </Button>

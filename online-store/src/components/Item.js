@@ -18,11 +18,10 @@ const Item = ({ path, purpose }) => {
 
     return (
         <Col 
-            md={3}
-            className={"mt-3"}
+            className={"mt-5 mb-4"}
         >
             <Card 
-                style={{width: 150, cursor: 'pointer'}}
+                style={{display: "block", margin: "0 auto", width: 250, height: 260, cursor: 'pointer', textAlign: "center", boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"}}
                 border={"light"}
                 onClick={() => {
                     if (!product.categoriesToDisplay.map(category => category.name).includes(path.name)) {
@@ -33,8 +32,8 @@ const Item = ({ path, purpose }) => {
                     navigate(route + '/' + path.id)
                 }}
             >
-                <Image width={150} height={150} src={path.image} />
-                <div>{path.name}</div>
+                <Image width={"100%"} height={"80%"} style={{objectFit: 'cover', marginLeft: 'auto', marginRight: 'auto'}} src={path.image} />
+                <h4 style={{marginTop: 10}}>{path.name}</h4>
             </Card>
         </Col>
     );

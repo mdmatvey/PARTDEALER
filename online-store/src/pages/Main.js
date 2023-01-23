@@ -10,7 +10,7 @@ const Shop = () => {
     
     return (
         <Container>
-            <Row className="mt-2">
+            <Row className="d-flex mt-2">
                 <Col md={5}>
                     <h1>About</h1>
                     <h2>

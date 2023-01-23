@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, Dropdown, DropdownButton, Row } from 'react-bootstrap';
 import { Context } from '..';
+import { TEXTBUTTON_STYLE } from "../utils/uiConsts";
 
 const SortdBar = observer(() => {
     const {user, product} = useContext(Context);
@@ -36,13 +37,13 @@ const SortdBar = observer(() => {
                         <DropdownButton variant="secondary" title="Сортировать по">
                             <Dropdown.Menu>
                                 <Dropdown.Item>
-                                    <Button style={{color: "#000", background: "none", border: "none", borderRadius: "0"}}>наличие</Button> 
+                                    <Button style={TEXTBUTTON_STYLE}>наличие</Button> 
                                 </Dropdown.Item>
                                 <Dropdown.Item>
-                                    <Button style={{color: "#000", background: "none", border: "none", borderRadius: "0"}}>цена</Button>
+                                    <Button style={TEXTBUTTON_STYLE}>цена</Button>
                                 </Dropdown.Item>
                                 <Dropdown.Item>
-                                    <Button style={{color: "#000", background: "none", border: "none", borderRadius: "0"}}>срок</Button>
+                                    <Button style={TEXTBUTTON_STYLE}>срок</Button>
                                 </Dropdown.Item>
                             </Dropdown.Menu>
                         </DropdownButton>
@@ -53,7 +54,7 @@ const SortdBar = observer(() => {
                                     <Button 
                                         onClick={(e) => itemsOnPage(e, 4)} 
                                         id="four" 
-                                        style={{color: "#000", background: "none", border: "none", borderRadius: "0"}}
+                                        style={TEXTBUTTON_STYLE}
                                     >
                                         4
                                     </Button>
@@ -71,7 +72,7 @@ const SortdBar = observer(() => {
                                     <Button 
                                         onClick={(e) => itemsOnPage(e, 12)} 
                                         id="twelve" 
-                                        style={{color: "#000", background: "none", border: "none", borderRadius: "0"}}
+                                        style={TEXTBUTTON_STYLE}
                                     >
                                         12
                                     </Button>
@@ -80,7 +81,7 @@ const SortdBar = observer(() => {
                                     <Button 
                                         onClick={(e) => itemsOnPage(e, 20)} 
                                         id="all" 
-                                        style={{color: "#000", background: "none", border: "none", borderRadius: "0"}}
+                                        style={TEXTBUTTON_STYLE}
                                     >
                                         Все
                                     </Button>
@@ -91,15 +92,15 @@ const SortdBar = observer(() => {
                     :
                     <>
                         Сортировать по: 
-                        <Button style={{color: "#000", background: "none", border: "none", borderRadius: "0"}}>наличие</Button> 
-                        <Button style={{color: "#000", background: "none", border: "none", borderRadius: "0"}}>цена</Button> 
-                        <Button style={{color: "#000", background: "none", border: "none", borderRadius: "0"}}>срок</Button>
+                        <Button style={TEXTBUTTON_STYLE}>наличие</Button> 
+                        <Button style={TEXTBUTTON_STYLE}>цена</Button> 
+                        <Button style={TEXTBUTTON_STYLE}>срок</Button>
                         <span className="d-flex align-items-center" style={{display: "block", marginLeft: "auto"}}>
                             На странице: 
                             <Button 
                                 onClick={(e) => itemsOnPage(e, 4)} 
                                 id="four" 
-                                style={{color: "#000", background: "none", border: "none", borderRadius: "0"}}
+                                style={TEXTBUTTON_STYLE}
                             >
                                 4
                             </Button> 
@@ -113,14 +114,14 @@ const SortdBar = observer(() => {
                             <Button 
                                 onClick={(e) => itemsOnPage(e, 12)} 
                                 id="twelve" 
-                                style={{color: "#000", background: "none", border: "none", borderRadius: "0"}}
+                                style={TEXTBUTTON_STYLE}
                             >
                                 12
                             </Button>
                             <Button 
                                 onClick={(e) => itemsOnPage(e, 20)} 
                                 id="all" 
-                                style={{color: "#000", background: "none", border: "none", borderRadius: "0"}}
+                                style={TEXTBUTTON_STYLE}
                             >
                                 Все
                             </Button>

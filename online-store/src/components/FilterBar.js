@@ -38,9 +38,9 @@ const FilterBar = observer(() => {
     }
 
     return (
-        <div style={{background: "#dedede", width: "100%"}}>
+        <div style={{background: "#ededed", width: "100%", padding: 4}}>
             Бренды:
-            <Form style={{display: "grid",  gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%', background: "#dedede"}}>
+            <Form style={{display: "grid",  gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%', background: "#ededed"}}>
                 {product.brands.filter(brand => {
                     if (brand.name.toLowerCase().includes(query.toLowerCase())) {
                         return true;
@@ -60,7 +60,7 @@ const FilterBar = observer(() => {
                 />
             </Form><br/>
             Категории:
-            <Form style={{display: "grid",  gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%', background: "#dedede"}}>
+            <Form style={{display: "grid",  gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%', background: "#ededed"}}>
                 {
                     product.categories.map(category => { return (
                         product.categoriesToDisplay.map(category => category.name).includes(category.name) 

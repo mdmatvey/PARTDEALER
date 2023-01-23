@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useContext } from 'react';
 import { Context } from '../index';
-import { Button, Row, Form } from 'react-bootstrap';
+import { Button, Row, Form, Container } from 'react-bootstrap';
 import Item from './Item';
 import { fetchBrands, fetchCategories } from './http/productAPI';
 
@@ -28,11 +28,11 @@ const Categories = observer(({ purpose }) => {
     }
 
     return (
-        <>
-            <h2>
+        <Container>
+            <h1 className='mt-5 mb-3'>
                 По {purp}:
-            </h2>
-            <Form className="d-flex">
+            </h1>
+            <Form className="d-flex" style={{display: "block", margin: "0 auto", width: "50%"}}>
                 <Form.Control
                     type="search"
                     placeholder={"Поиск по " + purp}
@@ -40,15 +40,15 @@ const Categories = observer(({ purpose }) => {
                     aria-label="Search"
                 />
                 <Button variant="outline-success">Поиск</Button>
-          </Form>
-            <Row className="d-flex">
+            </Form>
+            <Row md={4}>
                 {
                     path.map(item => 
                         <Item key={item.key} path={item} purpose={purpose} />
                     )
                 }
             </Row>
-        </>
+        </Container>
     );
 });
 

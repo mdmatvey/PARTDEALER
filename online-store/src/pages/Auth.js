@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Container, Form, Card, Button, Row } from 'react-bootstrap';
 import { LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE } from '../utils/routeConsts';
 import { login, registration } from '../components/http/userAPI';
@@ -58,11 +58,11 @@ const Auth = observer(() => {
                     <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
                         {isLogin ? 
                             <div style={{width: "auto"}}>
-                                Еще нет аккаунта? <NavLink to={REGISTRATION_ROUTE}>Зарегистрируйтесь!</NavLink>
+                                Еще нет аккаунта? <Link to={REGISTRATION_ROUTE}>Зарегистрируйтесь!</Link>
                             </div>
                             :
                             <div style={{width: "auto"}}>
-                                Уже есть аккаунт? <NavLink to={LOGIN_ROUTE}>Авторизируйтесь!</NavLink>
+                                Уже есть аккаунт? <Link to={LOGIN_ROUTE}>Авторизируйтесь!</Link>
                             </div>
                         }
                         <Button

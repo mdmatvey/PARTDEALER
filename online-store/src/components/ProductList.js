@@ -15,7 +15,10 @@ const ProductList = observer(() => {
 
         const categoriesToDisplay = product.categoriesToDisplay.map(category => category.name)
 
-        product.setCurrentProducts(product.products.filter(product => categoriesToDisplay.includes(product.category)))
+       if (product.products.length !== 0) {
+         console.log(product.products.length, product.products)
+         product.setCurrentProducts(product.products.filter(product => categoriesToDisplay.includes(product.category)))
+       }
     }, [product.products, product.categoriesToDisplay]);
 
     const [columns, setColumns] = useState(4) 
@@ -31,7 +34,7 @@ const ProductList = observer(() => {
     }, [user.userWidth]);
 
     return (
-        <Container style={{background: '#dedede', padding: 10, overflow: 'auto'}}>
+        <Container style={{background: '#ededed', padding: 10, overflow: 'auto'}}>
             <Row style={{display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%'}}>
                 {product.currentProducts.map(product => 
                     <Product key={product.key} item={product} />    

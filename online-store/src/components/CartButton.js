@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Context } from '../index';
 import { Button } from 'react-bootstrap';
+import { CARTBUTTON_STYLE } from "../utils/uiConsts";
 
 const Product = ({item}) => {
     const {cart} = useContext(Context)
@@ -12,7 +13,7 @@ const Product = ({item}) => {
                     cart.setCartItems([...cart.cartItems, item])
                 }
             }}
-            style={{background: '#fff', color: '#000', border: 'none', borderRadius: 0}}
+            style={CARTBUTTON_STYLE}
         >
                 🛒 В корзину
         </Button>
