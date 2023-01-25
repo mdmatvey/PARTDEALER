@@ -7,11 +7,12 @@ import { fetchBrands, fetchCategories } from './http/productAPI';
 import SkeletonItem from './skeleton_components/SkeletonItem';
 
 const Categories = observer(({ purpose }) => {
-    const {product} = useContext(Context);
+    const {product, user} = useContext(Context); 
 
     let purp = "";
     let path;
     const [isLoading, setIsLoading] = useState(true);
+    const [md, setMd] = useState(4);
 
     if (purpose === "categories") {
         purp = "категориям";
@@ -35,6 +36,16 @@ const Categories = observer(({ purpose }) => {
         }, [])
     }
 
+    useEffect(() => {
+        if (user.userWidth < 992) {
+            setMd(2);
+        } else if (user.userWidth < 1200) {
+            setMd(3);
+        } else if (user.userWidth >= 1200) {
+            setMd(4);   
+        } 
+    }, [user.userWidth]);
+
     return (
         <Container>
             <h1 className='mt-5 mb-3'>
@@ -49,7 +60,7 @@ const Categories = observer(({ purpose }) => {
                 />
                 <Button variant="outline-success">Поиск</Button>
             </Form>
-            <Row md={4}>
+            <Row md={md}>
                 {
                     isLoading 
                     ? 

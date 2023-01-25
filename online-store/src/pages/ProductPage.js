@@ -11,9 +11,11 @@ import { observer } from "mobx-react-lite";
 import { Context } from "..";
 
 const ProductPage = observer(() => {
-    const {product} = useContext(Context);
+    const {product, user} = useContext(Context);
     const {id} = useParams();
     const [isLoading, setIsLoading] = useState(true);
+    const [md1, setMd1] = useState(4);
+    const [md2, setMd2] = useState(8);
 
     useEffect(() => {
         fetchOneProduct(id)
@@ -22,6 +24,16 @@ const ProductPage = observer(() => {
                 setIsLoading(false);
             })
     }, []);
+    
+    useEffect(() => {
+        if (user.userWidth < 992) {
+            setMd1(12);
+            setMd2(12);
+        } else if (user.userWidth >= 992) {
+            setMd1(4);
+            setMd2(8);
+        } 
+    }, [user.userWidth]);
 
     return (
         <Container>
@@ -35,7 +47,7 @@ const ProductPage = observer(() => {
                 } 
             </Row>
             <Row>
-                <Col md={4}>
+                <Col md={md1}>
                     {
                         isLoading
                         ?
@@ -44,7 +56,7 @@ const ProductPage = observer(() => {
                             <Image style={{objectFit: 'contain', display: 'block', margin: '0 auto'}} width={300} height={300} src={product.products.image} />
                     }
                 </Col>
-                <Col md={4}>
+                <Col md={md1}>
                     <Card
                         className="d-flex flex-column"
                         style={{width: "100%", height: "100%", fontSize: 24, border: "none"}}
@@ -67,7 +79,7 @@ const ProductPage = observer(() => {
                         }
                     </Card>
                 </Col>
-                <Col md={4}>
+                <Col md={md1}>
                     <Card
                         className="d-flex flex-column"
                         style={{width: "100%", height: "100%", fontSize: 30, border: "none", borderRadius: 0, background: "#ededed", padding: 10}}
@@ -99,7 +111,7 @@ const ProductPage = observer(() => {
                     </Card>
                 </Col>
             </Row>
-            <Col md={8}>
+            <Col md={md2}>
                 <Comments product={product} />
             </Col>
         </Container>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../index";
 import { MAIN_ROUTE, ADMIN_ROUTE, LOGIN_ROUTE, CART_ROUTE } from "../utils/routeConsts";
@@ -24,6 +24,12 @@ const NavBar = observer(() => {
         user.setIsAuth(false);
         localStorage.removeItem('token'); // temporarily
     }
+
+    useEffect(() => {
+        if (user.userWidth < 992) {
+            setCartOpen(false)
+        } 
+    }, [user.userWidth]);
 
     return (
         <>
@@ -97,7 +103,9 @@ const NavBar = observer(() => {
                                 <Button 
                                     className={`ms-2 me-2 ${cartOpen && 'open'}`} 
                                     style={{background: '#fff', border: 'none'}}
-                                    onClick={() => setCartOpen(!cartOpen)}
+                                    onClick={() => {
+                                        user.userWidth < 992 ? navigate(CART_ROUTE) : setCartOpen(!cartOpen)
+                                    }}
                                 >
                                     🛒
                                 </Button>

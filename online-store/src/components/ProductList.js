@@ -24,7 +24,9 @@ const ProductList = observer(({ isProductsLoading }) => {
     const [columns, setColumns] = useState(4) 
 
     useEffect(() => {
-        if (user.userWidth < 992) {
+        if (user.userWidth < 476) {
+            setColumns(1)
+        } else if (user.userWidth < 992) {
             setColumns(2)
         } else if (user.userWidth < 1200) {
             setColumns(3)
@@ -40,7 +42,7 @@ const ProductList = observer(({ isProductsLoading }) => {
                 {
                     isProductsLoading 
                     ? 
-                        <SkeletonProduct products={8} />
+                        <SkeletonProduct products={4} />
                     :
                         product.currentProducts.map(product => 
                             <Product key={product.key} item={product} />    

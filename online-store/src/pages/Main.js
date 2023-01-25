@@ -1,27 +1,41 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { Context } from '../index';
 import { Carousel, Col, Container, Row, Image, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { CATEGORIES_ROUTE, BRANDS_ROUTE } from "../utils/routeConsts";
 import MainStyles from '../styles/MainStyles.css';
+import { observer } from 'mobx-react-lite';
 
-const Shop = () => {
+const Shop = observer(() => {
     const carouselInterval = 3000;
     const navigate = useNavigate();
+    const {user} = useContext(Context); 
+
+    const [flexDirection, setFlexDirection] = useState("flex-row");
+    const [width, setWidth] = useState("");
+
+    useEffect(() => {
+        if (user.userWidth < 992) {
+            setFlexDirection("flex-column")
+            setWidth("w-100");
+        } else if (user.userWidth >= 992) {
+            setFlexDirection("flex-row")
+            setWidth("");
+        } 
+    }, [user.userWidth]);
     
     return (
         <Container>
-            <Row className="d-flex mt-2">
-                <Col md={5}>
+            <Row className={`d-flex ${flexDirection} mt-5`}>
+                <Col className={width} md={5}>
                     <h1>About</h1>
                     <h2>
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
                         when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                        It has survived not only five centuries, but also the leap into electronic typesetting, 
-                        remaining essentially unchanged. 
                     </h2>
                 </Col>
-                <Col md={7}>
+                <Col className={width} md={7}>
                     <Carousel>
                         <Carousel.Item interval={carouselInterval}>
                             <img
@@ -96,6 +110,6 @@ const Shop = () => {
             </Row>
         </Container>
     );
-};
+});
 
 export default Shop;

@@ -13,7 +13,11 @@ const FilterBar = observer(({isCategoriesLoading, isBrandsLoading}) => {
     const [columns, setColumns] = useState(2) 
 
     useEffect(() => {
-        if (user.userWidth < 992) {
+        if (user.userWidth < 360) {
+            setColumns(1);
+        } else if (user.userWidth < 768) {
+            setColumns(2)
+        } else if (user.userWidth < 992) {
             setColumns(1)
         } else if (user.userWidth >= 992) {
             setColumns(2)
