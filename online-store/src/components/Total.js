@@ -10,17 +10,20 @@ const Total = observer(({itemsCount}) => {
     const ending = setEnding(itemsCount)
 
     return (
-        <Card>
-            Итого: 
-            {
-                cart.cartItems.length !== 0 
-                ? 
-                cart.cartItems.map(item => item.price * item.count).reduce((accumulator, currentValue) => accumulator + currentValue).toFixed(2) + '₽' 
-                : 
-                '.........................................................................' + 0 + '₽'
-            }
-            <br/>Всего: {itemsCount} товар{ending} - 0.2кг.............................1390₽
-            <br/>Скидки:..............................................................-139₽
+        <Card
+            style={{width: "100%", padding: "20px 10px", border: "none", borderRadius: 0, background: "#ededed"}}
+        >
+            <div className="d-inline-flex justify-content-between align-items-baseline">
+                <span 
+                    style={{fontWeight: 500, fontSize: "2rem"}}
+                >
+                    Итого:
+                    {
+                       cart.cartItems.length === 0 ? null : <strong>{' ' + cart.cartItems.map(item => item.price * item.count).reduce((accumulator, currentValue) => accumulator + currentValue).toFixed(2) + '₽'}</strong>
+                    }
+                </span>
+            </div>
+            <span style={{fontSize: "1.5rem"}}>Всего: {itemsCount} товар{ending}</span>
         </Card>
     );
 });

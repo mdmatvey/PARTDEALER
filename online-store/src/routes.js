@@ -52,13 +52,5 @@ export const publicRoutes = [
     {
         path: ITEM_ROUTE + '/:id',
         Component: ItemPage,
-    },
-    {
-        path: CATEGORIES_ROUTE + '/:id',
-        Component: Shop,
-    },
-    {
-        path: BRANDS_ROUTE + '/:id',
-        Component: Shop,
     }
 ]

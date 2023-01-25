@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { Card, Col, Image } from 'react-bootstrap';
-import { CATEGORIES_ROUTE, BRANDS_ROUTE } from '../utils/routeConsts';
+import { CATEGORIES_ROUTE, BRANDS_ROUTE, SHOP_ROUTE } from '../utils/routeConsts';
 import { Context } from '..';
 
 const Item = ({ path, purpose }) => {
@@ -29,7 +29,7 @@ const Item = ({ path, purpose }) => {
                         product.setCategoriesToDisplay([...product.categoriesToDisplay, path])
                     }
         
-                    navigate(route + '/' + path.id)
+                    navigate(SHOP_ROUTE)
                 }}
             >
                 <Image width={"100%"} height={"80%"} style={{objectFit: 'cover', marginLeft: 'auto', marginRight: 'auto'}} src={path.image} />

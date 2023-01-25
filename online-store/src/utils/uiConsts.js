@@ -1,5 +1,7 @@
-export const PRIMARY_COLOR = '#777777';
-export const SECONDARY_COLOR = '#B0B0B0';
+// export const PRIMARY_COLOR = '#777777';
+// export const SECONDARY_COLOR = '#B0B0B0';
+export const PRIMARY_COLOR = 'lightblue';
+export const SECONDARY_COLOR = 'lightgray';
 
 export const NAVLINK_STYLE = {
     border: "none", 
@@ -10,12 +12,13 @@ export const NAVLINK_STYLE = {
 
 export const NAVBUTTON_STYLE = {
     fontSize: "1.25rem",
+    color: "#000",
     backgroundColor: PRIMARY_COLOR,
     borderColor: PRIMARY_COLOR
 } 
 
 export const CARTBUTTON_STYLE = {
-    color: "#fff", 
+    color: "#000", 
     background: PRIMARY_COLOR, 
     border: "none", 
     borderRadius: "0",

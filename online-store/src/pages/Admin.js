@@ -37,6 +37,7 @@ const Admin = () => {
             <CreateCategory show={typeVisible} onHide={() => setTypeVisible(false)} />
         </Container>
     );
+    
 };
 
 export default Admin;
