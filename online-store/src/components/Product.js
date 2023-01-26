@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'
 import { Card, Col, Image } from 'react-bootstrap';
-import { ITEM_ROUTE } from '../utils/routeConsts';
+import { PRODUCT_ROUTE } from '../utils/routeConsts';
 import CartButton from './CartButton'
 
 const Product = ({item}) => {
@@ -13,7 +13,7 @@ const Product = ({item}) => {
                 <Card 
                     className='pb-5'
                     style={{cursor: 'pointer', border: 'none', borderRadius: 0, padding: 5}}
-                    onClick={() => navigate(ITEM_ROUTE + '/' + item.id)}
+                    onClick={() => navigate(PRODUCT_ROUTE + '/' + item.id)}
                 >
                     <Image style={{objectFit: 'contain', marginLeft: 'auto', marginRight: 'auto'}} width={150} height={150} src={item.image} />
                     <div style={{fontSize: "1.7rem", display: 'block', marginLeft: 'auto'}}><strong>{item.price.toFixed(2)}₽</strong></div>
