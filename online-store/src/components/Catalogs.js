@@ -47,8 +47,8 @@ const Categories = observer(({ purpose }) => {
     }, [user.userWidth]);
 
     return (
-        <Container>
-            <h1 className='mt-5 mb-3'>
+        <Container className='pt-5 pb-5'>
+            <h1 className='mb-3'>
                 По {purp}:
             </h1>
             <Form className="d-flex" style={{display: "block", margin: "0 auto", width: "50%"}}>

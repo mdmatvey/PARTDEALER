@@ -18,7 +18,7 @@ const CartItem = observer(({item, cartPage}) => {
     return (
         <Card style={{display: 'grid', alignItems: 'center', gridTemplateColumns: cartPage ? '1fr 3fr 7fr 4fr 1fr' : '3fr 7fr 4fr 1fr', gridTemplateRows: 170, width: '100%', marginBottom: 10}}>
             {cartPage ? <Form.Check onClick={(e) => chooseProduct(e, item)} className="cartChecked" type='checkbox' /> : null}
-            <Card.Img style={{height: '100%', objectFit: 'contain', marginLeft: 'auto', marginRight: 'auto', }} src={item.image} />
+            <Card.Img style={{height: '80%', objectFit: 'contain', marginLeft: 'auto', marginRight: 'auto', }} src={item.image} />
             <Card.Body>
                 <Card.Title style={{fontSize: '1.1rem'}}>{cartPage ? item.title : item.title.length > 50 ? item.title.substring(0, 50) + '...' : item.title}</Card.Title>
                 <Card.Subtitle>{item.category}</Card.Subtitle>

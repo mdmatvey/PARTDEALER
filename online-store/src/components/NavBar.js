@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../index";
-import { MAIN_ROUTE, ADMIN_ROUTE, LOGIN_ROUTE, CART_ROUTE } from "../utils/routeConsts";
+import { MAIN_ROUTE, ADMIN_ROUTE, USER_ROUTE, LOGIN_ROUTE, CART_ROUTE } from "../utils/routeConsts";
 import { Button, Container, Form, Nav, Navbar} from 'react-bootstrap';
 import { observer } from "mobx-react-lite";
 import { PRIMARY_COLOR, SECONDARY_COLOR, NAVLINK_STYLE, NAVBUTTON_STYLE } from "../utils/uiConsts";
@@ -128,6 +128,12 @@ const NavBar = observer(() => {
                                     onClick={() => navigate(ADMIN_ROUTE)}
                                 >
                                     Админ-панель
+                                </Button>
+                                <Button 
+                                    style={NAVBUTTON_STYLE}
+                                    onClick={() => navigate(USER_ROUTE)}
+                                >
+                                    Личный кабинет
                                 </Button>
                                 <Button 
                                     style={NAVBUTTON_STYLE}
