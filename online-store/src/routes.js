@@ -1,6 +1,7 @@
-import { ADMIN_ROUTE, CART_ROUTE, CATEGORIES_ROUTE, BRANDS_ROUTE, PRODUCT_ROUTE, LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE, ORDERING_ROUTE } from './utils/routeConsts';
+import { ADMIN_ROUTE, USER_ROUTE, CART_ROUTE, CATEGORIES_ROUTE, BRANDS_ROUTE, PRODUCT_ROUTE, LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE, ORDERING_ROUTE } from './utils/routeConsts';
 import Main from './pages/Main';
 import Admin from './pages/Admin';
+import User from './pages/User';
 import Cart from './pages/Cart';
 import Ordering from './pages/Ordering';
 import Shop from './pages/Shop';
@@ -13,6 +14,10 @@ export const authRoutes = [
     {
         path: ADMIN_ROUTE,
         Component: Admin,
+    },
+    {
+        path: USER_ROUTE,
+        Component: User,
     },
     {
         path: CART_ROUTE,
