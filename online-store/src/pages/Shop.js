@@ -44,7 +44,7 @@ const Shop = observer(() => {
     }, [product.page, product.limit, product.selectedCategory, product.selectedBrand])
 
     return (
-        <Container className='mt-4'>
+        <Container className='pt-4'>
             <Row className="mt-2">
                 <Col md={3}>
                     <FilterBar isCategoriesLoading={isCategoriesLoading} isBrandsLoading={isBrandsLoading} />

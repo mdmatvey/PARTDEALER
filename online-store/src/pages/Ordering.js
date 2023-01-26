@@ -49,7 +49,7 @@ const Cart = observer(() => {
     }, [user.userWidth]);
 
     return (
-        <Container className="mt-3">
+        <Container className="pt-3">
             <Row className="mb-4">
                 <div className="d-flex flex-direction-row align-items-end">
                     <h1 style={{margin: 0}}>Оформление</h1>
@@ -133,12 +133,12 @@ const Cart = observer(() => {
                         </Card>   
                     </div>
                 </Container>
-                <Card style={{border: "none", width: "100%"}}>
+                <Card style={{position: "relative", border: "none", width: "100%"}}>
                     <Total itemsCount={itemsCount} />
                     <Button 
                         onClick={() => navigate()}
                         className="mt-4"
-                        style={{fontWeight: "bold", fontSize: "1.2rem", padding: 20, border: "none", borderRadius: 0, background: PRIMARY_COLOR}}
+                        style={{position: "absolute", width: "90%", top: "auto", bottom: 10, left: "5%", display: "block", margin: "0 auto", fontWeight: "bold", fontSize: "1.2rem", padding: 20, border: "none", borderRadius: 0, background: PRIMARY_COLOR}}
                     >
                         Оформить заказ
                     </Button>

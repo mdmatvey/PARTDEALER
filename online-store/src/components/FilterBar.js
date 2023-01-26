@@ -44,15 +44,15 @@ const FilterBar = observer(({isCategoriesLoading, isBrandsLoading}) => {
     }
 
     return (
-        <div style={{background: "#ededed", width: "100%", padding: 4}}>
+        <div style={{background: "#fff", width: "100%", padding: 4}}>
             Бренды:
-            <Form style={{display: "grid",  gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%', background: "#ededed"}}>
+            <Form style={{display: "grid",  gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%', background: "#fff"}}>
                 {
                     isBrandsLoading 
                     ? 
                         <>
-                            <Skeleton count={4} style={{width: "100%"}} /> 
-                            <Skeleton count={4} style={{width: "100%"}} />
+                            <Skeleton count={4} style={{width: "80%"}} /> 
+                            <Skeleton count={4} style={{width: "80%"}} />
                         </>
                     :
                         product.brands.filter(brand => {
@@ -75,13 +75,13 @@ const FilterBar = observer(({isCategoriesLoading, isBrandsLoading}) => {
                 />
             </Form><br/>
             Категории:
-            <Form style={{display: "grid",  gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%', background: "#ededed"}}>
+            <Form style={{display: "grid",  gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%', background: "#fff"}}>
                 {
                     isCategoriesLoading 
                     ? 
                         <>
-                            <Skeleton count={4} style={{width: "100%"}} /> 
-                            <Skeleton count={4} style={{width: "100%"}} />
+                            <Skeleton count={4} style={{width: "80%"}} /> 
+                            <Skeleton count={4} style={{width: "80%"}} />
                         </> 
                     :
                         product.categories.map(category => { return (

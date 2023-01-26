@@ -8,7 +8,7 @@ const Footer = () => {
     return (
         <footer 
             style={{width: '100%', backgroundColor: PRIMARY_COLOR}}
-            className="mt-4 pt-4"
+            className="pt-4"
         >
             <div className="container-fluid text-center text-md-left">
                 <Row>

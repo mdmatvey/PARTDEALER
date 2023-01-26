@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { observer } from 'mobx-react-lite';
 import { Context } from '../index';
 import { Carousel, Col, Container, Row, Image, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { CATEGORIES_ROUTE, BRANDS_ROUTE } from "../utils/routeConsts";
 import MainStyles from '../styles/MainStyles.css';
-import { observer } from 'mobx-react-lite';
 
 const Shop = observer(() => {
     const carouselInterval = 3000;
@@ -26,7 +26,7 @@ const Shop = observer(() => {
     
     return (
         <Container>
-            <Row className={`d-flex ${flexDirection} mt-5`}>
+            <Row className={`d-flex ${flexDirection} pt-5`}>
                 <Col className={width} md={5}>
                     <h1>About</h1>
                     <h2>
@@ -75,7 +75,7 @@ const Shop = observer(() => {
             </Row>
             <Row 
                 style={{textAlign: "center"}}
-                className="mt-5 mb-5"
+                className="mt-5 pb-5"
             >
                 <Col>
                     <Card 
