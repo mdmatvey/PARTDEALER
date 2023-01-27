@@ -11,7 +11,7 @@ const Total = observer(({itemsCount}) => {
 
     return (
         <Card
-            style={{width: "100%", padding: "20px 10px", border: "none", borderRadius: 0}}
+            style={{background: "#eeeeee", width: "100%", padding: "20px 10px", border: "none", borderRadius: 0}}
         >
             <div className="d-inline-flex justify-content-between align-items-baseline">
                 <span 

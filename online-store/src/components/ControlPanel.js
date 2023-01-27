@@ -23,7 +23,7 @@ const ControlPanel = ({button1, button2, FirstTab, SecondTab, user}) => {
                         onClick={(e) => {
                             click(setFirstTabDisplay, setSecondTabDisplay, document.getElementById("SecondButton"), e);
                         }} 
-                        style={{...NAVLINK_STYLE, fontSize: "2.5rem", fontWeight: "bold"}}
+                        style={{...NAVLINK_STYLE, fontSize: "2.5rem", fontWeight: "bold", transition: "0.1s"}}
                         id="FirstButton"
                     >
                         {button1}
@@ -32,7 +32,7 @@ const ControlPanel = ({button1, button2, FirstTab, SecondTab, user}) => {
                         onClick={(e) => {
                             click(setSecondTabDisplay, setFirstTabDisplay, document.getElementById("FirstButton"), e);
                         }} 
-                        style={{...NAVLINK_STYLE, fontSize: "2.5rem"}}
+                        style={{...NAVLINK_STYLE, fontSize: "2.5rem", transition: "0.1s"}}
                         id="SecondButton"
                     >
                         {button2}
