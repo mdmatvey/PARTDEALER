@@ -42,9 +42,11 @@ const ProductList = observer(({ isProductsLoading }) => {
                 {
                     isProductsLoading
                       ? <SkeletonProduct products={4} />
-                      : product.currentProducts.map(product =>
+                      : product.currentProducts.length !== undefined
+                        ? product.currentProducts.map(product =>
                             <Product key={product.key} item={product} />
-                      )
+                        )
+                        : null
                 }
             </Row>
         </Container>
