@@ -1,7 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'react-bootstrap'
 import { PRIMARY_COLOR } from '../utils/uiConsts'
-import { TempStyles } from '../styles/TempStyles.css'
 import { Link } from 'react-router-dom'
 
 const Footer = () => {
@@ -13,7 +12,7 @@ const Footer = () => {
             <div className="container-fluid text-center text-md-left">
                 <Row>
                     <hr className="clearfix w-100 d-md-none pb-0"/>
-                    <Col className="col-md-3 mb-md-0 mb-3">
+                    <Col className="col-md-2 mb-md-0 mb-3">
                         <h5 className="text-uppercase">Ассортимент</h5>
                         <ul className="list-unstyled">
                             <li><Link to="">Акции</Link></li>
@@ -21,12 +20,19 @@ const Footer = () => {
                             <li><Link to="/brands">Бренды</Link></li>
                         </ul>
                     </Col>
-                    <Col className="col-md-3 mb-md-0 mb-3">
+                    <Col className="col-md-2 mb-md-0 mb-3">
+                        <h5 className="text-uppercase">Сервис</h5>
+                        <ul className="list-unstyled">
+                            <li><Link to="/payment">Оплата</Link></li>
+                            <li><Link to="/delivery">Доставка</Link></li>
+                            <li><Link to="">Возврат</Link></li>
+                        </ul>
+                    </Col>
+                    <Col className="col-md-2 mb-md-0 mb-3">
                         <h5 className="text-uppercase">Клиентам</h5>
                         <ul className="list-unstyled">
-                            <li><Link to="">Оплата</Link></li>
-                            <li><Link to="">Доставка</Link></li>
-                            <li><Link to="">Возврат</Link></li>
+                            <li><Link to="/termsofuse">Пользовательское соглашение</Link></li>
+                            <li><Link to="/confidentiality">Конфиденциальность</Link></li>
                         </ul>
                     </Col>
                     <Col className="col-md-6 mt-md-0 mt-3">
