@@ -1,7 +1,7 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-const UserData = () => {
+const UserControl = () => {
     
     return (
         <Form className="p-4">
@@ -14,7 +14,7 @@ const UserData = () => {
                 <Form.Label>Адрес</Form.Label>
                 <Form.Control type="email" placeholder="Введите ваш адрес" />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group className="mb-4" controlId="formBasicEmail">
                 <Form.Label>Почта</Form.Label>
                 <Form.Control type="email" placeholder="Введите ваш email" />
                 <Form.Text className="text-muted">
@@ -32,4 +32,4 @@ const UserData = () => {
     );
 };
 
-export default UserData;
+export default UserControl;
