@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import { Button, Form, Modal } from "react-bootstrap";
-import { createBrand } from '../http/productAPI';
+import React, { useState } from 'react'
+import { Button, Form, Modal } from 'react-bootstrap'
+import { createBrand } from '../http/productAPI'
 
-const CreateBrand = ({show, onHide}) => {
-    const [value, setValue] = useState('');
+const CreateBrand = ({ show, onHide }) => {
+  const [value, setValue] = useState('')
 
-    const addBrand = () => {
-        createBrand({name: value})
-            .then(data => {
-                setValue('');
-                onHide();
-            })
-    }
+  const addBrand = () => {
+    createBrand({ name: value })
+      .then(data => {
+        setValue('')
+        onHide()
+      })
+  }
 
-    return (
+  return (
         <Modal
             show={show}
             onHide={onHide}
@@ -27,10 +27,10 @@ const CreateBrand = ({show, onHide}) => {
             </Modal.Header>
             <Modal.Body>
                 <Form>
-                    <Form.Control 
+                    <Form.Control
                         value={value}
                         onChange={e => setValue(e.target.value)}
-                        placeholder={"Введите название бренда"}
+                        placeholder={'Введите название бренда'}
                     />
                 </Form>
             </Modal.Body>
@@ -38,7 +38,7 @@ const CreateBrand = ({show, onHide}) => {
                 <Button variant="outline-success" onClick={addBrand}>Добавить</Button>
             </Modal.Footer>
         </Modal>
-    );
-};
+  )
+}
 
-export default CreateBrand;
+export default CreateBrand

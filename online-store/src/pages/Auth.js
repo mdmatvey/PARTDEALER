@@ -1,48 +1,47 @@
-import React, { useContext, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Container, Form, Card, Button, Row } from 'react-bootstrap';
-import { LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE } from '../utils/routeConsts';
-import { login, registration } from '../components/http/userAPI';
-import { observer } from 'mobx-react-lite';
-import { Context } from '../index';
+import React, { useContext, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Container, Form, Card, Button, Row } from 'react-bootstrap'
+import { LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE } from '../utils/routeConsts'
+import { login, registration } from '../components/http/userAPI'
+import { observer } from 'mobx-react-lite'
+import { Context } from '../index'
 
 const Auth = observer(() => {
-    const {user} = useContext(Context)
-    const location = useLocation();
-    const navigate = useNavigate();
-    const isLogin = location.pathname === LOGIN_ROUTE;
+  const { user } = useContext(Context)
+  const location = useLocation()
+  const navigate = useNavigate()
+  const isLogin = location.pathname === LOGIN_ROUTE
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-    const click = async () => {
-        try {
-            let data;
-        
-            if (isLogin) {
-                data = await login(email, password);
+  const click = async () => {
+    try {
+      let data
 
-            } else {
-                data = await registration(email, password);
-            }
+      if (isLogin) {
+        data = await login(email, password)
+      } else {
+        data = await registration(email, password)
+      }
 
-            user.setUser(data);
-            user.setIsAuth(true);
-            navigate(MAIN_ROUTE);
-        } catch (e) {
-            alert(e.response.data.message);
-        }
-    }  
+      user.setUser(data)
+      user.setIsAuth(true)
+      navigate(MAIN_ROUTE)
+    } catch (e) {
+      alert(e.response.data.message)
+    }
+  }
 
-    return (
-        <Container 
+  return (
+        <Container
             className="d-flex justify-content-center align-items-center"
-            style={{height: window.innerHeight - 56}}
+            style={{ height: window.innerHeight - 56 }}
         >
-            <Card style={{width:600}} className="p-5">
-                <h2 className="m-auto">{isLogin ? "Авторизация" : "Регистрация"}</h2>
+            <Card style={{ width: 600 }} className="p-5">
+                <h2 className="m-auto">{isLogin ? 'Авторизация' : 'Регистрация'}</h2>
                 <Form className="d-flex flex-column">
-                    <Form.Control  
+                    <Form.Control
                         className="mt-3"
                         placeholder="Введите Ваш email"
                         value={email}
@@ -56,27 +55,26 @@ const Auth = observer(() => {
                         onChange={e => setPassword(e.target.value)}
                     />
                     <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
-                        {isLogin ? 
-                            <div style={{width: "auto"}}>
+                        {isLogin
+                          ? <div style={{ width: 'auto' }}>
                                 Еще нет аккаунта? <Link to={REGISTRATION_ROUTE}>Зарегистрируйтесь!</Link>
                             </div>
-                            :
-                            <div style={{width: "auto"}}>
+                          : <div style={{ width: 'auto' }}>
                                 Уже есть аккаунт? <Link to={LOGIN_ROUTE}>Авторизируйтесь!</Link>
                             </div>
                         }
                         <Button
-                            style={{width: "auto"}}
-                            variant={"outline-success"}
+                            style={{ width: 'auto' }}
+                            variant={'outline-success'}
                             onClick={click}
                         >
-                            {isLogin ? "Войти" : "Зарегистрироваться"}
+                            {isLogin ? 'Войти' : 'Зарегистрироваться'}
                         </Button>
                     </Row>
                 </Form>
             </Card>
         </Container>
-    );
-});
+  )
+})
 
-export default Auth;
+export default Auth

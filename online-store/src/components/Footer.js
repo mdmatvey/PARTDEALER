@@ -1,13 +1,13 @@
-import React from "react"
-import { Col, Row } from "react-bootstrap";
-import { PRIMARY_COLOR } from "../utils/uiConsts";
-import { TempStyles } from "../styles/TempStyles.css"
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Col, Row } from 'react-bootstrap'
+import { PRIMARY_COLOR } from '../utils/uiConsts'
+import { TempStyles } from '../styles/TempStyles.css'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
-    return (
-        <footer 
-            style={{width: '100%', backgroundColor: PRIMARY_COLOR}}
+  return (
+        <footer
+            style={{ width: '100%', backgroundColor: PRIMARY_COLOR }}
             className="pt-4"
         >
             <div className="container-fluid text-center text-md-left">
@@ -35,7 +35,7 @@ const Footer = () => {
                             <p>Here you can use rows and columns to organize your footer content.</p>
                        </Row>
                        <Row className="d-flex justify-content-center">
-                            <img style={{width: 300}} src="https://snipboard.io/loJ7yk.jpg"  alt="Платежные системы" />
+                            <img style={{ width: 300 }} src="https://snipboard.io/loJ7yk.jpg" alt="Платежные системы" />
                        </Row>
                     </Col>
                 </Row>
@@ -44,7 +44,7 @@ const Footer = () => {
                 <Link to="https://mdbootstrap.com/"> mockdomen.com</Link>
             </div>
         </footer>
-    );
-};
+  )
+}
 
 export default Footer

@@ -1,9 +1,8 @@
-import React from "react";
-import { Form } from "react-bootstrap";
+import React from 'react'
+import { Form } from 'react-bootstrap'
 
 const UserControl = () => {
-    
-    return (
+  return (
         <Form className="p-4">
             <h3>Контакты</h3>
             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -29,7 +28,7 @@ const UserControl = () => {
                 </Form.Text>
             </Form.Group>
         </Form>
-    );
-};
+  )
+}
 
-export default UserControl;
+export default UserControl

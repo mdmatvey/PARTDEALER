@@ -1,62 +1,62 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Context } from "../index";
-import { MAIN_ROUTE, ADMIN_ROUTE, USER_ROUTE, LOGIN_ROUTE, CART_ROUTE } from "../utils/routeConsts";
-import { Button, Container, Form, Nav, Navbar} from 'react-bootstrap';
-import { observer } from "mobx-react-lite";
-import { PRIMARY_COLOR, SECONDARY_COLOR, NAVLINK_STYLE, NAVBUTTON_STYLE } from "../utils/uiConsts";
-import CartList from "./CartList";
+import React, { useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Context } from '../index'
+import { MAIN_ROUTE, ADMIN_ROUTE, USER_ROUTE, LOGIN_ROUTE, CART_ROUTE } from '../utils/routeConsts'
+import { Button, Container, Form, Nav, Navbar } from 'react-bootstrap'
+import { observer } from 'mobx-react-lite'
+import { PRIMARY_COLOR, SECONDARY_COLOR, NAVLINK_STYLE, NAVBUTTON_STYLE } from '../utils/uiConsts'
+import CartList from './CartList'
 
 const NavBar = observer(() => {
-    const {user} = useContext(Context);
-    const navigate = useNavigate();
+  const { user } = useContext(Context)
+  const navigate = useNavigate()
 
-    const [cartOpen, setCartOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false)
 
-    const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('')
 
-    const searchAPI = searchQuery => {
-        console.log(searchQuery)
+  const searchAPI = searchQuery => {
+    console.log(searchQuery)
+  }
+
+  const logOut = () => {
+    user.setUser({})
+    user.setIsAuth(false)
+    localStorage.removeItem('token') // temporarily
+  }
+
+  useEffect(() => {
+    if (user.userWidth < 992) {
+      setCartOpen(false)
     }
+  }, [user.userWidth])
 
-    const logOut = () => {
-        user.setUser({});
-        user.setIsAuth(false);
-        localStorage.removeItem('token'); // temporarily
-    }
-
-    useEffect(() => {
-        if (user.userWidth < 992) {
-            setCartOpen(false)
-        } 
-    }, [user.userWidth]);
-
-    return (
+  return (
         <>
-            <Navbar 
-                bg="light" 
-                expand="lg" 
-                className="d-flex flex-column" 
-                style={{padding: 0}}
+            <Navbar
+                bg="light"
+                expand="lg"
+                className="d-flex flex-column"
+                style={{ padding: 0 }}
             >
-                <Container 
+                <Container
                     className="pt-2 pb-2"
-                    style={{background: SECONDARY_COLOR}} 
+                    style={{ background: SECONDARY_COLOR }}
                     fluid
                 >
-                    <Navbar.Brand onClick={() => navigate(MAIN_ROUTE)} style={{cursor: "pointer"}}>COMPANY NAME</Navbar.Brand>
+                    <Navbar.Brand onClick={() => navigate(MAIN_ROUTE)} style={{ cursor: 'pointer' }}>COMPANY NAME</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav className="ms-auto">
-                            <Button 
-                                className="ms-2 me-2" 
+                            <Button
+                                className="ms-2 me-2"
                                 style={NAVLINK_STYLE}
                             >
                                 Адрес
                             </Button>
-                            <Button 
+                            <Button
                                 style={NAVLINK_STYLE}
-                                lassName="ms-2 me-2" 
+                                lassName="ms-2 me-2"
                             >
                                 Контакты
                             </Button>
@@ -64,16 +64,16 @@ const NavBar = observer(() => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <Navbar 
-                sticky="top" 
-                bg="light" 
-                expand="lg" 
-                className="d-flex flex-column" 
-                style={{top: -0.1, padding: 0, margin: 0}}
+            <Navbar
+                sticky="top"
+                bg="light"
+                expand="lg"
+                className="d-flex flex-column"
+                style={{ top: -0.1, padding: 0, margin: 0 }}
             >
-                <Container 
+                <Container
                     className="pt-2 pb-2"
-                    style={{background: PRIMARY_COLOR}} 
+                    style={{ background: PRIMARY_COLOR }}
                     fluid
                 >
                     <Navbar.Toggle aria-controls="navbarScroll" />
@@ -87,69 +87,68 @@ const NavBar = observer(() => {
                                 className="ms-5 me-2"
                                 aria-label="Search"
                         />
-                            <Button 
+                            <Button
                                 onClick={() => searchAPI(query)}
                                 variant="outline-secondary"
                             >
                                 Search
                             </Button>
                         </Form>
-                        {user.isAuth ? 
-                            <Nav
+                        {user.isAuth
+                          ? <Nav
                                 className="ms-auto my-2 my-lg-0"
-                                style={{ maxHeight: '100px'}}
+                                style={{ maxHeight: '100px' }}
                                 navbarScroll
                             >
-                                <Button 
-                                    className={`ms-2 me-2 ${cartOpen && 'open'}`} 
-                                    style={{background: '#fff', border: 'none'}}
+                                <Button
+                                    className={`ms-2 me-2 ${cartOpen && 'open'}`}
+                                    style={{ background: '#fff', border: 'none' }}
                                     onClick={() => {
-                                        user.userWidth < 992 ? navigate(CART_ROUTE) : setCartOpen(!cartOpen)
+                                      user.userWidth < 992 ? navigate(CART_ROUTE) : setCartOpen(!cartOpen)
                                     }}
                                 >
                                     🛒
                                 </Button>
                                 {cartOpen && (
-                                    <div style={{position: "absolute", top: 59, right: 0, width: "35vw", height: 400, background: SECONDARY_COLOR, zIndex: -1, boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px"}}>
+                                    <div style={{ position: 'absolute', top: 59, right: 0, width: '35vw', height: 400, background: SECONDARY_COLOR, zIndex: -1, boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px' }}>
                                         <CartList cartPage={false} />
-                                        <Button 
+                                        <Button
                                         onClick={() => {
-                                            setCartOpen(false);
-                                            navigate(CART_ROUTE)
-                                        }} 
-                                        style={{display: 'block', margin: '20px auto 0 auto', border: 'none', borderRadius: 0, background: PRIMARY_COLOR}}
+                                          setCartOpen(false)
+                                          navigate(CART_ROUTE)
+                                        }}
+                                        style={{ display: 'block', margin: '20px auto 0 auto', border: 'none', borderRadius: 0, background: PRIMARY_COLOR }}
                                         >
                                             Перейти в корзину
                                         </Button>
                                     </div>
                                 )}
-                                <Button 
+                                <Button
                                     style={NAVBUTTON_STYLE}
                                     onClick={() => navigate(ADMIN_ROUTE)}
                                 >
                                     Админ-панель
                                 </Button>
-                                <Button 
+                                <Button
                                     style={NAVBUTTON_STYLE}
                                     onClick={() => navigate(USER_ROUTE)}
                                 >
                                     Личный кабинет
                                 </Button>
-                                <Button 
+                                <Button
                                     style={NAVBUTTON_STYLE}
-                                    onClick={() => logOut()} 
+                                    onClick={() => logOut()}
                                     className="ms-2"
                                 >
                                     Выйти
                                 </Button>
                             </Nav>
-                            :
-                            <Nav
+                          : <Nav
                                 className="ms-auto my-2 my-lg-0"
                                 style={{ maxHeight: '100px' }}
                                 navbarScroll
                             >
-                                <Button 
+                                <Button
                                     style={NAVBUTTON_STYLE}
                                     onClick={() => navigate(LOGIN_ROUTE)}
                                 >
@@ -161,7 +160,7 @@ const NavBar = observer(() => {
                 </Container>
             </Navbar>
         </>
-    );
-});
+  )
+})
 
-export default NavBar;
+export default NavBar

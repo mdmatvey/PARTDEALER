@@ -1,38 +1,38 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { observer } from 'mobx-react-lite';
-import { Context } from '../index';
-import { Carousel, Col, Container, Row, Image, Card } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import { CATEGORIES_ROUTE, BRANDS_ROUTE } from "../utils/routeConsts";
-import MainStyles from '../styles/MainStyles.css';
+import React, { useContext, useEffect, useState } from 'react'
+import { observer } from 'mobx-react-lite'
+import { Context } from '../index'
+import { Carousel, Col, Container, Row, Image, Card } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
+import { CATEGORIES_ROUTE, BRANDS_ROUTE } from '../utils/routeConsts'
+import MainStyles from '../styles/MainStyles.css'
 
 const Shop = observer(() => {
-    const carouselInterval = 3000;
-    const navigate = useNavigate();
-    const {user} = useContext(Context); 
+  const carouselInterval = 3000
+  const navigate = useNavigate()
+  const { user } = useContext(Context)
 
-    const [flexDirection, setFlexDirection] = useState("flex-row");
-    const [width, setWidth] = useState("");
+  const [flexDirection, setFlexDirection] = useState('flex-row')
+  const [width, setWidth] = useState('')
 
-    useEffect(() => {
-        if (user.userWidth < 992) {
-            setFlexDirection("flex-column")
-            setWidth("w-100");
-        } else if (user.userWidth >= 992) {
-            setFlexDirection("flex-row")
-            setWidth("");
-        } 
-    }, [user.userWidth]);
-    
-    return (
+  useEffect(() => {
+    if (user.userWidth < 992) {
+      setFlexDirection('flex-column')
+      setWidth('w-100')
+    } else if (user.userWidth >= 992) {
+      setFlexDirection('flex-row')
+      setWidth('')
+    }
+  }, [user.userWidth])
+
+  return (
         <Container>
             <Row className={`d-flex ${flexDirection} pt-5`}>
                 <Col className={width} md={5}>
                     <h1>About</h1>
                     <h2>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
                     </h2>
                 </Col>
                 <Col className={width} md={7}>
@@ -73,43 +73,43 @@ const Shop = observer(() => {
                     </Carousel>
                 </Col>
             </Row>
-            <Row 
-                style={{textAlign: "center"}}
+            <Row
+                style={{ textAlign: 'center' }}
                 className="mt-5 pb-5"
             >
                 <Col>
-                    <Card 
+                    <Card
                         className="border-0"
-                        style={{cursor: "pointer"}}                 
+                        style={{ cursor: 'pointer' }}
                         onClick={() => navigate(CATEGORIES_ROUTE)}
-                    > 
+                    >
                         <Image
-                            style={{width: "100%"}}
+                            style={{ width: '100%' }}
                             src="https://snipboard.io/YiIAy9.jpg"
                         />
-                        <div class="image-overlay">
-                            <div class="image-title" unselectable="on">К каталогам категорий</div> 
+                        <div className="image-overlay">
+                            <div className="image-title" unselectable="on">К каталогам категорий</div>
                         </div>
                     </Card>
                 </Col>
                 <Col>
-                    <Card 
+                    <Card
                         className="border-0"
-                        style={{cursor: "pointer"}}
+                        style={{ cursor: 'pointer' }}
                         onClick={() => navigate(BRANDS_ROUTE)}
                     >
-                        <Image 
-                            style={{width: "100%"}}
+                        <Image
+                            style={{ width: '100%' }}
                             src="https://snipboard.io/YiIAy9.jpg"
                         />
-                        <div class="image-overlay">
-                            <div class="image-title" unselectable="on">К каталогам брендов</div> 
+                        <div className="image-overlay">
+                            <div className="image-title" unselectable="on">К каталогам брендов</div>
                         </div>
                     </Card>
                 </Col>
             </Row>
         </Container>
-    );
-});
+  )
+})
 
-export default Shop;
+export default Shop

@@ -1,21 +1,21 @@
-import { observer } from "mobx-react-lite";
-import React, { useContext, useState } from "react";
-import { Card } from "react-bootstrap";
-import { Context } from "..";
-import { setEnding } from "../utils/functions"
+import { observer } from 'mobx-react-lite'
+import React, { useContext, useState } from 'react'
+import { Card } from 'react-bootstrap'
+import { Context } from '..'
+import { setEnding } from '../utils/functions'
 
-const Total = observer(({itemsCount}) => {
-    const {cart} = useContext(Context);
+const Total = observer(({ itemsCount }) => {
+  const { cart } = useContext(Context)
 
-    const ending = setEnding(itemsCount)
+  const ending = setEnding(itemsCount)
 
-    return (
+  return (
         <Card
-            style={{background: "#eeeeee", width: "100%", padding: "20px 10px", border: "none", borderRadius: 0}}
+            style={{ background: '#eeeeee', width: '100%', padding: '20px 10px', border: 'none', borderRadius: 0 }}
         >
             <div className="d-inline-flex justify-content-between align-items-baseline">
-                <span 
-                    style={{fontWeight: 500, fontSize: "2rem"}}
+                <span
+                    style={{ fontWeight: 500, fontSize: '2rem' }}
                 >
                     Итого:
                     {
@@ -23,9 +23,9 @@ const Total = observer(({itemsCount}) => {
                     }
                 </span>
             </div>
-            <span style={{fontSize: "1.5rem"}}>Всего: {itemsCount} товар{ending}</span>
+            <span style={{ fontSize: '1.5rem' }}>Всего: {itemsCount} товар{ending}</span>
         </Card>
-    );
-});
+  )
+})
 
-export default Total;
+export default Total

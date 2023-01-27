@@ -1,14 +1,13 @@
-import { observer } from 'mobx-react-lite';
-import React from 'react';
-import Catalogs from '../components/Catalogs';
+import { observer } from 'mobx-react-lite'
+import React from 'react'
+import Catalogs from '../components/Catalogs'
 
 const Categories = observer(() => {
+  return (
+        <Catalogs
+            purpose="categories"
+        />
+  )
+})
 
-    return (
-        <Catalogs 
-            purpose="categories"                                          
-        />   
-    );
-});
-
-export default Categories;
+export default Categories
