@@ -1,43 +1,20 @@
-import React, { useState } from "react";
-import { Button, Container } from "react-bootstrap";
-import CreateBrand from "../components/modals/CreateBrand";
-import CreateProduct from "../components/modals/CreateProduct";
-import CreateCategory from "../components/modals/CreateCategory";
+import React from "react";
+import ControlPanel from "../components/ControlPanel";
+import AdminControl from "../components/AdminControl";
+import Orders from "../components/Orders";
 
 const Admin = () => {
-    const [brandVisible, setBrandVisible] = useState(false);
-    const [typeVisible, setTypeVisible] = useState(false);
-    const [itemVisible, setItemVisible] = useState(false);
+
+    /* HARD CODED USER DATA */
+    const user = {
+        role: "admin",
+        password: "simple_password"
+    }
+    /* HARD CODED USER DATA */
     
     return (
-        <Container className="d-flex flex-column">
-            <Button
-                onClick={() => setBrandVisible(true)} 
-                variant={"outline-dark"} 
-                className="mt-3 p-2"
-            >
-                Добавить бренд
-            </Button>
-            <Button
-                onClick={() => setTypeVisible(true)} 
-                variant={"outline-dark"} 
-                className="mt-3 p-2"
-            >
-                Добавить категорию
-            </Button>
-            <Button
-                onClick={() => setItemVisible(true)} 
-                variant={"outline-dark"} 
-                className="mt-3 p-2"
-            >
-                Добавить товар
-            </Button>
-            <CreateBrand show={brandVisible} onHide={() => setBrandVisible(false)} />
-            <CreateProduct show={itemVisible} onHide={() => setItemVisible(false)} />
-            <CreateCategory show={typeVisible} onHide={() => setTypeVisible(false)} />
-        </Container>
+        <ControlPanel button1={"Управление"} button2={"Заказы"} FirstTab={AdminControl} SecondTab={Orders} user={user} />
     );
-    
 };
 
 export default Admin;
