@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { Context } from '../index'
 import { Button } from 'react-bootstrap'
 import { CARTBUTTON_STYLE } from '../utils/uiConsts'
+import CartButtonStyles from '../styles/CartButtonStyles.css'
 
 const Product = ({ item }) => {
   const { cart } = useContext(Context)
@@ -15,6 +16,7 @@ const Product = ({ item }) => {
               }
             }}
             style={CARTBUTTON_STYLE}
+            id='cart-button'
         >
                 🛒 В корзину
         </Button>
