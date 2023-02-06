@@ -1,0 +1,8 @@
+.main-button:hover {
+    background-color: #00CCCC !important;
+}
+
+.nav-button:hover, .count-button:hover {
+    color: #000 !important;
+    background-color: #00CCCC !important;
+}

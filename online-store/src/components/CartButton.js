@@ -1,10 +1,11 @@
 import React, { useContext } from 'react'
 import { Context } from '../index'
 import { Button } from 'react-bootstrap'
-import { CARTBUTTON_STYLE } from '../utils/uiConsts'
-import CartButtonStyles from '../styles/CartButtonStyles.css'
+import { MAINBUTTON_STYLE } from '../utils/uiConsts'
+import { TbShoppingCartPlus } from 'react-icons/tb'
+import ButtonHoverStyles from '../styles/ButtonHoverStyles.css'
 
-const Product = ({ item }) => {
+const Product = ({ item, productPage }) => {
   const { cart } = useContext(Context)
 
   return (
@@ -15,10 +16,10 @@ const Product = ({ item }) => {
                 cart.setCartItems([...cart.cartItems, item])
               }
             }}
-            style={CARTBUTTON_STYLE}
-            id='cart-button'
+            className='d-flex align-items-center justify-content-center main-button'
+            style={{ ...MAINBUTTON_STYLE, color: productPage ? '#fff' : '#171717' }}
         >
-                🛒 В корзину
+              В корзину&nbsp;<TbShoppingCartPlus />
         </Button>
   )
 }

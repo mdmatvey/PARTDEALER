@@ -3,16 +3,17 @@ import { useNavigate } from 'react-router-dom'
 import { Card, Col, Image } from 'react-bootstrap'
 import { PRODUCT_ROUTE } from '../utils/routeConsts'
 import CartButton from './CartButton'
+import ProductStyles from '../styles/ProductStyles.css'
 
 const Product = ({ item }) => {
   const navigate = useNavigate()
 
   return (
         <Col className='m-3'>
-            <div style={{ background: '#fff', height: '100%', position: 'relative' }}>
+            <div className='product-card' style={{ background: '#fff', height: '100%', position: 'relative', borderRadius: 5 }}>
                 <Card
                     className='pb-5'
-                    style={{ cursor: 'pointer', border: 'none', borderRadius: 0, padding: 5 }}
+                    style={{ cursor: 'pointer', border: 'none', padding: 5 }}
                     onClick={() => navigate(PRODUCT_ROUTE + '/' + item.id)}
                 >
                     <Image style={{ objectFit: 'contain', marginLeft: 'auto', marginRight: 'auto' }} width={150} height={150} src={item.image} />
@@ -23,7 +24,7 @@ const Product = ({ item }) => {
                     </div>
                 </Card>
                 <div className="d-flex" style={{ position: 'absolute', bottom: 0, right: 0 }}>
-                    <CartButton item={item} />
+                    <CartButton item={item} productPage={false} />
                 </div>
             </div>
         </Col>

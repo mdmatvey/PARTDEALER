@@ -7,6 +7,7 @@ import { fetchOneProduct } from '../components/http/productAPI'
 import CountButton from '../components/CountButton'
 import CartButton from '../components/CartButton'
 import Comments from '../components/Comments'
+import { PRIMARY_COLOR } from '../utils/uiConsts'
 import { observer } from 'mobx-react-lite'
 import { Context } from '..'
 
@@ -36,7 +37,7 @@ const ProductPage = observer(() => {
   }, [user.userWidth])
 
   return (
-        <div className="pt-5 pb-5">
+        <div className="mt-3 mb-3">
             <Container className="p-4" style={{ background: '#fff' }}>
                 <Row>
                     {
@@ -45,7 +46,7 @@ const ProductPage = observer(() => {
                           : <h1 className="d-flex align-items-center">{product.products.title}</h1>
                     }
                 </Row>
-                <Row style={{ background: '#fff' }}>
+                <Row className='mt-5' style={{ background: '#fff' }}>
                     <Col md={md1}>
                         {
                             isLoading
@@ -77,7 +78,7 @@ const ProductPage = observer(() => {
                     <Col md={md1}>
                         <Card
                             className="d-flex flex-column"
-                            style={{ width: '100%', height: '100%', fontSize: 30, border: 'none', borderRadius: 0, background: '#ededed', padding: 10 }}
+                            style={{ width: '100%', height: '100%', fontSize: 30, border: 'none', color: '#fff', background: '#171717', padding: 10 }}
                         >
                             {
                                 isLoading
@@ -91,13 +92,14 @@ const ProductPage = observer(() => {
                                         <Skeleton style={{ width: '80%' }} />
                                     </>
                                   : <>
-                                        <h3 style={{ marginBottom: 0 }}>Цена</h3>
-                                        <span>{(product.products.price * product.products.count).toFixed(2)}₽</span>
-                                        <CountButton item={product.products} count={product.products.count} />
+                                        <span style={{ color: PRIMARY_COLOR, fontWeight: 'bold', fontSize: '3rem' }}>{(product.products.price * product.products.count).toFixed(2)}₽</span>
                                         Срок: 1 д.<br/>
                                         Наличие: 1 шт.
-                                        <CartButton item={product.products} />
-                                        Картой онлайн, наличными
+                                        <span className='d-flex align-items-center justify-content-between' style={{ marginTop: 'auto' }}>
+                                          <CountButton item={product.products} count={product.products.count} />
+                                          <CartButton item={product.products} productPage={true} />
+                                        </span>
+                                        <span style={{ fontSize: '1rem' }}>Картой онлайн, наличными</span>
                                     </>
                             }
 

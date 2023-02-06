@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import React, { useContext, useEffect, useState } from 'react'
 import { Context } from '../index'
-import { Form } from 'react-bootstrap'
+import { Card, Form } from 'react-bootstrap'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
@@ -44,9 +44,9 @@ const FilterBar = observer(({ isCategoriesLoading, isBrandsLoading }) => {
   }
 
   return (
-        <div style={{ background: '#fff', width: '100%', padding: 4 }}>
-            Бренды:
-            <Form style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%', background: '#fff' }}>
+        <Card style={{ width: '100%', border: 'none' }}>
+            <h2 style={{ textDecoration: 'underline', textDecorationColor: '#00CCCC', textDecorationThickness: 5 }}><strong>Бренды:</strong></h2>
+            <Form style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%' }}>
                 {
                     isBrandsLoading
                       ? <>
@@ -72,8 +72,8 @@ const FilterBar = observer(({ isCategoriesLoading, isBrandsLoading }) => {
                     aria-label="Search"
                 />
             </Form><br/>
-            Категории:
-            <Form style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%', background: '#fff' }}>
+            <h2 style={{ textDecoration: 'underline', textDecorationColor: '#00CCCC', textDecorationThickness: 5 }}><strong>Категории:</strong></h2>
+            <Form style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%' }}>
                 {
                     isCategoriesLoading
                       ? <>
@@ -89,7 +89,7 @@ const FilterBar = observer(({ isCategoriesLoading, isBrandsLoading }) => {
                       })
                 }
             </Form>
-        </div>
+        </Card>
   )
 })
 

@@ -10,8 +10,8 @@ const CartList = observer(({ cartPage }) => {
   return (
         <div style={{ padding: 20, height: '80%', overflowX: cartPage ? 'visible' : 'hidden' }}>
                 {cart.cartItems.map(item =>
-                    <Row style={{ width: '100%', margin: 0 }}>
-                        <CartItem key={item.key} item={item} cartPage={cartPage} />
+                    <Row key={item.key} style={{ width: '100%', margin: 0 }}>
+                        <CartItem item={item} cartPage={cartPage} />
                     </Row>
                 )}
         </div>

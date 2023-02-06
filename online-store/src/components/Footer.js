@@ -1,12 +1,12 @@
 import React from 'react'
 import { Col, Row } from 'react-bootstrap'
-import { PRIMARY_COLOR } from '../utils/uiConsts'
+import { SECONDARY_COLOR } from '../utils/uiConsts'
 import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
         <footer
-            style={{ width: '100%', backgroundColor: PRIMARY_COLOR }}
+            style={{ width: '100%', backgroundColor: SECONDARY_COLOR, color: '#fff' }}
             className="pt-4"
         >
             <div className="container-fluid text-center text-md-left">

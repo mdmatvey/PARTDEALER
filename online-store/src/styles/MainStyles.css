@@ -29,3 +29,18 @@
     font-size: 2.5em;
     font-weight: bold;
 }
+
+#topping {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: gainsboro;
+    background-image: url(../logo.svg);
+    background-size: 80%;
+    /* -webkit-background-size: contain; */
+    /* -moz-background-size: contain; */
+    /* -o-background-size: contain; */
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}

@@ -6,6 +6,12 @@ import { Button, Container, Form, Nav, Navbar } from 'react-bootstrap'
 import { observer } from 'mobx-react-lite'
 import { PRIMARY_COLOR, SECONDARY_COLOR, NAVLINK_STYLE, NAVBUTTON_STYLE } from '../utils/uiConsts'
 import CartList from './CartList'
+import { MdOutlineMailOutline } from 'react-icons/md'
+import { BsTelephoneFill } from 'react-icons/bs'
+import { FaTelegram, FaWhatsapp, FaRegUser } from 'react-icons/fa'
+import { TbShoppingCart } from 'react-icons/tb'
+import ButtonHoverStyles from '../styles/ButtonHoverStyles.css'
+import WebFont from 'webfontloader'
 
 const NavBar = observer(() => {
   const { user } = useContext(Context)
@@ -31,6 +37,14 @@ const NavBar = observer(() => {
     }
   }, [user.userWidth])
 
+  const WebFont = require('webfontloader')
+
+  WebFont.load({
+    google: {
+      families: ['Amaranth']
+    }
+  })
+
   return (
         <>
             <Navbar
@@ -41,24 +55,41 @@ const NavBar = observer(() => {
             >
                 <Container
                     className="pt-2 pb-2"
-                    style={{ background: SECONDARY_COLOR }}
+                    style={{ background: PRIMARY_COLOR, height: 30, padding: '0 110px' }}
                     fluid
                 >
-                    <Navbar.Brand onClick={() => navigate(MAIN_ROUTE)} style={{ cursor: 'pointer' }}>COMPANY NAME</Navbar.Brand>
+                    <Navbar.Brand
+                        onClick={() => navigate(MAIN_ROUTE)}
+                        style={{ cursor: 'pointer', fontFamily: 'Amaranth', fontWeight: 'bold', fontSize: '1.5rem', letterSpacing: '.05rem' }}
+                    >
+                        PART DEALER
+                    </Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav className="ms-auto">
                             <Button
-                                className="ms-2 me-2"
                                 style={NAVLINK_STYLE}
+                                lassName="ms-2 me-2"
                             >
-                                Адрес
+                                <span className='d-flex align-items-center'><FaTelegram />&nbsp;dubstepchik</span>
                             </Button>
                             <Button
                                 style={NAVLINK_STYLE}
                                 lassName="ms-2 me-2"
                             >
-                                Контакты
+                                <span className='d-flex align-items-center'><FaWhatsapp />&nbsp;dubstepchik</span>
+                            </Button>
+                            <Button
+                                style={NAVLINK_STYLE}
+                                lassName="ms-2 me-2"
+                            >
+                                <span className='d-flex align-items-center'><BsTelephoneFill />&nbsp;dubstepchik</span>
+                            </Button>
+                            <Button
+                                style={NAVLINK_STYLE}
+                                lassName="ms-2 me-2"
+                            >
+                                <span className='d-flex align-items-center'><MdOutlineMailOutline />&nbsp;dubstepchik</span>
                             </Button>
                         </Nav>
                     </Navbar.Collapse>
@@ -73,7 +104,7 @@ const NavBar = observer(() => {
             >
                 <Container
                     className="pt-2 pb-2"
-                    style={{ background: PRIMARY_COLOR }}
+                    style={{ background: SECONDARY_COLOR, padding: '0 110px' }}
                     fluid
                 >
                     <Navbar.Toggle aria-controls="navbarScroll" />
@@ -84,7 +115,7 @@ const NavBar = observer(() => {
                                 onChange={(e) => setQuery(e.target.value)}
                                 type="search"
                                 placeholder="Search term..."
-                                className="ms-5 me-2"
+                                className="me-2"
                                 aria-label="Search"
                         />
                             <Button
@@ -101,16 +132,16 @@ const NavBar = observer(() => {
                                 navbarScroll
                             >
                                 <Button
-                                    className={`ms-2 me-2 ${cartOpen && 'open'}`}
-                                    style={{ background: '#fff', border: 'none' }}
+                                    className={`d-flex align-items-center ms-2 me-2 ${cartOpen && 'open'} nav-button`}
+                                    style={NAVBUTTON_STYLE}
                                     onClick={() => {
                                       user.userWidth < 992 ? navigate(CART_ROUTE) : setCartOpen(!cartOpen)
                                     }}
                                 >
-                                    🛒
+                                    <TbShoppingCart style={{ fontSize: '1.5rem' }} />&nbsp;Корзина
                                 </Button>
                                 {cartOpen && (
-                                    <div style={{ position: 'absolute', top: 59, right: 0, width: '35vw', height: 400, background: SECONDARY_COLOR, zIndex: -1, boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px' }}>
+                                    <div style={{ position: 'absolute', top: 58, right: 0, width: '35vw', height: 400, borderRadius: '0 0 5px 5px', background: SECONDARY_COLOR, zIndex: -1, boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px' }}>
                                         <CartList cartPage={false} />
                                         <Button
                                         onClick={() => {
@@ -125,20 +156,22 @@ const NavBar = observer(() => {
                                 )}
                                 <Button
                                     style={NAVBUTTON_STYLE}
+                                    className='d-flex align-items-center nav-button'
                                     onClick={() => navigate(ADMIN_ROUTE)}
                                 >
-                                    Админ-панель
+                                    <FaRegUser />&nbsp;Админ-панель
                                 </Button>
                                 <Button
                                     style={NAVBUTTON_STYLE}
+                                    className='d-flex align-items-center nav-button'
                                     onClick={() => navigate(USER_ROUTE)}
                                 >
-                                    Личный кабинет
+                                    <FaRegUser />&nbsp;Личный кабинет
                                 </Button>
                                 <Button
                                     style={NAVBUTTON_STYLE}
+                                    className='nav-button'
                                     onClick={() => logOut()}
-                                    className="ms-2"
                                 >
                                     Выйти
                                 </Button>

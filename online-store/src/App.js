@@ -51,7 +51,7 @@ const App = observer(() => {
   return (
       <BrowserRouter>
         <NavBar />
-        <main style={{ minHeight: '100vh', background: '#EEEEEE' }}>
+        <main style={{ minHeight: '100vh', background: '#FFF' }}>
           <AppRouter />
         </main>
         <Footer />

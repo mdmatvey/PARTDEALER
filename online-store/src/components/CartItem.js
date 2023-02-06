@@ -24,7 +24,7 @@ const CartItem = observer(({ item, cartPage }) => {
                 <Card.Subtitle>{item.category}</Card.Subtitle>
                 <Card.Text><h2>{(item.price * item.count).toFixed(2)}₽</h2></Card.Text>
             </Card.Body>
-            <CountButton item={item} />
+            <CountButton item={item} cartPage={cartPage} />
             <Button
                     onClick={() => cart.setCartItems(cart.cartItems.filter(cartItem => item.id !== cartItem.id))}
                     className="shadow-none"

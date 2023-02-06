@@ -1,7 +1,9 @@
 import React, { useContext } from 'react'
 import { Button, Container, FloatingLabel, Form } from 'react-bootstrap'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Context } from '..'
+import { MAINBUTTON_STYLE } from '../utils/uiConsts'
+import ButtonHoverStyles from '../styles/ButtonHoverStyles.css'
 
 const Comments = ({ product }) => {
   const { user } = useContext(Context)
@@ -20,7 +22,7 @@ const Comments = ({ product }) => {
                                 style={{ height: '100px' }}
                                 />
                             </FloatingLabel>
-                            <Button className="ms-4" style={{ height: 50 }}>Отправить</Button>
+                            <Button className="ms-4 main-button" style={MAINBUTTON_STYLE}>Отправить</Button>
                         </div>
                         Отправляя отзыв, вы соглашаетесь с <Link to="" style={{ cursor: 'pointer', color: 'red' }}>политикой конфиденциальности</Link>
                     </>
