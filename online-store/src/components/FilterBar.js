@@ -62,7 +62,7 @@ const FilterBar = observer(({ isCategoriesLoading, isBrandsLoading }) => {
                       }).map(brand => <Form.Check key={brand.id} label={brand.name} />)
                 }
             </Form>
-            <Form className="d-inline-flex">
+            <Form className="d-inline-flex brandbar-form">
                 <Form.Control
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}

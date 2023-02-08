@@ -1,5 +1,5 @@
 export const PRIMARY_COLOR = '#00CCCC'
-export const SECONDARY_COLOR = '#171717'
+export const SECONDARY_COLOR = '#222222'
 
 export const NAVLINK_STYLE = {
   border: 'none',
@@ -35,4 +35,10 @@ export const TEXTBUTTON_STYLE = {
   fontSize: '1.3rem',
   padding: 0,
   margin: '0px 10px'
+}
+
+export const ANCHOR_STYLE = {
+  color: '#fff',
+  textDecoration: 'underline',
+  textDecorationThickness: 2
 }

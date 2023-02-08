@@ -2,6 +2,8 @@ import { observer } from 'mobx-react-lite'
 import React, { useContext } from 'react'
 import { Pagination } from 'react-bootstrap'
 import { Context } from '../index'
+import BootstrapReStyles from '../styles/BootstrapReStyles.css'
+import EventStyles from '../styles/EventStyles.css'
 
 const Pages = observer(() => {
   const { product } = useContext(Context);
@@ -21,7 +23,7 @@ const Pages = observer(() => {
   }
 
   return (
-        <Pagination className='mt-5'>
+        <Pagination className='mt-5 justify-content-center'>
             {pages.map(page =>
                 <Pagination.Item
                     key={page}

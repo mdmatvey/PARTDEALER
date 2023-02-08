@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Card, Col, Image } from 'react-bootstrap'
 import { PRODUCT_ROUTE } from '../utils/routeConsts'
 import CartButton from './CartButton'
-import ProductStyles from '../styles/ProductStyles.css'
+import EventStyles from '../styles/EventStyles.css'
 
 const Product = ({ item }) => {
   const navigate = useNavigate()

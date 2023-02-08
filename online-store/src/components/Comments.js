@@ -3,7 +3,7 @@ import { Button, Container, FloatingLabel, Form } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { Context } from '..'
 import { MAINBUTTON_STYLE } from '../utils/uiConsts'
-import ButtonHoverStyles from '../styles/ButtonHoverStyles.css'
+import EventStyles from '../styles/EventStyles.css'
 
 const Comments = ({ product }) => {
   const { user } = useContext(Context)
@@ -13,8 +13,8 @@ const Comments = ({ product }) => {
             {
                 user.isAuth
                   ? <>
-                        <h3 className="mt-4 mb-4">Отзывы</h3>
-                        <div className="d-flex align-items-center">
+                        <h3 className="mt-4 mb-4" style={{ textDecoration: 'underline', textDecorationColor: '#00CCCC', textDecorationThickness: 5 }}><strong>Отзывы</strong></h3>
+                        <div className="d-flex align-items-start">
                             <FloatingLabel label="Ваш отзыв" style={{ width: '100%' }}>
                                 <Form.Control
                                 as="textarea"
@@ -24,7 +24,7 @@ const Comments = ({ product }) => {
                             </FloatingLabel>
                             <Button className="ms-4 main-button" style={MAINBUTTON_STYLE}>Отправить</Button>
                         </div>
-                        Отправляя отзыв, вы соглашаетесь с <Link to="" style={{ cursor: 'pointer', color: 'red' }}>политикой конфиденциальности</Link>
+                        Отправляя отзыв, вы соглашаетесь с <Link to="/confidentiality" style={{ cursor: 'pointer' }}>политикой конфиденциальности</Link>
                     </>
                   : null
             }

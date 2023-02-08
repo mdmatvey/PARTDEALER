@@ -1,7 +1,8 @@
 import React from 'react'
 import { Col, Row } from 'react-bootstrap'
-import { SECONDARY_COLOR } from '../utils/uiConsts'
+import { PRIMARY_COLOR, SECONDARY_COLOR } from '../utils/uiConsts'
 import { Link } from 'react-router-dom'
+import BootstrapReStyles from '../styles/BootstrapReStyles.css'
 
 const Footer = () => {
   return (
@@ -47,7 +48,7 @@ const Footer = () => {
                 </Row>
             </div>
             <div className="footer-copyright text-center py-3">&copy; {new Date().getFullYear()} Copyright:
-                <Link to="https://mdbootstrap.com/"> mockdomen.com</Link>
+                <Link to="https://mdbootstrap.com/" style={{ color: PRIMARY_COLOR, textDecoration: 'none' }}> mockdomen.com</Link>
             </div>
         </footer>
   )

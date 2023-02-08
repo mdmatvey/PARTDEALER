@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react'
 import { Card } from 'react-bootstrap'
 import { Context } from '..'
 import { setEnding } from '../utils/functions'
+import { SECONDARY_COLOR } from '../utils/uiConsts'
 
 const Total = observer(({ itemsCount }) => {
   const { cart } = useContext(Context)
@@ -11,7 +12,7 @@ const Total = observer(({ itemsCount }) => {
 
   return (
         <Card
-            style={{ background: '#eeeeee', width: '100%', padding: '20px 10px', border: 'none', borderRadius: 0 }}
+            style={{ background: SECONDARY_COLOR, color: '#fff', width: '100%', padding: '20px 10px', border: 'none' }}
         >
             <div className="d-inline-flex justify-content-between align-items-baseline">
                 <span

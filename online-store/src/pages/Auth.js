@@ -5,6 +5,9 @@ import { LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE } from '../utils/routeConst
 import { login, registration } from '../components/http/userAPI'
 import { observer } from 'mobx-react-lite'
 import { Context } from '../index'
+import { ANCHOR_STYLE, MAINBUTTON_STYLE, PRIMARY_COLOR, SECONDARY_COLOR } from '../utils/uiConsts'
+import BootstrapReStyles from '../styles/BootstrapReStyles.css'
+import EventStyles from '../styles/EventStyles.css'
 
 const Auth = observer(() => {
   const { user } = useContext(Context)
@@ -38,8 +41,8 @@ const Auth = observer(() => {
             className="d-flex justify-content-center align-items-center"
             style={{ height: window.innerHeight - 56 }}
         >
-            <Card style={{ width: 600 }} className="p-5">
-                <h2 className="m-auto">{isLogin ? 'Авторизация' : 'Регистрация'}</h2>
+            <Card style={{ width: 600, background: SECONDARY_COLOR }} className="p-5">
+                <h2 className="m-auto" style={{ color: PRIMARY_COLOR }}>{isLogin ? 'Авторизация' : 'Регистрация'}</h2>
                 <Form className="d-flex flex-column">
                     <Form.Control
                         className="mt-3"
@@ -54,22 +57,21 @@ const Auth = observer(() => {
                         type="password"
                         onChange={e => setPassword(e.target.value)}
                     />
-                    <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
-                        {isLogin
-                          ? <div style={{ width: 'auto' }}>
-                                Еще нет аккаунта? <Link to={REGISTRATION_ROUTE}>Зарегистрируйтесь!</Link>
-                            </div>
-                          : <div style={{ width: 'auto' }}>
-                                Уже есть аккаунт? <Link to={LOGIN_ROUTE}>Авторизируйтесь!</Link>
-                            </div>
+                    <Row className="d-inline-flex align-items-baseline justify-content-between mt-3 pl-3 pr-3">
+                      <div style={{ width: 'auto', color: '#fff' }}>
+                        {
+                          isLogin
+                            ? <span>Еще нет аккаунта? <Link to={REGISTRATION_ROUTE} style={ANCHOR_STYLE} className='anchor'>Зарегистрируйтесь!</Link></span>
+                            : <span>Уже есть аккаунт? <Link to={LOGIN_ROUTE} style={ANCHOR_STYLE} className='anchor'>Авторизируйтесь!</Link></span>
                         }
-                        <Button
-                            style={{ width: 'auto' }}
-                            variant={'outline-success'}
-                            onClick={click}
-                        >
-                            {isLogin ? 'Войти' : 'Зарегистрироваться'}
-                        </Button>
+                      </div>
+                      <Button
+                          style={{ ...MAINBUTTON_STYLE, width: 100, color: '#fff' }}
+                          className='nav-button'
+                          onClick={click}
+                      >
+                          {isLogin ? 'Войти' : 'Зарегистрироваться'}
+                      </Button>
                     </Row>
                 </Form>
             </Card>

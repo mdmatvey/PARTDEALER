@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react'
-import { Accordion, Container, Dropdown, Row } from 'react-bootstrap'
+import { Accordion, Dropdown, Row } from 'react-bootstrap'
 import { Context } from '../index'
 import OrderItem from './OrderItem'
+import EventStyles from '../styles/EventStyles.css'
 
 const Order = ({ user }) => {
   const { cart } = useContext(Context)
@@ -14,8 +15,8 @@ const Order = ({ user }) => {
                 <Accordion.Body>
                     <div style={{ padding: 20, height: 220, overflowX: 'hidden' }}>
                         {cart.cartItems.map(item =>
-                            <Row style={{ width: '100%', margin: 0 }}>
-                                <OrderItem key={item.key} item={item} />
+                            <Row key={item.key} style={{ width: '100%', margin: 0 }}>
+                                <OrderItem item={item} />
                             </Row>
                         )}
                     </div>

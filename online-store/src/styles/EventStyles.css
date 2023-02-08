@@ -1,0 +1,104 @@
+.main-button:hover {
+    background-color: #00CCCC !important;
+}
+
+.main-button:active {
+    background-color: #fff !important;
+    border-color: #fff !important;
+}
+
+.nav-button:hover, .count-button:hover {
+    color: #000 !important;
+    background-color: #00CCCC !important;
+}
+
+#major-button:hover {
+    background: none !important;
+    color: #fff !important;
+}
+
+.nav-button:active {
+    color: #fff !important;
+    background-color: #222222 !important;
+    border-color: #222222 !important;
+}
+
+.nav-logo {
+    transition: .05s linear;
+}
+
+.nav-logo:active {
+    scale: 0.95 !important
+}
+
+.anchor:hover {
+    transition: .3s;
+    color: #00CCCC !important;
+    text-decoration-color: #fff !important;
+}
+
+.search-bar:focus {
+    border-color: #00CCCC !important;
+    box-shadow: rgba(0, 204, 204, 0.2) 0 0 0 0.25rem ;
+}
+
+.product-card, .item-card {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 5px 1px;
+    transition: 0.2s;
+}
+
+.product-card:hover, .item-card:hover {
+    box-shadow: rgba(99, 99, 99, 0.1) 0px 0px 15px 10px;
+    scale: 1.01
+}
+
+.product-card:active, .item-card:active {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 5px 1px;
+    scale: 1;
+}
+
+.form-check-input:focus {
+    border-color: #222222;
+    box-shadow: 0 0 0 0.25rem rgba(34, 34, 34, 0.2) !important;
+}
+
+.form-check-input:checked {
+    background-color: #222222;
+    border-color: #222222;
+}
+
+.form-control:focus {
+    border-color: #00CCCC;
+    background: #fff !important;
+    box-shadow: 0 0 0 0.25rem rgba(34, 34, 34, 0.2) !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #222222 inset !important;
+}
+
+input:-webkit-autofill{
+    -webkit-text-fill-color: #fff !important;
+}
+
+.accordion-button {
+    color: #fff;
+    background-color: #222222;
+    transition: .2s;
+}
+
+.accordion-button:not(.collapsed) {
+    color: #00CCCC;
+    background-color: #222222;
+}
+
+.accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(34, 34, 34, 0.2) !important;
+}
+
+.page-link:active {
+    box-shadow: 0 0 0 0.25rem rgba(34, 34, 34, 0.2) !important;
+}

@@ -13,8 +13,8 @@ const Item = ({ path }) => {
             className={'mt-5 mb-4'}
         >
             <Card
-                style={{ display: 'block', margin: '0 auto', width: 250, height: 260, cursor: 'pointer', textAlign: 'center', boxShadow: '0px 0px 8px 3px rgba(99, 99, 99, 0.2)' }}
-                border={'light'}
+                style={{ display: 'block', margin: '0 auto', width: 250, height: 260, cursor: 'pointer', textAlign: 'center' }}
+                className='item-card'
                 onClick={() => {
                   if (!product.categoriesToDisplay.map(category => category.name).includes(path.name)) {
                     product.setCategoriesToDisplay([])

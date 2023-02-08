@@ -7,7 +7,7 @@ import { fetchOneProduct } from '../components/http/productAPI'
 import CountButton from '../components/CountButton'
 import CartButton from '../components/CartButton'
 import Comments from '../components/Comments'
-import { PRIMARY_COLOR } from '../utils/uiConsts'
+import { PRIMARY_COLOR, SECONDARY_COLOR } from '../utils/uiConsts'
 import { observer } from 'mobx-react-lite'
 import { Context } from '..'
 
@@ -68,17 +68,17 @@ const ProductPage = observer(() => {
                                         <Skeleton style={{ width: '95%' }} />
                                         <Skeleton style={{ width: '40%' }} />
                                     </>
-                                  : <>
-                                        <h3>Описание товара:</h3>
+                                  : <div style={{ fontSize: '1.7rem' }}>
+                                        <h3 style={{ textDecoration: 'underline', textDecorationColor: '#00CCCC', textDecorationThickness: 5 }}><strong>Описание товара:</strong></h3>
                                         {product.products.description}
-                                    </>
+                                    </div>
                             }
                         </Card>
                     </Col>
                     <Col md={md1}>
                         <Card
                             className="d-flex flex-column"
-                            style={{ width: '100%', height: '100%', fontSize: 30, border: 'none', color: '#fff', background: '#171717', padding: 10 }}
+                            style={{ width: '100%', height: '100%', fontSize: 30, border: 'none', color: '#fff', background: SECONDARY_COLOR, padding: 20 }}
                         >
                             {
                                 isLoading
@@ -95,8 +95,8 @@ const ProductPage = observer(() => {
                                         <span style={{ color: PRIMARY_COLOR, fontWeight: 'bold', fontSize: '3rem' }}>{(product.products.price * product.products.count).toFixed(2)}₽</span>
                                         Срок: 1 д.<br/>
                                         Наличие: 1 шт.
-                                        <span className='d-flex align-items-center justify-content-between' style={{ marginTop: 'auto' }}>
-                                          <CountButton item={product.products} count={product.products.count} />
+                                        <span className='d-flex align-items-center justify-content-between mb-1' style={{ marginTop: 'auto', height: 41 }}>
+                                          <CountButton item={product.products} count={product.products.count} productPage={true} />
                                           <CartButton item={product.products} productPage={true} />
                                         </span>
                                         <span style={{ fontSize: '1rem' }}>Картой онлайн, наличными</span>

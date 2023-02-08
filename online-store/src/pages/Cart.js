@@ -7,7 +7,8 @@ import CartList from '../components/CartList'
 import Total from '../components/Total'
 import { SHOP_ROUTE, ORDERING_ROUTE } from '../utils/routeConsts'
 import { setEnding } from '../utils/functions'
-import { PRIMARY_COLOR } from '../utils/uiConsts'
+import { MAINBUTTON_STYLE, PRIMARY_COLOR, SECONDARY_COLOR, TEXTBUTTON_STYLE } from '../utils/uiConsts'
+import EventStyles from '../styles/EventStyles.css'
 
 const Cart = observer(() => {
   const { product, cart } = useContext(Context)
@@ -49,11 +50,12 @@ const Cart = observer(() => {
                                           product.setCategoriesToDisplay([])
                                           navigate(SHOP_ROUTE)
                                         }}
-                                        style={{ border: 'none', borderRadius: 0, background: PRIMARY_COLOR, padding: '10px 20px', fontSize: '1.25rem', fontWeight: 'bold' }}
+                                        className='main-button'
+                                        style={{ ...MAINBUTTON_STYLE, padding: '10px 20px', fontSize: '1.25rem' }}
                                     >
                                         В каталог
                                     </Button>
-                                    <Link to="/" style={{ fontSize: '1.25rem', fontWeight: 'bold', textDecoration: 'none' }}>На главную</Link>
+                                    <Link to="/" style={{ ...TEXTBUTTON_STYLE, fontSize: '1.25rem', textDecoration: 'underline 2px #00CCCC' }}>На главную</Link>
                                 </div>
                             </div>
                           : <>
@@ -72,7 +74,7 @@ const Cart = observer(() => {
                                         }
                                       }
                                     }}
-                                    style={{ color: '#000', background: 'none', border: 'none', borderRadius: '0' }}
+                                    style={{ ...TEXTBUTTON_STYLE, fontSize: '1rem' }}
                                 >
                                     Выбрать все
                                 </Button>
@@ -93,17 +95,17 @@ const Cart = observer(() => {
                             <div style={{ display: 'grid', gridTemplateColumns: '3fr 1fr' }}>
                                 <CartList cartPage={true} />
                                 <Card
-                                    style={{ background: '#eeeeee', height: 250, width: '100%', border: 'none', borderRadius: 0, padding: 10 }}
+                                    style={{ background: SECONDARY_COLOR, height: 250, marginTop: 20, width: '100%', border: 'none', padding: 10 }}
                                 >
+                                    <Total itemsCount={itemsCount} />
                                     <Button
                                         disabled={!(cart.cartItems.length > 0)}
                                         onClick={() => navigate(ORDERING_ROUTE)}
-                                        className="mb-4"
-                                        style={{ fontWeight: 'bold', fontSize: '1.2rem', padding: 20, border: 'none', borderRadius: 0, background: PRIMARY_COLOR }}
+                                        className="nav-button"
+                                        style={{ ...MAINBUTTON_STYLE, color: '#fff', marginTop: 'auto', padding: 10 }}
                                     >
                                         Перейти к оформлению
                                     </Button>
-                                    <Total itemsCount={itemsCount} />
                                 </Card>
                             </div>
                         </>

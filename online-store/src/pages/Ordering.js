@@ -5,7 +5,9 @@ import { useNavigate } from 'react-router-dom'
 import { Context } from '..'
 import Total from '../components/Total'
 import { CART_ROUTE } from '../utils/routeConsts'
-import { PRIMARY_COLOR } from '../utils/uiConsts'
+import { MAINBUTTON_STYLE, PRIMARY_COLOR, SECONDARY_COLOR } from '../utils/uiConsts'
+import EventStyles from '../styles/EventStyles.css'
+import BootstrapReStyles from '../styles/BootstrapReStyles.css'
 
 const Cart = observer(() => {
   const { cart, user } = useContext(Context)
@@ -58,20 +60,20 @@ const Cart = observer(() => {
             </Row>
             <div style={{ display: 'grid', gridTemplateColumns: `${pageColumns}` }}>
                 <Container>
-                    <Card className="p-3 mb-3" style={{ borderRadius: 0 }}>
+                    <Card className="p-3 mb-3" style={{ }}>
                         <h2>Товары к оплате</h2>
                         <Container style={{ display: 'grid', gridTemplateColumns: `repeat(${productColumns}, 1fr)`, gap: 30 }}>
                             {
                                 cart.cartItems.map(cartItem =>
                                     <div style={{ position: 'relative' }}>
                                         <Image style={{ objectFit: 'contain' }} width={75} height={75} src={cartItem.image} />
-                                        <div style={{ position: 'absolute', zIndex: 2, top: 0, right: 0, backdropFilter: 'blur(10px)', background: 'rgba(0, 0, 0, 0.3)', color: '#fff', padding: '2px 8px', borderRadius: 7 }}>{cartItem.count}</div>
+                                        <div style={{ position: 'absolute', zIndex: 2, top: 0, right: 0, borderRadius: 5, backdropFilter: 'blur(10px)', background: 'rgba(0, 0, 0, 0.5)', color: '#fff', padding: '2px 8px' }}>{cartItem.count}</div>
                                     </div>
                                 )
                             }
                         </Container>
                     </Card>
-                    <Card className="p-3 mb-3" style={{ borderRadius: 0 }}>
+                    <Card className='   p-3 mb-3'>
                         <h2>Адрес </h2>
                         <Form>
                             <Form.Group className="mb-3">
@@ -87,7 +89,7 @@ const Cart = observer(() => {
                         </Form>
                     </Card>
                     <div className="d-flex">
-                        <Card className="p-3 me-2" style={{ width: '50%', borderRadius: 0 }}>
+                        <Card className="p-3 me-2" style={{ width: '50%' }}>
                             <h2>Получатель</h2>
                             <Form>
                                 <Form.Group className="mb-3">
@@ -99,7 +101,7 @@ const Cart = observer(() => {
                                 </Form.Group>
                             </Form>
                         </Card>
-                        <Card className="p-3 ms-2" style={{ width: '50%', borderRadius: 0 }}>
+                        <Card className="p-3 ms-2" style={{ width: '50%' }}>
                             <h2>Способ оплаты</h2>
                             <Tabs
                                 defaultActiveKey="profile"
@@ -110,7 +112,7 @@ const Cart = observer(() => {
                                     <p>8 910 123 456 78 91 - Сбербанк</p>
                                 </Tab>
                                 <Tab eventKey="profile" title="СБП">
-                                    <Button onClick={handleShow} style={{ border: 'none', borderRadius: 0, background: PRIMARY_COLOR }}>
+                                    <Button onClick={handleShow} className='main-button' style={MAINBUTTON_STYLE}>
                                         Нажмите для получения QR для оплаты
                                     </Button>
                                     <Modal show={show} onHide={handleClose} centered>
@@ -133,12 +135,12 @@ const Cart = observer(() => {
                         </Card>
                     </div>
                 </Container>
-                <Card style={{ position: 'relative', border: 'none', width: '100%' }}>
+                <Card style={{ position: 'relative', border: 'none', width: '100%', background: SECONDARY_COLOR }}>
                     <Total itemsCount={itemsCount} />
                     <Button
                         onClick={() => navigate()}
-                        className="mt-4"
-                        style={{ position: 'absolute', width: '90%', top: 'auto', bottom: 10, left: '5%', display: 'block', margin: '0 auto', fontWeight: 'bold', fontSize: '1.2rem', padding: 20, border: 'none', borderRadius: 0, background: PRIMARY_COLOR }}
+                        className="mt-4 nav-button"
+                        style={{ ...MAINBUTTON_STYLE, color: '#fff', position: 'absolute', width: '90%', top: 'auto', bottom: 10, left: '5%', display: 'block', margin: '0 auto', fontSize: '1.2rem', padding: 20 }}
                     >
                         Оформить заказ
                     </Button>

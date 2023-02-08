@@ -5,11 +5,10 @@ import { Context } from '..'
 import { PRIMARY_COLOR, TEXTBUTTON_STYLE } from '../utils/uiConsts'
 // import { fetchSortProductsPrice, fetchSortProductsPopularity } from './http/productAPI'
 import { TiThList, TiThLarge } from 'react-icons/ti'
-import { BsCaretDownFill, BsCaretUpFill } from 'react-icons/bs'
-import SortBarStyles from '../styles/SortBarStyles.css'
+import { BsCaretDownFill } from 'react-icons/bs'
 
-let i = 1
-let j = 2
+let i = 0
+let j = 0
 
 const SortdBar = observer(({ setIsProductsLoading }) => {
   const { user, product } = useContext(Context)
@@ -37,17 +36,10 @@ const SortdBar = observer(({ setIsProductsLoading }) => {
   const itemsOnPage = (e, num) => {
     product.setLimit(num)
 
-    let color = ''
-    if (dropdown) {
-      color = '#000'
-    } else {
-      color = '#fff'
-    }
-
-    document.getElementById('four').style.color = color
-    document.getElementById('eight').style.color = color
-    document.getElementById('twelve').style.color = color
-    document.getElementById('all').style.color = color
+    document.getElementById('four').style.color = '#000'
+    document.getElementById('eight').style.color = '#000'
+    document.getElementById('twelve').style.color = '#000'
+    document.getElementById('all').style.color = '#000'
     e.target.style.color = 'gray'
   }
 
@@ -61,41 +53,36 @@ const SortdBar = observer(({ setIsProductsLoading }) => {
     }
   }
 
-  const [priceCaretUpDisplay, setPrcieCaretUpDisplay] = useState({ display: 'none' })
-  const [priceCaretDownDisplay, setPrcieCaretDownDisplay] = useState({ display: 'none' })
-  const [popularityCaretUpDisplay, setPopularityCaretUpDisplay] = useState({ display: 'none' })
-  const [popularityCaretDownDisplay, setPopularityCaretDownDisplay] = useState({ display: 'inline-block' })
+  const [priceCaretDisplay, setPrcieCaretDisplay] = useState({ display: 'none' })
+  const [popularityCaretDisplay, setPopularityCaretDisplay] = useState({ display: 'inline-block' })
   const [nbspDisplay, setNbspDisplay] = useState({ display: 'inline-block' })
 
   const priceSort = () => {
     document.getElementById('popularity').style.color = '#000'
     document.getElementById('price').style.color = 'gray'
+    i++
 
-    if (i + 1 === 2) {
-      i++
+    if (i % 2 === 0) {
       // setIsProductsLoading(true)
       //   fetchSortProductsPrice('desc')
       //     .then(data => {
       //       product.setProducts(data)
       //       setIsProductsLoading(false)
       //     })
-      setPrcieCaretDownDisplay({ display: 'inline-block' })
-      setPrcieCaretUpDisplay({ display: 'none' })
-      setPopularityCaretDownDisplay({ display: 'none' })
-      setPopularityCaretUpDisplay({ display: 'none' })
+      setPrcieCaretDisplay({ display: 'inline-block' })
+      setPopularityCaretDisplay({ display: 'none' })
+      document.getElementById('price-caret').style.transform = `rotate(${i * 180}deg)`
       setNbspDisplay({ display: 'none' })
-    } else if (i + 1 === 3) {
-      i = 1
+    } else if (i % 2 !== 0) {
       // setIsProductsLoading(true)
       // fetchSortProductsPrice('asc')
       //   .then(data => {
       //     product.setProducts(data)
       //     setIsProductsLoading(false)
       //   })
-      setPrcieCaretDownDisplay({ display: 'none' })
-      setPrcieCaretUpDisplay({ display: 'inline-block' })
-      setPopularityCaretDownDisplay({ display: 'none' })
-      setPopularityCaretUpDisplay({ display: 'none' })
+      setPrcieCaretDisplay({ display: 'inline-block' })
+      setPopularityCaretDisplay({ display: 'none' })
+      document.getElementById('price-caret').style.transform = `rotate(${i * 180}deg)`
       setNbspDisplay({ display: 'none' })
     }
   }
@@ -103,32 +90,29 @@ const SortdBar = observer(({ setIsProductsLoading }) => {
   const popularitySort = () => {
     document.getElementById('popularity').style.color = 'gray'
     document.getElementById('price').style.color = '#000'
+    j++
 
-    if (j + 1 === 2) {
-      j++
+    if (j % 2 === 0) {
       //   setIsProductsLoading(true)
       //   fetchSortProductsPopularity('desc')
       //     .then(data => {
       //       product.setProducts(data)
       //       setIsProductsLoading(false)
       //     })
-      setPrcieCaretDownDisplay({ display: 'none' })
-      setPrcieCaretUpDisplay({ display: 'none' })
-      setPopularityCaretDownDisplay({ display: 'inline-block' })
-      setPopularityCaretUpDisplay({ display: 'none' })
+      setPrcieCaretDisplay({ display: 'none' })
+      setPopularityCaretDisplay({ display: 'inline-block' })
+      document.getElementById('popularity-caret').style.transform = `rotate(${j * 180}deg)`
       setNbspDisplay({ display: 'inline-block' })
-    } else if (j + 1 === 3) {
-      j = 1
+    } else if (j % 2 !== 0) {
       // setIsProductsLoading(true)
       // fetchSortProductsPopularity('asc')
       //   .then(data => {
       //     product.setProducts(data)
       //     setIsProductsLoading(false)
       //   })
-      setPrcieCaretDownDisplay({ display: 'none' })
-      setPrcieCaretUpDisplay({ display: 'none' })
-      setPopularityCaretDownDisplay({ display: 'none' })
-      setPopularityCaretUpDisplay({ display: 'inline-block' })
+      setPrcieCaretDisplay({ display: 'none' })
+      setPopularityCaretDisplay({ display: 'inline-block' })
+      document.getElementById('popularity-caret').style.transform = `rotate(${j * 180}deg)`
       setNbspDisplay({ display: 'inline-block' })
     }
   }
@@ -146,7 +130,7 @@ const SortdBar = observer(({ setIsProductsLoading }) => {
                                         style={{ ...TEXTBUTTON_STYLE, color: '#fff' }}
                                         id='price'
                                     >
-                                        цена <BsCaretDownFill style={{ ...priceCaretDownDisplay, fontSize: '1rem' }} /> <BsCaretUpFill style={{ ...priceCaretUpDisplay, fontSize: '1rem' }} />
+                                        цена <BsCaretDownFill id='price-caret' style={{ ...priceCaretDisplay, fontSize: '1rem', transition: '.2s' }} />
                                     </Button>
                                 </Dropdown.Item>
                                 <Dropdown.Item>
@@ -155,7 +139,7 @@ const SortdBar = observer(({ setIsProductsLoading }) => {
                                         style={{ ...TEXTBUTTON_STYLE, color: 'gray' }}
                                         id='popularity'
                                     >
-                                        популярность <BsCaretDownFill style={{ ...popularityCaretDownDisplay, fontSize: '1rem' }} /> <BsCaretUpFill style={{ ...popularityCaretUpDisplay, fontSize: '1rem' }} />
+                                        популярность <BsCaretDownFill id='popularity-caret' style={{ ...popularityCaretDisplay, fontSize: '1rem', transition: '.2s' }} />
                                     </Button>
                                 </Dropdown.Item>
                             </DropdownButton>
@@ -219,8 +203,7 @@ const SortdBar = observer(({ setIsProductsLoading }) => {
                                     id='price'
                                 >
                                     цена
-                                    <BsCaretDownFill style={{ ...priceCaretDownDisplay, fontSize: '1rem' }} />
-                                    <BsCaretUpFill style={{ ...priceCaretUpDisplay, fontSize: '1rem' }} />
+                                    <BsCaretDownFill id='price-caret' style={{ ...priceCaretDisplay, fontSize: '1rem', transition: '.2s' }} />
                                     <span className='nbsp' style={nbspDisplay}>&nbsp;&nbsp;&nbsp;</span>
                                 </Button>
                                 <Button
@@ -228,7 +211,7 @@ const SortdBar = observer(({ setIsProductsLoading }) => {
                                     style={{ ...TEXTBUTTON_STYLE, color: 'gray' }}
                                     id='popularity'
                                 >
-                                    популярность <BsCaretDownFill style={{ ...popularityCaretDownDisplay, fontSize: '1rem' }} /> <BsCaretUpFill style={{ ...popularityCaretUpDisplay, fontSize: '1rem' }} />
+                                    популярность <BsCaretDownFill id='popularity-caret' style={{ ...popularityCaretDisplay, fontSize: '1rem', transition: '.2s' }} />
                                 </Button>
                             </span>
                             <span className="d-flex align-items-center">

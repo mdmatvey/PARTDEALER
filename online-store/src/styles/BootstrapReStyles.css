@@ -1,0 +1,42 @@
+.pagination li span {
+    background-color: #222222 !important;
+    border-color: #222222 !important;
+}
+
+.pagination li a {
+    color: #222222 !important;
+}
+
+.page-link {
+    color: #00CCCC !important;
+    outline: none;
+}
+
+.nav-link {
+    color: #000;
+    transition: .2s;
+}
+
+.nav-link.active, .nav-link:hover {
+    color: #000;
+    text-decoration: underline 2px #00CCCC;
+}
+
+.form-control {
+    height: 100%;
+    color: #fff;
+    background: none !important; 
+    outline: none; 
+    transition: .2s
+}
+
+li a {
+    color: #fff;
+    text-decoration: none;
+    transition: .2s;
+}
+
+li a:hover {
+    color: #00CCCC;
+}
+
