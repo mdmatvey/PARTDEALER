@@ -1,18 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Context } from '../index'
-import { MAIN_ROUTE, ADMIN_ROUTE, USER_ROUTE, LOGIN_ROUTE, CART_ROUTE } from '../utils/routeConsts'
+import { MAIN_ROUTE, ADMIN_ROUTE, USER_ROUTE, LOGIN_ROUTE, CART_ROUTE, SHOP_ROUTE } from '../utils/routeConsts'
 import { Button, Container, Form, Nav, Navbar } from 'react-bootstrap'
 import { observer } from 'mobx-react-lite'
-import { PRIMARY_COLOR, SECONDARY_COLOR, NAVLINK_STYLE, NAVBUTTON_STYLE, MAINBUTTON_STYLE } from '../utils/uiConsts'
+import { PRIMARY_COLOR, SECONDARY_COLOR, NAVLINK_STYLE, NAVBUTTON_STYLE } from '../utils/uiConsts'
 import CartList from './CartList'
 import { MdOutlineMailOutline } from 'react-icons/md'
 import { BsTelephoneFill } from 'react-icons/bs'
 import { FaTelegram, FaWhatsapp, FaRegUser } from 'react-icons/fa'
 import { TbShoppingCart } from 'react-icons/tb'
 import { GoSearch } from 'react-icons/go'
+import { BiLogIn, BiLogOut } from 'react-icons/bi'
+import BootstrapReStyles from '../styles/BootstrapReStyles.css'
+import NavbarStyles from '../styles/NavbarStyles.css'
 import EventStyles from '../styles/EventStyles.css'
-import WebFont from 'webfontloader'
 
 const NavBar = observer(() => {
   const { user } = useContext(Context)
@@ -24,6 +26,7 @@ const NavBar = observer(() => {
 
   const searchAPI = searchQuery => {
     console.log(searchQuery)
+    navigate(SHOP_ROUTE)
   }
 
   const logOut = () => {
@@ -32,19 +35,16 @@ const NavBar = observer(() => {
     localStorage.removeItem('token') // temporarily
   }
 
+  const navbarCollapses = document.querySelectorAll('.navbar-collapse')
+
   useEffect(() => {
     if (user.userWidth < 992) {
       setCartOpen(false)
+      navbarCollapses.forEach(element => { element.style.height = '250px' })
+    } else {
+      navbarCollapses.forEach(element => { element.style.height = '0' })
     }
   }, [user.userWidth])
-
-  const WebFont = require('webfontloader')
-
-  WebFont.load({
-    google: {
-      families: ['Amaranth']
-    }
-  })
 
   return (
         <>
@@ -55,13 +55,15 @@ const NavBar = observer(() => {
                 style={{ padding: 0, zIndex: 11 }}
             >
                 <Container
-                    className="pt-2 pb-2"
-                    style={{ background: PRIMARY_COLOR, height: 30, padding: '0 110px' }}
+                    className='navbar-container'
+                    style={{ background: PRIMARY_COLOR, height: 30 }}
+                    id='navbar-top-container'
                     fluid
                 >
                     <Navbar.Brand
                         onClick={() => navigate(MAIN_ROUTE)}
-                        style={{ cursor: 'pointer', fontFamily: 'Amaranth', fontWeight: 'bold', fontSize: '1.5rem', letterSpacing: '.05rem' }}
+                        id='nav-logo'
+                        style={{ cursor: 'pointer', fontFamily: 'Amaranth', fontWeight: 'bold', fontSize: '1.5rem', letterSpacing: '.05rem', padding: 0 }}
                     >
                         PART DEALER
                     </Navbar.Brand>
@@ -70,27 +72,23 @@ const NavBar = observer(() => {
                         <Nav className="ms-auto">
                             <Button
                                 style={NAVLINK_STYLE}
-                                lassName="ms-2 me-2"
                             >
-                                <span className='d-flex align-items-center'><FaTelegram />&nbsp;dubstepchik</span>
+                                <span className='d-flex align-items-center navbar-contact'><FaTelegram />&nbsp;dubstepchik</span>
                             </Button>
                             <Button
                                 style={NAVLINK_STYLE}
-                                lassName="ms-2 me-2"
                             >
-                                <span className='d-flex align-items-center'><FaWhatsapp />&nbsp;dubstepchik</span>
+                                <span className='d-flex align-items-center navbar-contact'><FaWhatsapp />&nbsp;dubstepchik</span>
                             </Button>
                             <Button
                                 style={NAVLINK_STYLE}
-                                lassName="ms-2 me-2"
                             >
-                                <span className='d-flex align-items-center'><BsTelephoneFill />&nbsp;dubstepchik</span>
+                                <span className='d-flex align-items-center navbar-contact'><BsTelephoneFill />&nbsp;dubstepchik</span>
                             </Button>
                             <Button
                                 style={NAVLINK_STYLE}
-                                lassName="ms-2 me-2"
                             >
-                                <span className='d-flex align-items-center'><MdOutlineMailOutline />&nbsp;dubstepchik</span>
+                                <span className='d-flex align-items-center navbar-contact'><MdOutlineMailOutline />&nbsp;dubstepchik</span>
                             </Button>
                         </Nav>
                     </Navbar.Collapse>
@@ -101,11 +99,11 @@ const NavBar = observer(() => {
                 bg="light"
                 expand="lg"
                 className="d-flex flex-column"
-                style={{ top: -0.1, padding: 0, margin: 0, zIndex: 10 }}
+                style={{ top: -1, padding: 0, margin: 0, zIndex: 10 }}
             >
                 <Container
-                    className="pt-2 pb-2"
-                    style={{ background: SECONDARY_COLOR, height: 60, padding: '0 110px' }}
+                    className='navbar-container'
+                    style={{ background: SECONDARY_COLOR, height: 60 }}
                     fluid
                 >
                     <Navbar.Toggle aria-controls="navbarScroll" />
@@ -114,19 +112,20 @@ const NavBar = observer(() => {
                             <Form.Control
                                 value={query}
                                 onChange={(e) => setQuery(e.target.value)}
+                                style={{ border: '3px solid #fff' }}
                                 type="search"
                                 placeholder="Артикул"
                                 className="me-2 search-bar"
-                                style={{ height: '100%', background: 'none', outline: 'none', border: '3px solid #fff', transition: '.2s' }}
+                                id='nav-search-bar'
                                 aria-label="Search"
                         />
-                            <Button
+                            <button
                                 onClick={() => searchAPI(query)}
-                                style={{ ...MAINBUTTON_STYLE, color: '#fff' }}
-                                className='nav-button'
+                                className='main-button inverted'
+                                type='button'
                             >
                                 <span className='d-flex align-items-center'><GoSearch />&nbsp;Искать</span>
-                            </Button>
+                            </button>
                         </Form>
                         {user.isAuth
                           ? <Nav
@@ -138,23 +137,24 @@ const NavBar = observer(() => {
                                     className={`d-flex align-items-center ms-2 me-2 ${cartOpen && 'open'} nav-button`}
                                     style={NAVBUTTON_STYLE}
                                     onClick={() => {
-                                      user.userWidth < 992 ? navigate(CART_ROUTE) : setCartOpen(!cartOpen)
+                                      user.userWidth < 992 ? (window.scrollTo(0, 0), navigate(CART_ROUTE)) : setCartOpen(!cartOpen)
                                     }}
                                 >
                                     <TbShoppingCart style={{ fontSize: '1.5rem' }} />&nbsp;Корзина
                                 </Button>
-                                <div style={{ position: 'absolute', top: cartOpen ? 58 : -430, transition: '1s', right: 0, width: '35vw', height: 400, borderRadius: '0 0 5px 5px', background: SECONDARY_COLOR, zIndex: -1, boxShadow: cartOpen ? 'rgba(0, 0, 0, 0.35) 0px 5px 15px' : 'none' }}>
+                                <div style={{ position: 'absolute', top: cartOpen ? 58 : -430, transition: '1s', right: 0, width: 600, height: 400, borderRadius: '0 0 5px 5px', background: SECONDARY_COLOR, zIndex: -1, boxShadow: cartOpen ? 'rgba(0, 0, 0, 0.35) 0px 5px 15px' : 'none' }}>
                                     <CartList cartPage={false} />
-                                    <Button
-                                    onClick={() => {
-                                      setCartOpen(false)
-                                      navigate(CART_ROUTE)
-                                    }}
-                                    style={{ ...MAINBUTTON_STYLE, display: 'block', margin: '20px auto 0 auto', color: '#fff' }}
-                                    className='nav-button'
+                                    <button
+                                        onClick={() => {
+                                          setCartOpen(false)
+                                          window.scrollTo(0, 0)
+                                          navigate(CART_ROUTE)
+                                        }}
+                                        style={{ display: 'block', margin: '20px auto 0 auto' }}
+                                        className='main-button inverted'
                                     >
                                         Перейти в корзину
-                                    </Button>
+                                    </button>
                                 </div>
                                 <Button
                                     style={NAVBUTTON_STYLE}
@@ -166,7 +166,10 @@ const NavBar = observer(() => {
                                 <Button
                                     style={NAVBUTTON_STYLE}
                                     className='d-flex align-items-center nav-button'
-                                    onClick={() => navigate(USER_ROUTE)}
+                                    onClick={() => {
+                                      window.scrollTo(0, 0)
+                                      navigate(USER_ROUTE)
+                                    }}
                                 >
                                     <FaRegUser />&nbsp;Личный кабинет
                                 </Button>
@@ -175,7 +178,7 @@ const NavBar = observer(() => {
                                     className='nav-button'
                                     onClick={() => logOut()}
                                 >
-                                    Выйти
+                                    <span className='d-flex align-items-center'><BiLogOut style={{ fontSize: '1.5rem' }} />&nbsp;Выйти</span>
                                 </Button>
                             </Nav>
                           : <Nav
@@ -185,9 +188,13 @@ const NavBar = observer(() => {
                             >
                                 <Button
                                     style={NAVBUTTON_STYLE}
-                                    onClick={() => navigate(LOGIN_ROUTE)}
+                                    className='nav-button'
+                                    onClick={() => {
+                                      window.scrollTo(0, 0)
+                                      navigate(LOGIN_ROUTE)
+                                    }}
                                 >
-                                    Авторизация
+                                    <span className='d-flex align-items-center'><BiLogIn style={{ fontSize: '1.5rem' }} />&nbsp;Войти</span>
                                 </Button>
                             </Nav>
                         }

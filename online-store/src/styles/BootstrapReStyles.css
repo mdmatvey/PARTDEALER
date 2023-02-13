@@ -13,6 +13,8 @@
 }
 
 .nav-link {
+    display: inline-flex;
+    cursor: pointer;
     color: #000;
     transition: .2s;
 }
@@ -22,12 +24,70 @@
     text-decoration: underline 2px #00CCCC;
 }
 
+.anchor {
+    color: #000;
+    text-decoration: underline 2px #000 !important;
+    transition: .3s;
+}
+
+.anchor.inverted {
+    color: #fff;
+    text-decoration: underline 2px #fff !important;
+}
+
+.anchor:hover {
+    color: #00CCCC;
+}
+
 .form-control {
     height: 100%;
     color: #fff;
     background: none !important; 
+    caret-color: #00CCCC;
+    caret-shape: underscore !important; 
     outline: none; 
     transition: .2s
+}
+
+.dropdown-button button {
+    background: none;
+    color: #000;
+    border: 3px solid #000;
+    transition: .3s;
+    font-weight: 500;
+}
+
+.dropdown-button button:hover {
+    color: #000;
+    background: none;
+    border-color: #00CCCC;
+}
+
+.dropdown-button button:active, .dropdown-button button:focus {
+    color: #000;
+    background: #00CCCC;
+    border-color: #00CCCC;
+}
+
+.dropdown
+.btn-check:checked+.btn, 
+.btn.active, 
+.btn.show, 
+.btn:first-child:active, 
+:not(.btn-check)+.btn:active {
+    color: #000;
+    background: #00CCCC;
+    border-color: #00CCCC;
+}
+
+.local-searchbar input {
+    border: 3px solid #ced4da;
+    transition: .3s;
+}
+
+.local-searchbar input:focus {
+    border-color: #000 !important;
+    box-shadow: none !important;
 }
 
 li a {

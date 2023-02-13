@@ -38,7 +38,7 @@ const ProductList = observer(({ isProductsLoading }) => {
 
   return (
     <Fade bottom>
-      <Container style={{ padding: 10, overflow: 'auto' }}>
+      <Container style={{ padding: 10, overflow: 'visible' }}>
         <Row style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%' }}>
           {
             isProductsLoading

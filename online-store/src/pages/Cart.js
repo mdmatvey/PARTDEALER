@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import React, { useContext, useEffect, useState } from 'react'
-import { Button, Card, Container, Row } from 'react-bootstrap'
+import { Button, Card, Col, Container, Row } from 'react-bootstrap'
 import Fade from 'react-reveal/Fade'
 import { Link, useNavigate } from 'react-router-dom'
 import { Context } from '..'
@@ -8,11 +8,11 @@ import CartList from '../components/CartList'
 import Total from '../components/Total'
 import { SHOP_ROUTE, ORDERING_ROUTE } from '../utils/routeConsts'
 import { setEnding } from '../utils/functions'
-import { MAINBUTTON_STYLE, PRIMARY_COLOR, SECONDARY_COLOR, TEXTBUTTON_STYLE } from '../utils/uiConsts'
+import { SECONDARY_COLOR, TEXTBUTTON_STYLE } from '../utils/uiConsts'
 import EventStyles from '../styles/EventStyles.css'
 
 const Cart = observer(() => {
-  const { product, cart } = useContext(Context)
+  const { user, product, cart } = useContext(Context)
   const navigate = useNavigate()
 
   const [itemsCount, setItemsCount] = useState(cart.cartItems.length)
@@ -20,6 +20,19 @@ const Cart = observer(() => {
   useEffect(() => {
     setItemsCount(cart.cartItems.length)
   }, [cart.cartItems])
+
+  const [md1, setMd1] = useState(8)
+  const [md2, setMd2] = useState(4)
+
+  useEffect(() => {
+    if (user.userWidth < 992) {
+      setMd1(12)
+      setMd2(12)
+    } else if (user.userWidth >= 992) {
+      setMd1(8)
+      setMd2(4)
+    }
+  }, [user.userWidth])
 
   const ending = setEnding(itemsCount)
 
@@ -30,7 +43,7 @@ const Cart = observer(() => {
                 itemsCount === 0
                   ? <div
                         className="d-flex flex-column align-items-center mt-5"
-                        style={{ display: 'block', paddingTop: '5%', textAlign: 'center', paddingBottom: '10%' }}
+                        style={{ paddingTop: '5%', textAlign: 'center', paddingBottom: '10%' }}
                     >
                         <Fade top>
                           <h3 style={{ fontSize: '4rem' }}>В вашей корзине пока ничего нет</h3>
@@ -42,17 +55,17 @@ const Cart = observer(() => {
                           </span>
                         </Fade>
                         <Fade bottom>
-                          <div className="d-inline-flex justify-content-between align-items-baseline w-25 mt-5">
-                              <Button
+                          <div className="d-inline-flex justify-content-between align-items-baseline mt-5">
+                              <button
                                   onClick={() => {
                                     product.setCategoriesToDisplay([])
                                     navigate(SHOP_ROUTE)
                                   }}
                                   className='main-button'
-                                  style={{ ...MAINBUTTON_STYLE, padding: '10px 20px', fontSize: '1.25rem' }}
+                                  style={{ padding: '10px 20px', fontSize: '1.25rem' }}
                               >
                                   В каталог
-                              </Button>
+                              </button>
                               <Link to="/" style={{ ...TEXTBUTTON_STYLE, fontSize: '1.25rem', textDecoration: 'underline 2px #00CCCC' }}>На главную</Link>
                           </div>
                         </Fade>
@@ -101,26 +114,30 @@ const Cart = observer(() => {
                         </span>
                       </div>
                     </Fade>
-                    <div style={{ display: 'grid', gridTemplateColumns: '3fr 1fr' }}>
+                    <Row>
+                      <Col md={md1}>
                         <Fade bottom>
                           <CartList cartPage={true} />
                         </Fade>
+                      </Col>
+                      <Col md={md2}>
                         <Fade right>
                           <Card
                               style={{ background: SECONDARY_COLOR, height: 250, marginTop: 20, width: '100%', border: 'none', padding: 10 }}
                           >
                               <Total itemsCount={itemsCount} />
-                              <Button
+                              <button
                                   disabled={!(cart.cartItems.length > 0)}
                                   onClick={() => navigate(ORDERING_ROUTE)}
-                                  className="nav-button"
-                                  style={{ ...MAINBUTTON_STYLE, color: '#fff', marginTop: 'auto', padding: 10 }}
+                                  className="main-button inverted cartpage-button"
+                                  style={{ marginTop: 'auto', padding: 10 }}
                               >
                                   Перейти к оформлению
-                              </Button>
+                              </button>
                           </Card>
                         </Fade>
-                    </div>
+                      </Col>
+                    </Row>
                 </>
               }
             </Container>

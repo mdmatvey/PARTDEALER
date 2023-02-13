@@ -7,6 +7,7 @@ import { fetchBrands, fetchCategories, fetchProducts } from '../components/http/
 import Pages from '../components/Pages'
 import ProductList from '../components/ProductList'
 import FilterBar from '../components/FilterBar'
+import ResponsiveStyles from '../styles/ResponsiveStyles.css'
 
 const Shop = observer(() => {
   const { product } = useContext(Context)
@@ -46,7 +47,7 @@ const Shop = observer(() => {
   return (
         <Container className='pt-4'>
             <Row className="mt-2">
-                <Col md={3}>
+                <Col md={3} id='filterbar-col'>
                     <FilterBar isCategoriesLoading={isCategoriesLoading} isBrandsLoading={isBrandsLoading} />
                 </Col>
                 <Col md={9}>

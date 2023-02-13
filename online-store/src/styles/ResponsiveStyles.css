@@ -1,0 +1,180 @@
+#catalog-search {
+    display: block;
+     margin: 0 auto; 
+     width: 50%
+}
+
+#brandbar {
+    margin-top: 0;
+}
+
+#filterbar-col {
+    padding-left: 12px;
+} 
+
+#productpage-container {
+    margin: 0 34px !important;
+}
+
+#cartitem-card {
+    display: grid;
+    align-items: center;
+    grid-template-rows: 170px;
+    width: 100%;
+    margin-bottom: 10px
+}
+
+#orderingpage-card {
+    position: relative;
+    border: none; 
+    width: 100%; 
+    height: 100%; 
+    background: #222222 
+}
+
+#orderingpage-bottom {
+    display: flex;
+}
+
+#orderingpage-bottom div.card {
+    width: 50%;
+}
+
+#recipient,
+#payment {
+    padding: 16px
+}
+
+#recipient {
+    margin-right: 8px;
+}
+
+#payment {
+    margin-left: 8px;
+}
+
+.productpage-col {
+    margin-bottom: 0;
+}
+
+#productpage-total {
+    margin-top: auto;
+    height: 41px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.cartpage-button {
+    font-size: 1.05rem;
+}
+
+#adminpage-dropdown {
+    margin-left: 16px
+}
+
+@media only screen and (max-width: 1216px) {
+    .cartpage-button {
+        font-size: 0.85rem;
+    }
+
+    #orderingpage-card {
+        margin-top: 40px;
+        height: 220px; 
+    }
+}
+
+@media only screen and (max-width: 1077px) {
+    .productpage-col {
+        margin-bottom: 50px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .cartpage-button {
+        font-size: 1.03rem;
+    }
+
+    #orderingpage-bottom {
+        flex-direction: column;
+    }
+    
+    #orderingpage-bottom div.card {
+        width: 100%;
+    }
+
+    #recipient {
+        margin-right: 0;
+        margin-bottom: 16px;
+    }
+
+    #payment {
+        margin-left: 0
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    #catalog-search {
+        margin: 0;
+        width: 100%;
+    }
+
+    #brandbar {
+        margin-top: 30px !important;
+    }
+
+    #filterbar-col {
+        padding-left: 32px;
+    }
+}
+
+@media only screen and (max-width: 580px) {
+    #cartitem-card {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #cartitem-card img {
+        width: 200px;
+        height: 100%;
+    }
+}
+
+@media only screen and (max-width: 533px) {
+    #adminpage-dropdown {
+        margin-top: 10px;
+        margin-left: 0
+    }
+
+    #adminpage-dropdown button {
+        margin-left: 0
+    }
+}
+
+@media only screen and (max-width: 427px) {
+    #productpage-total {
+        flex-direction: column;
+        align-items: flex-start;
+        height: 92px;
+    } 
+
+    .main-button {
+        margin-left: 0 !important;
+    }
+
+    #productpage-container {
+        margin: 0 !important;
+    }
+
+    #price, #popularity {
+        margin: 0 !important;
+    }
+}
+
+@media only screen and (max-width: 372px) {
+    #adminpage-dropdown button {
+        font-size: 0.85rem;
+        padding: 3px;
+    }
+}

@@ -1,14 +1,15 @@
 import { observer } from 'mobx-react-lite'
 import React, { useContext, useEffect, useState } from 'react'
-import { Button, Card, Container, Modal, Row, Tab, Tabs, Form, Image } from 'react-bootstrap'
+import { Card, Container, Modal, Row, Tab, Tabs, Form, Image } from 'react-bootstrap'
 import Fade from 'react-reveal/Fade'
 import { useNavigate } from 'react-router-dom'
 import { Context } from '..'
 import Total from '../components/Total'
 import { CART_ROUTE } from '../utils/routeConsts'
-import { MAINBUTTON_STYLE, SECONDARY_COLOR } from '../utils/uiConsts'
-import EventStyles from '../styles/EventStyles.css'
+import { SECONDARY_COLOR } from '../utils/uiConsts'
 import BootstrapReStyles from '../styles/BootstrapReStyles.css'
+import ResponsiveStyles from '../styles/ResponsiveStyles.css'
+import EventStyles from '../styles/EventStyles.css'
 
 const Cart = observer(() => {
   const { cart, user } = useContext(Context)
@@ -26,6 +27,7 @@ const Cart = observer(() => {
 
   const [productColumns, setProductColumns] = useState(8)
   const [pageColumns, setPageColumns] = useState('3fr 1fr')
+  const [flexClassStyles, setFlexClassStyles] = useState('flex-row align-items-end')
 
   useEffect(() => {
     if (user.userWidth < 500) {
@@ -44,10 +46,18 @@ const Cart = observer(() => {
   }, [user.userWidth])
 
   useEffect(() => {
-    if (user.userWidth < 768) {
+    if (user.userWidth < 1200) {
       setPageColumns('1fr')
-    } else if (user.userWidth >= 768) {
+    } else if (user.userWidth >= 1200) {
       setPageColumns('3fr 1fr')
+    }
+  }, [user.userWidth])
+
+  useEffect(() => {
+    if (user.userWidth < 478) {
+      setFlexClassStyles('flex-column')
+    } else if (user.userWidth >= 478) {
+      setFlexClassStyles('flex-row align-items-end')
     }
   }, [user.userWidth])
 
@@ -55,9 +65,9 @@ const Cart = observer(() => {
         <Container className="pt-5 pb-5">
             <Fade top>
                 <Row className="mt-4 mb-4">
-                    <div className="d-flex flex-direction-row align-items-end">
-                        <h1 style={{ margin: 0 }}>Оформление</h1>
-                        <span onClick={() => navigate(CART_ROUTE)} style={{ fontSize: 24, marginLeft: 20, cursor: 'pointer' }}>Вернуться в корзину</span>
+                    <div className={`d-flex ${flexClassStyles}`}>
+                        <h1 style={{ margin: 0, marginRight: 20 }}>Оформление</h1>
+                        <span onClick={() => navigate(CART_ROUTE)} style={{ fontSize: 24, cursor: 'pointer' }}>Вернуться в корзину</span>
                     </div>
                 </Row>
             </Fade>
@@ -96,8 +106,8 @@ const Cart = observer(() => {
                         </Card>
                     </Fade>
                     <Fade bottom>
-                        <div className="d-flex">
-                            <Card className="p-3 me-2" style={{ width: '50%' }}>
+                        <div id='orderingpage-bottom'>
+                            <Card id='recipient'>
                                 <h2>Получатель</h2>
                                 <Form>
                                     <Form.Group className="mb-3">
@@ -109,7 +119,7 @@ const Cart = observer(() => {
                                     </Form.Group>
                                 </Form>
                             </Card>
-                            <Card className="p-3 ms-2" style={{ width: '50%' }}>
+                            <Card id='payment'>
                                 <h2>Способ оплаты</h2>
                                 <Tabs
                                     defaultActiveKey="profile"
@@ -120,9 +130,9 @@ const Cart = observer(() => {
                                         <p>8 910 123 456 78 91 - Сбербанк</p>
                                     </Tab>
                                     <Tab eventKey="profile" title="СБП">
-                                        <Button onClick={handleShow} className='main-button' style={MAINBUTTON_STYLE}>
+                                        <button onClick={handleShow} className='main-button'>
                                             Нажмите для получения QR для оплаты
-                                        </Button>
+                                        </button>
                                         <Modal show={show} onHide={handleClose} centered>
                                             <Modal.Header closeButton>
                                                 <Modal.Title>QR код СБП</Modal.Title>
@@ -146,15 +156,15 @@ const Cart = observer(() => {
                 </Container>
                 <Fade right>
                     <div>
-                        <Card style={{ position: 'relative', border: 'none', width: '100%', height: '100%', background: SECONDARY_COLOR }}>
+                        <Card id='orderingpage-card'>
                             <Total itemsCount={itemsCount} />
-                            <Button
+                            <button
                                 onClick={() => navigate()}
-                                className="mt-4 nav-button"
-                                style={{ ...MAINBUTTON_STYLE, color: '#fff', position: 'absolute', width: '90%', top: 'auto', bottom: 10, left: '5%', display: 'block', margin: '0 auto', fontSize: '1.2rem', padding: 20 }}
+                                className="mt-4 main-button inverted"
+                                style={{ position: 'absolute', width: '90%', top: 'auto', bottom: 10, left: '5%', display: 'block', margin: '0 auto', fontSize: '1.2rem', padding: 20 }}
                             >
                                 Оформить заказ
-                            </Button>
+                            </button>
                         </Card>
                     </div>
                 </Fade>

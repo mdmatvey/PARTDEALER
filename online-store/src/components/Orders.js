@@ -1,9 +1,9 @@
 import React from 'react'
 import OrderList from './OrderList'
 
-const Orders = ({ user }) => {
+const Orders = ({ userTemp }) => {
   return (
-        <OrderList user={user} />
+        <OrderList userTemp={userTemp} />
   )
 }
 

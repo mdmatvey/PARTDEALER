@@ -1,10 +1,38 @@
+.main-button {
+    color: #000;
+    margin: 10px;
+    padding: 3px 9px;
+    background: transparent;
+    background-position: center;
+    border: 3px solid #00CCCC;
+    border-radius: 5px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    transition: 0.75s;
+}
+
+.inverted {
+    color: #fff;
+}
+
 .main-button:hover {
-    background-color: #00CCCC !important;
+    background: #00CCCC radial-gradient(circle, transparent 1%, #fff 1%) center/15000%;
+}
+
+.inverted:hover {
+    color: #000;
+    background: #00CCCC radial-gradient(circle, transparent 1%, #222222 1%) center/15000%;
+    
 }
 
 .main-button:active {
-    background-color: #fff !important;
-    border-color: #fff !important;
+    background-color: #00CCCC;
+    background-size: 100%;
+    transition: background 0s;
+}
+
+.inverted:active {
+    color: #fff;
 }
 
 .nav-button:hover, 
@@ -32,15 +60,9 @@
     scale: 0.95 !important
 }
 
-.anchor:hover {
-    transition: .3s;
-    color: #00CCCC !important;
-    text-decoration-color: #fff !important;
-}
-
 .search-bar:focus {
     border-color: #00CCCC !important;
-    box-shadow: rgba(0, 204, 204, 0.2) 0 0 0 0.25rem ;
+    box-shadow: rgba(0, 204, 204, 0.2) 0 0 0 0.25rem;
 }
 
 .product-card, 

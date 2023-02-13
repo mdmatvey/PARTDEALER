@@ -4,6 +4,7 @@ import { Button, Col, Dropdown, Spinner, Form, Modal, Row } from 'react-bootstra
 import { Context } from '../../index'
 import { createProduct, fetchBrands, fetchCategories } from '../http/productAPI'
 import { PRIMARY_COLOR } from '../../utils/uiConsts'
+import BootstrapReStyles from '../../styles/BootstrapReStyles.css'
 
 const CreateProduct = observer(({ show, onHide }) => {
   const { product } = useContext(Context)
@@ -87,7 +88,7 @@ const CreateProduct = observer(({ show, onHide }) => {
             <Modal.Body>
                 <Form>
                     <Dropdown
-                        className="mt-2 mb-2"
+                        className="mt-2 mb-2 dropdown-button"
                     >
                         <Dropdown.Toggle>{product.selectedCategory.name || 'Выберите категорию'}</Dropdown.Toggle>
                         <Dropdown.Menu>
@@ -105,7 +106,7 @@ const CreateProduct = observer(({ show, onHide }) => {
                             }
                         </Dropdown.Menu>
                     </Dropdown>
-                    <Dropdown className="mt-2 mb-2">
+                    <Dropdown className="mt-2 mb-2 dropdown-button">
                         <Dropdown.Toggle>{product.selectedBrand.name || 'Выберите бренд'}</Dropdown.Toggle>
                         <Dropdown.Menu>
                             {

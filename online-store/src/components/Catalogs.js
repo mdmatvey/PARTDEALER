@@ -6,6 +6,8 @@ import Fade from 'react-reveal/Fade'
 import Item from './Item'
 import { fetchBrands, fetchCategories } from './http/productAPI'
 import SkeletonItem from './skeleton_components/SkeletonItem'
+import BootstrapReStyles from '../styles/BootstrapReStyles.css'
+import EventStyles from '../styles/EventStyles.css'
 
 const Categories = observer(({ purpose }) => {
   const { product, user } = useContext(Context)
@@ -54,14 +56,22 @@ const Categories = observer(({ purpose }) => {
                 <h1 className='mb-3'>
                     По {purp}:
                 </h1>
-                <Form className="d-flex" style={{ display: 'block', margin: '0 auto', width: '50%' }}>
+                <Form
+                  className="d-flex local-searchbar"
+                >
                     <Form.Control
                         type="search"
                         placeholder={'Поиск по ' + purp}
                         className="me-2"
                         aria-label="Search"
                     />
-                    <Button variant="outline-success">Поиск</Button>
+                    <button
+                      style={{ margin: 0 }}
+                      className='main-button'
+                      type='button'
+                    >
+                      Поиск
+                    </button>
                 </Form>
               </div>
             </Fade>

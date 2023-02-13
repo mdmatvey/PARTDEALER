@@ -12,7 +12,6 @@ const Footer = () => {
         >
             <div className="container-fluid text-center text-md-left">
                 <Row>
-                    <hr className="clearfix w-100 d-md-none pb-0"/>
                     <Col className="col-md-2 mb-md-0 mb-3">
                         <h5 className="text-uppercase">Ассортимент</h5>
                         <ul className="list-unstyled">

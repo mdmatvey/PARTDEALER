@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Card, Col, Container, Row, Image } from 'react-bootstrap'
+import { Card, Col, Row, Image } from 'react-bootstrap'
 import Fade from 'react-reveal/Fade'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -11,13 +11,15 @@ import Comments from '../components/Comments'
 import { PRIMARY_COLOR, SECONDARY_COLOR } from '../utils/uiConsts'
 import { observer } from 'mobx-react-lite'
 import { Context } from '..'
+import ResponsiveStyles from '../styles/ResponsiveStyles.css'
 
 const ProductPage = observer(() => {
   const { product, user } = useContext(Context)
   const { id } = useParams()
   const [isLoading, setIsLoading] = useState(true)
   const [md1, setMd1] = useState(4)
-  const [md2, setMd2] = useState(8)
+  const [md2, setMd2] = useState(4)
+  const [md3, setMd3] = useState(8)
 
   useEffect(() => {
     fetchOneProduct(id)
@@ -28,18 +30,20 @@ const ProductPage = observer(() => {
   }, [])
 
   useEffect(() => {
-    if (user.userWidth < 992) {
+    if (user.userWidth < 1077) {
       setMd1(12)
-      setMd2(12)
-    } else if (user.userWidth >= 992) {
+      setMd2(6)
+      setMd3(12)
+    } else if (user.userWidth >= 1077) {
       setMd1(4)
-      setMd2(8)
+      setMd2(4)
+      setMd3(8)
     }
   }, [user.userWidth])
 
   return (
         <div className="mt-3 mb-3">
-            <Container className="p-4" style={{ background: '#fff' }}>
+            <div className="p-4" style={{ background: '#fff' }} id='productpage-container'>
                 <Fade top>
                   <Row>
                       {
@@ -50,16 +54,16 @@ const ProductPage = observer(() => {
                   </Row>
                 </Fade>
                 <Row className='mt-5' style={{ background: '#fff' }}>
-                    <Col md={md1}>
+                    <Col md={md1} className='productpage-col'>
                         <Fade left>
                           {
                               isLoading
                                 ? <Skeleton style={{ display: 'block', margin: '0 auto', width: 300, height: 300 }} />
-                                : <Image style={{ objectFit: 'contain', display: 'block', margin: '0 auto' }} width={300} height={300} src={product.products.image} />
+                                : <Image style={{ objectFit: 'contain', display: 'block', margin: '0 auto', width: '100%' }} width={300} height={300} src={product.products.image} />
                           }
                         </Fade>
                     </Col>
-                    <Col md={md1}>
+                    <Col md={md2} className='productpage-col'>
                         <Fade>
                           <Card
                               className="d-flex flex-column"
@@ -82,7 +86,7 @@ const ProductPage = observer(() => {
                           </Card>
                         </Fade>
                     </Col>
-                    <Col md={md1}>
+                    <Col md={md2} className='productpage-col'>
                         <Fade right>
                           <Card
                               className="d-flex flex-column"
@@ -103,7 +107,7 @@ const ProductPage = observer(() => {
                                           <span style={{ color: PRIMARY_COLOR, fontWeight: 'bold', fontSize: '3rem' }}>{(product.products.price * product.products.count).toFixed(2)}₽</span>
                                           Срок: 1 д.<br/>
                                           Наличие: 1 шт.
-                                          <span className='d-flex align-items-center justify-content-between mb-1' style={{ marginTop: 'auto', height: 41 }}>
+                                          <span className='mb-1' id='productpage-total'>
                                             <CountButton item={product.products} count={product.products.count} productPage={true} />
                                             <CartButton item={product.products} productPage={true} />
                                           </span>
@@ -115,12 +119,12 @@ const ProductPage = observer(() => {
                         </Fade>
                     </Col>
                 </Row>
-                <Col md={md2}>
+                <Col md={md3}>
                     <Fade bottom>
                       <Comments product={product} />
                     </Fade>
                 </Col>
-            </Container>
+            </div>
         </div>
   )
 })

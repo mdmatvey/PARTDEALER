@@ -21,6 +21,7 @@ const Item = ({ path }) => {
                     product.setCategoriesToDisplay([...product.categoriesToDisplay, path])
                   }
 
+                  window.scrollTo(0, 0)
                   navigate(SHOP_ROUTE)
                 }}
             >

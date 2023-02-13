@@ -5,6 +5,7 @@ import { Card, Form } from 'react-bootstrap'
 import Fade from 'react-reveal/Fade'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import BootstrapReStyles from '../styles/BootstrapReStyles.css'
 
 const FilterBar = observer(({ isCategoriesLoading, isBrandsLoading }) => {
   const { user, product } = useContext(Context)
@@ -45,54 +46,54 @@ const FilterBar = observer(({ isCategoriesLoading, isBrandsLoading }) => {
   }
 
   return (
-        <Fade left>
-          <Card style={{ width: '100%', border: 'none' }}>
-              <h2 style={{ textDecoration: 'underline', textDecorationColor: '#00CCCC', textDecorationThickness: 5 }}><strong>Бренды:</strong></h2>
-              <Form style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%' }}>
-                  {
-                      isBrandsLoading
-                        ? <>
-                              <Skeleton count={4} style={{ width: '80%' }} />
-                              <Skeleton count={4} style={{ width: '80%' }} />
-                          </>
-                        : product.brands.filter(brand => {
-                          if (brand.name.toLowerCase().includes(query.toLowerCase())) {
-                            return true
-                          }
+    <Fade left>
+      <Card style={{ width: '100%', border: 'none' }}>
+          <h2 style={{ textDecoration: 'underline', textDecorationColor: '#00CCCC', textDecorationThickness: 5 }}><strong>Бренды:</strong></h2>
+          <Form style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%' }}>
+              {
+                  isBrandsLoading
+                    ? <>
+                          <Skeleton count={4} style={{ width: '80%' }} />
+                          <Skeleton count={4} style={{ width: '80%' }} />
+                      </>
+                    : product.brands.filter(brand => {
+                      if (brand.name.toLowerCase().includes(query.toLowerCase())) {
+                        return true
+                      }
 
-                          return false
-                        }).map(brand => <Form.Check key={brand.id} label={brand.name} />)
-                  }
-              </Form>
-              <Form className="d-inline-flex brandbar-form">
-                  <Form.Control
-                      value={query}
-                      onChange={(e) => setQuery(e.target.value)}
-                      type="search"
-                      placeholder="Поиск по брендам"
-                      className="me-2"
-                      aria-label="Search"
-                  />
-              </Form><br/>
-              <h2 style={{ textDecoration: 'underline', textDecorationColor: '#00CCCC', textDecorationThickness: 5 }}><strong>Категории:</strong></h2>
-              <Form style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%' }}>
-                  {
-                      isCategoriesLoading
-                        ? <>
-                              <Skeleton count={4} style={{ width: '80%' }} />
-                              <Skeleton count={4} style={{ width: '80%' }} />
-                          </>
-                        : product.categories.map(category => {
-                          return (
-                            product.categoriesToDisplay.map(category => category.name).includes(category.name)
-                              ? <Form.Check onClick={(e) => chooseCategory(e, category)} key={category.id} label={category.name} className="filterBarChecked" />
-                              : <Form.Check onClick={(e) => chooseCategory(e, category)} key={category.id} label={category.name} />
-                          )
-                        })
-                  }
-              </Form>
-          </Card>
-        </Fade>
+                      return false
+                    }).map(brand => <Form.Check key={brand.id} label={brand.name} />)
+              }
+          </Form>
+          <Form className="mt-3 d-inline-flex brandbar-form w-75 local-searchbar">
+              <Form.Control
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  type="search"
+                  placeholder="Бренд"
+                  className="me-2"
+                  aria-label="Search"
+              />
+          </Form><br/>
+          <h2 style={{ textDecoration: 'underline', textDecorationColor: '#00CCCC', textDecorationThickness: 5 }}><strong>Категории:</strong></h2>
+          <Form style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%' }}>
+              {
+                  isCategoriesLoading
+                    ? <>
+                          <Skeleton count={4} style={{ width: '80%' }} />
+                          <Skeleton count={4} style={{ width: '80%' }} />
+                      </>
+                    : product.categories.map(category => {
+                      return (
+                        product.categoriesToDisplay.map(category => category.name).includes(category.name)
+                          ? <Form.Check onClick={(e) => chooseCategory(e, category)} key={category.id} label={category.name} className="filterBarChecked" />
+                          : <Form.Check onClick={(e) => chooseCategory(e, category)} key={category.id} label={category.name} />
+                      )
+                    })
+              }
+          </Form>
+      </Card>
+    </Fade>
   )
 })
 

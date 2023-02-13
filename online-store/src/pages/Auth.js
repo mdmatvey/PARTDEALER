@@ -5,7 +5,7 @@ import { LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE } from '../utils/routeConst
 import { login, registration } from '../components/http/userAPI'
 import { observer } from 'mobx-react-lite'
 import { Context } from '../index'
-import { ANCHOR_STYLE, MAINBUTTON_STYLE, PRIMARY_COLOR, SECONDARY_COLOR } from '../utils/uiConsts'
+import { PRIMARY_COLOR, SECONDARY_COLOR } from '../utils/uiConsts'
 import BootstrapReStyles from '../styles/BootstrapReStyles.css'
 import EventStyles from '../styles/EventStyles.css'
 
@@ -61,12 +61,12 @@ const Auth = observer(() => {
                       <div style={{ width: 'auto', color: '#fff' }}>
                         {
                           isLogin
-                            ? <span>Еще нет аккаунта? <Link to={REGISTRATION_ROUTE} style={ANCHOR_STYLE} className='anchor'>Зарегистрируйтесь!</Link></span>
-                            : <span>Уже есть аккаунт? <Link to={LOGIN_ROUTE} style={ANCHOR_STYLE} className='anchor'>Авторизируйтесь!</Link></span>
+                            ? <span>Еще нет аккаунта? <Link to={REGISTRATION_ROUTE} className='anchor inverted'>Зарегистрируйтесь!</Link></span>
+                            : <span>Уже есть аккаунт? <Link to={LOGIN_ROUTE} className='anchor inverted'>Авторизируйтесь!</Link></span>
                         }
                       </div>
                       <Button
-                          style={{ ...MAINBUTTON_STYLE, width: 100, color: '#fff' }}
+                          style={{ width: 100, color: '#fff' }}
                           className='nav-button'
                           onClick={click}
                       >

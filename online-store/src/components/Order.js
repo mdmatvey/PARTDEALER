@@ -1,12 +1,27 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Accordion, Dropdown, Row } from 'react-bootstrap'
 import { Context } from '../index'
 import OrderItem from './OrderItem'
+import BootstrapReStyles from '../styles/BootstrapReStyles.css'
 import EventStyles from '../styles/EventStyles.css'
+import ResponsiveStyles from '../styles/ResponsiveStyles.css'
 
-const Order = ({ user }) => {
-  const { cart } = useContext(Context)
+const Order = ({ userTemp }) => {
+  const { user, cart } = useContext(Context)
+
   const [orderStatus, setOrderStatus] = useState('Платёж обрабатывается')
+
+  const [flexDirection, setFlexDirection] = useState('flex-row')
+
+  if (userTemp.role === 'admin') {
+    useEffect(() => {
+      if (user.userWidth < 517) {
+        setFlexDirection('flex-column')
+      } else if (user.userWidth >= 517) {
+        setFlexDirection('flex-row')
+      }
+    }, [user.userWidth])
+  }
 
   return (
         <Accordion className="pb-3">
@@ -22,9 +37,9 @@ const Order = ({ user }) => {
                     </div>
                     <h3>Итого: 1420Р</h3>
                     <h3>Дата: 20.04.2420</h3>
-                    <h3 className="d-flex">Статус: {
-                            user.role === 'admin'
-                              ? <Dropdown className="ms-3">
+                    <h3 className={`d-flex ${flexDirection}`}>Статус: {
+                            userTemp.role === 'admin'
+                              ? <Dropdown className='dropdown-button' id='adminpage-dropdown'>
                                     <Dropdown.Toggle variant="primary" id="dropdown-basic">
                                         {orderStatus}
                                     </Dropdown.Toggle>

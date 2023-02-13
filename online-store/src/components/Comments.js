@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Button, Container, FloatingLabel, Form } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { Context } from '..'
-import { MAINBUTTON_STYLE } from '../utils/uiConsts'
+import BootstrapReStyles from '../styles/BootstrapReStyles.css'
 import EventStyles from '../styles/EventStyles.css'
 
 const Comments = ({ product }) => {
@@ -22,9 +22,9 @@ const Comments = ({ product }) => {
                                 style={{ height: '100px' }}
                                 />
                             </FloatingLabel>
-                            <Button className="ms-4 main-button" style={MAINBUTTON_STYLE}>Отправить</Button>
+                            <Button className="ms-4 main-button">Отправить</Button>
                         </div>
-                        Отправляя отзыв, вы соглашаетесь с <Link to="/confidentiality" style={{ cursor: 'pointer' }}>политикой конфиденциальности</Link>
+                        Отправляя отзыв, вы соглашаетесь с <Link to="/confidentiality" className='anchor' style={{ textDecorationColor: '#000' }}>политикой конфиденциальности</Link>
                     </>
                   : null
             }

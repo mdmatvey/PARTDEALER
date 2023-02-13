@@ -1,14 +1,13 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import Fade from 'react-reveal/Fade'
 import Order from './Order'
 
-const OrderList = ({ user }) => {
+const OrderList = ({ userTemp }) => {
   return (
         <Container className="p-4">
             {
                 Array(6).fill(0).map(order =>
-                    <Order user={user} />
+                    <Order userTemp={userTemp} />
                 )
             }
         </Container>

@@ -5,14 +5,14 @@ import Orders from '../components/Orders'
 
 const Admin = () => {
   /* HARD CODED USER DATA */
-  const user = {
+  const userTemp = {
     role: 'admin',
     password: 'simple_password'
   }
   /* HARD CODED USER DATA */
 
   return (
-        <ControlPanel button1={'Управление'} button2={'Заказы'} FirstTab={AdminControl} SecondTab={Orders} user={user} />
+        <ControlPanel button1={'Управление'} button2={'Заказы'} FirstTab={AdminControl} SecondTab={Orders} userTemp={userTemp} />
   )
 }
 

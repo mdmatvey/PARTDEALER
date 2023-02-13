@@ -38,22 +38,19 @@
     margin: 0;
     padding: 0;
     width: 100%;
-
-    /* background: rgb(23,23,23);
-    background: linear-gradient(0deg, rgba(23,23,23,1) 0%, rgba(61,61,61,1) 100%); */
-
-    /* background: rgb(61,61,61); */
-    /* background: linear-gradient(0deg, rgba(61,61,61,1) 0%, rgba(23,23,23,1) 100%); */
-
     background-image: url(../background.webp);
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
+}
+
+#topping span h2, 
+#topping span svg {
+    font-size: 2.3rem;
 }
 
 .flip-card {
@@ -62,6 +59,10 @@
     height: 230px;
     margin-bottom: 4%;
     perspective: 1000px;
+}
+
+.flip-card img {
+    padding: 30px;
 }
 
 .flip-card-inner {
@@ -143,4 +144,81 @@
     opacity: 0;
     filter: blur(20px);
     transform: translateX(-100px) skewX(-15deg);
+}
+
+.cataloge-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 1000px) {
+    .cataloge-container {
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    #topping div {
+        padding: 0 2% !important;
+    }
+}
+
+@media only screen and (max-width: 773px) {
+    .advantages-span {
+        align-items: flex-start !important;
+    }
+}
+
+@media only screen and (max-width: 604px) {
+    #topping span:first-child  {
+        margin-top: 30px;
+    }
+
+    #topping span h2 {
+        font-size: 2.2rem;
+    }
+
+    .flip-card {
+        display: block;
+        margin: 0 auto;
+        width: 80vw;
+        height: 40vw;
+    }
+
+    .flip-card img {
+        padding: 0 8%;
+    }
+}
+
+@media only screen and (max-width: 428px) {
+    .advantages-span svg {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .advantages-span {
+        align-items: baseline !important;
+        flex-direction: column;
+        margin-right: 1px;
+    }
+
+    #topping span h2 {
+        font-size: 1.7rem;
+    }
+
+    #major-button {
+        display: block;
+        margin: 0 auto !important;
+        margin-top: 20px !important;
+        font-size: 1.5rem !important;
+    }
+
+    .flip-card-back h1 {
+        font-size: 1.5rem;
+    }
+
+    .flip-card-back h5 {
+        font-size: 1rem;
+    }
 }

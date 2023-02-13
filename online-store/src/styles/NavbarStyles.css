@@ -1,0 +1,95 @@
+.navbar-collapse.collapsing {
+    background: #222222 !important;
+}
+
+.navbar-collapse.collapse.show {
+    background: #222222 !important;
+    height: 250px;
+    border-radius: 0 0 5px 5px;
+}
+
+.navbar-nav.navbar-nav-scroll {
+    overflow: visible;
+}
+
+.navbar-toggler {
+    margin-top: 10px;
+    border: 3px solid #00CCCC;
+    transition: .3s;
+}
+
+.navbar-toggler:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.navbar-toggler.collapsed {
+    margin-top: 0px;
+    border: 3px solid #fff;
+    background: none;
+}
+
+.navbar-toggler-icon {
+    background-image: url(../hamburger.svg);
+    background-size: contain;
+}
+
+#navbar-top-container .navbar-collapse.collapse.show {
+    height: 180px !important;
+}
+
+#navbar-top-container .navbar-nav button span {
+    color: #fff;
+}
+
+#navbar-top-container .navbar-toggler {
+    position: relative;
+    border: none;
+}
+
+#navbar-top-container .navbar-toggler::after {
+    position: absolute;
+    left: -78px;
+    top: -11px;
+    padding: 6px 10px;
+    font-size: 1.2rem;
+    content: 'Контакты';
+    color: #00CCCC;
+    background-color: #222222;
+    border-radius: 5px 5px 0px 0px;
+    transition: .3s;
+}
+
+#navbar-top-container .navbar-toggler.collapsed::after {
+    color: #fff;
+}
+
+#navbar-top-container .navbar-toggler-icon {
+    display: none;
+}
+
+.navbar-container {
+    padding: 0px 110px;
+}
+
+.navbar-contact {
+    color: #000  !important
+}
+
+#nav-search-bar {
+    margin: 0
+}
+
+@media only screen and (max-width: 992px) {
+    .navbar-container {
+        padding: 0 15px;
+    }
+
+    .navbar-contact {
+        color: #fff !important
+    }
+
+    #nav-search-bar {
+        margin: 0 20px
+    }
+}
