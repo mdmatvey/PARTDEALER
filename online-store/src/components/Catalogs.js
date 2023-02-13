@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite'
 import React, { useEffect, useContext, useState } from 'react'
 import { Context } from '../index'
 import { Button, Row, Form, Container } from 'react-bootstrap'
+import Fade from 'react-reveal/Fade'
 import Item from './Item'
 import { fetchBrands, fetchCategories } from './http/productAPI'
 import SkeletonItem from './skeleton_components/SkeletonItem'
@@ -48,27 +49,33 @@ const Categories = observer(({ purpose }) => {
 
   return (
         <Container className='pt-5 pb-5'>
-            <h1 className='mb-3'>
-                По {purp}:
-            </h1>
-            <Form className="d-flex" style={{ display: 'block', margin: '0 auto', width: '50%' }}>
-                <Form.Control
-                    type="search"
-                    placeholder={'Поиск по ' + purp}
-                    className="me-2"
-                    aria-label="Search"
-                />
-                <Button variant="outline-success">Поиск</Button>
-            </Form>
-            <Row md={md}>
-                {
-                    isLoading
-                      ? <SkeletonItem items={8} />
-                      : path.map(item =>
-                            <Item key={item.key} path={item} purpose={purpose} />
-                      )
-                }
-            </Row>
+            <Fade top>
+              <div>
+                <h1 className='mb-3'>
+                    По {purp}:
+                </h1>
+                <Form className="d-flex" style={{ display: 'block', margin: '0 auto', width: '50%' }}>
+                    <Form.Control
+                        type="search"
+                        placeholder={'Поиск по ' + purp}
+                        className="me-2"
+                        aria-label="Search"
+                    />
+                    <Button variant="outline-success">Поиск</Button>
+                </Form>
+              </div>
+            </Fade>
+            <Fade bottom>
+              <Row md={md}>
+                  {
+                      isLoading
+                        ? <SkeletonItem items={8} />
+                        : path.map(item =>
+                              <Item key={item.key} path={item} purpose={purpose} />
+                        )
+                  }
+              </Row>
+            </Fade>
         </Container>
   )
 })

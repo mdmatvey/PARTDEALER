@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
+import Fade from 'react-reveal/Fade'
 import Order from './Order'
 
 const OrderList = ({ user }) => {

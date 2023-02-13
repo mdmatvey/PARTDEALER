@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import React, { useContext, useEffect, useState } from 'react'
 import { Button, Dropdown, DropdownButton, Row } from 'react-bootstrap'
+import Fade from 'react-reveal/Fade'
 import { Context } from '..'
 import { PRIMARY_COLOR, TEXTBUTTON_STYLE } from '../utils/uiConsts'
 // import { fetchSortProductsPrice, fetchSortProductsPopularity } from './http/productAPI'
@@ -118,22 +119,95 @@ const SortdBar = observer(({ setIsProductsLoading }) => {
   }
 
   return (
-        <Row className="d-flex" style={{ fontSize: '1.1rem', width: '100%', margin: '0 auto', padding: '4px 8px', borderRadius: 5 }} id='brandbar'>
-            <div className="d-flex align-items-center col-md-6" style={{ width: '100%' }}>
-                {
-                    dropdown
-                      ? <div className={`d-flex ${flexDirection} justify-content-between`} style={{ width: '100%' }}>
-                            <DropdownButton title="Сортировать по">
-                                <Dropdown.Item>
+        <Fade top>
+            <Row className="d-flex" style={{ fontSize: '1.1rem', width: '100%', margin: '0 auto', padding: '4px 8px', borderRadius: 5 }} id='brandbar'>
+                <div className="d-flex align-items-center col-md-6" style={{ width: '100%' }}>
+                    {
+                        dropdown
+                          ? <div className={`d-flex ${flexDirection} justify-content-between`} style={{ width: '100%' }}>
+                                <DropdownButton title="Сортировать по">
+                                    <Dropdown.Item>
+                                        <Button
+                                            onClick={() => priceSort()}
+                                            style={{ ...TEXTBUTTON_STYLE, color: '#fff' }}
+                                            id='price'
+                                        >
+                                            цена <BsCaretDownFill id='price-caret' style={{ ...priceCaretDisplay, fontSize: '1rem', transition: '.2s' }} />
+                                        </Button>
+                                    </Dropdown.Item>
+                                    <Dropdown.Item>
+                                        <Button
+                                            onClick={() => popularitySort()}
+                                            style={{ ...TEXTBUTTON_STYLE, color: 'gray' }}
+                                            id='popularity'
+                                        >
+                                            популярность <BsCaretDownFill id='popularity-caret' style={{ ...popularityCaretDisplay, fontSize: '1rem', transition: '.2s' }} />
+                                        </Button>
+                                    </Dropdown.Item>
+                                </DropdownButton>
+                                <DropdownButton title="На странице">
+                                    <Dropdown.Item>
+                                        <Button
+                                            onClick={(e) => itemsOnPage(e, 4)}
+                                            id="four"
+                                            style={{ ...TEXTBUTTON_STYLE, color: '#fff' }}
+                                        >
+                                            4
+                                        </Button>
+                                    </Dropdown.Item>
+                                    <Dropdown.Item>
+                                        <Button
+                                            onClick={(e) => itemsOnPage(e, 8)}
+                                            id="eight"
+                                            style={{ ...TEXTBUTTON_STYLE, color: 'gray' }}
+                                        >
+                                            8
+                                        </Button>
+                                    </Dropdown.Item>
+                                    <Dropdown.Item>
+                                        <Button
+                                            onClick={(e) => itemsOnPage(e, 12)}
+                                            id="twelve"
+                                            style={{ ...TEXTBUTTON_STYLE, color: '#fff' }}
+                                        >
+                                            12
+                                        </Button>
+                                    </Dropdown.Item>
+                                    <Dropdown.Item>
+                                        <Button
+                                            onClick={(e) => itemsOnPage(e, 20)}
+                                            id="all"
+                                            style={{ ...TEXTBUTTON_STYLE, color: '#fff' }}
+                                        >
+                                            Все
+                                        </Button>
+                                    </Dropdown.Item>
+                                </DropdownButton>
+                                <DropdownButton title="Вид">
+                                    <Dropdown.Item>
+                                        <Button onClick={(e) => listType(true, document.getElementById('grid'), document.getElementById('list'))} style={TEXTBUTTON_STYLE}>
+                                            <TiThLarge id="grid" style={{ color: 'gray' }} />
+                                        </Button>
+                                    </Dropdown.Item>
+                                    <Dropdown.Item>
+                                        <Button onClick={(e) => listType(false, document.getElementById('list'), document.getElementById('grid'))} style={TEXTBUTTON_STYLE}>
+                                            <TiThList id="list" style={{ color: '#fff' }} />
+                                        </Button>
+                                    </Dropdown.Item>
+                            </DropdownButton>
+                            </div>
+                          : <div className='d-flex justify-content-between w-100'>
+                                <span className='d-flex align-items-baseline'>
+                                    <h5><strong>Сортировать по:</strong></h5>
                                     <Button
                                         onClick={() => priceSort()}
-                                        style={{ ...TEXTBUTTON_STYLE, color: '#fff' }}
+                                        style={{ ...TEXTBUTTON_STYLE, color: '#000' }}
                                         id='price'
                                     >
-                                        цена <BsCaretDownFill id='price-caret' style={{ ...priceCaretDisplay, fontSize: '1rem', transition: '.2s' }} />
+                                        цена
+                                        <BsCaretDownFill id='price-caret' style={{ ...priceCaretDisplay, fontSize: '1rem', transition: '.2s' }} />
+                                        <span className='nbsp' style={nbspDisplay}>&nbsp;&nbsp;&nbsp;</span>
                                     </Button>
-                                </Dropdown.Item>
-                                <Dropdown.Item>
                                     <Button
                                         onClick={() => popularitySort()}
                                         style={{ ...TEXTBUTTON_STYLE, color: 'gray' }}
@@ -141,19 +215,16 @@ const SortdBar = observer(({ setIsProductsLoading }) => {
                                     >
                                         популярность <BsCaretDownFill id='popularity-caret' style={{ ...popularityCaretDisplay, fontSize: '1rem', transition: '.2s' }} />
                                     </Button>
-                                </Dropdown.Item>
-                            </DropdownButton>
-                            <DropdownButton title="На странице">
-                                <Dropdown.Item>
+                                </span>
+                                <span className="d-flex align-items-baseline">
+                                    <h5><strong>На странице:</strong></h5>
                                     <Button
                                         onClick={(e) => itemsOnPage(e, 4)}
                                         id="four"
-                                        style={{ ...TEXTBUTTON_STYLE, color: '#fff' }}
+                                        style={{ ...TEXTBUTTON_STYLE, color: '#000' }}
                                     >
                                         4
                                     </Button>
-                                </Dropdown.Item>
-                                <Dropdown.Item>
                                     <Button
                                         onClick={(e) => itemsOnPage(e, 8)}
                                         id="eight"
@@ -161,103 +232,35 @@ const SortdBar = observer(({ setIsProductsLoading }) => {
                                     >
                                         8
                                     </Button>
-                                </Dropdown.Item>
-                                <Dropdown.Item>
                                     <Button
                                         onClick={(e) => itemsOnPage(e, 12)}
                                         id="twelve"
-                                        style={{ ...TEXTBUTTON_STYLE, color: '#fff' }}
+                                        style={{ ...TEXTBUTTON_STYLE, color: '#000' }}
                                     >
                                         12
                                     </Button>
-                                </Dropdown.Item>
-                                <Dropdown.Item>
                                     <Button
                                         onClick={(e) => itemsOnPage(e, 20)}
                                         id="all"
-                                        style={{ ...TEXTBUTTON_STYLE, color: '#fff' }}
+                                        style={{ ...TEXTBUTTON_STYLE, color: '#000' }}
                                     >
                                         Все
                                     </Button>
-                                </Dropdown.Item>
-                            </DropdownButton>
-                            <DropdownButton title="Вид">
-                                <Dropdown.Item>
+                                </span>
+                                <span className='d-flex align-items-baseline'>
+                                    <h5><strong>Вид:</strong></h5>
                                     <Button onClick={(e) => listType(true, document.getElementById('grid'), document.getElementById('list'))} style={TEXTBUTTON_STYLE}>
-                                        <TiThLarge id="grid" style={{ color: 'gray' }} />
+                                        <TiThLarge id="grid" style={{ color: 'gray', transition: '0.25s' }} />
                                     </Button>
-                                </Dropdown.Item>
-                                <Dropdown.Item>
                                     <Button onClick={(e) => listType(false, document.getElementById('list'), document.getElementById('grid'))} style={TEXTBUTTON_STYLE}>
-                                        <TiThList id="list" style={{ color: '#fff' }} />
+                                        <TiThList id="list" style={{ transition: '0.25s' }} />
                                     </Button>
-                                </Dropdown.Item>
-                        </DropdownButton>
-                        </div>
-                      : <div className='d-flex justify-content-between w-100'>
-                            <span className='d-flex align-items-baseline'>
-                                <h5><strong>Сортировать по:</strong></h5>
-                                <Button
-                                    onClick={() => priceSort()}
-                                    style={{ ...TEXTBUTTON_STYLE, color: '#000' }}
-                                    id='price'
-                                >
-                                    цена
-                                    <BsCaretDownFill id='price-caret' style={{ ...priceCaretDisplay, fontSize: '1rem', transition: '.2s' }} />
-                                    <span className='nbsp' style={nbspDisplay}>&nbsp;&nbsp;&nbsp;</span>
-                                </Button>
-                                <Button
-                                    onClick={() => popularitySort()}
-                                    style={{ ...TEXTBUTTON_STYLE, color: 'gray' }}
-                                    id='popularity'
-                                >
-                                    популярность <BsCaretDownFill id='popularity-caret' style={{ ...popularityCaretDisplay, fontSize: '1rem', transition: '.2s' }} />
-                                </Button>
-                            </span>
-                            <span className="d-flex align-items-center">
-                                <h5><strong>На странице:</strong></h5>
-                                <Button
-                                    onClick={(e) => itemsOnPage(e, 4)}
-                                    id="four"
-                                    style={{ ...TEXTBUTTON_STYLE, color: '#000' }}
-                                >
-                                    4
-                                </Button>
-                                <Button
-                                    onClick={(e) => itemsOnPage(e, 8)}
-                                    id="eight"
-                                    style={{ ...TEXTBUTTON_STYLE, color: 'gray' }}
-                                >
-                                    8
-                                </Button>
-                                <Button
-                                    onClick={(e) => itemsOnPage(e, 12)}
-                                    id="twelve"
-                                    style={{ ...TEXTBUTTON_STYLE, color: '#000' }}
-                                >
-                                    12
-                                </Button>
-                                <Button
-                                    onClick={(e) => itemsOnPage(e, 20)}
-                                    id="all"
-                                    style={{ ...TEXTBUTTON_STYLE, color: '#000' }}
-                                >
-                                    Все
-                                </Button>
-                            </span>
-                            <span className='d-flex align-items-baseline'>
-                                <h5><strong>Вид:</strong></h5>
-                                <Button onClick={(e) => listType(true, document.getElementById('grid'), document.getElementById('list'))} style={TEXTBUTTON_STYLE}>
-                                    <TiThLarge id="grid" style={{ color: 'gray', transition: '0.25s' }} />
-                                </Button>
-                                <Button onClick={(e) => listType(false, document.getElementById('list'), document.getElementById('grid'))} style={TEXTBUTTON_STYLE}>
-                                    <TiThList id="list" style={{ transition: '0.25s' }} />
-                                </Button>
-                            </span>
-                        </div>
-                }
-            </div>
-        </Row>
+                                </span>
+                            </div>
+                    }
+                </div>
+            </Row>
+        </Fade>
   )
 })
 

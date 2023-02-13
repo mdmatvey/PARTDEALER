@@ -7,7 +7,8 @@
     border-color: #fff !important;
 }
 
-.nav-button:hover, .count-button:hover {
+.nav-button:hover, 
+.count-button:hover {
     color: #000 !important;
     background-color: #00CCCC !important;
 }
@@ -23,11 +24,11 @@
     border-color: #222222 !important;
 }
 
-.nav-logo {
+#nav-logo {
     transition: .05s linear;
 }
 
-.nav-logo:active {
+#nav-logo:active {
     scale: 0.95 !important
 }
 
@@ -42,17 +43,20 @@
     box-shadow: rgba(0, 204, 204, 0.2) 0 0 0 0.25rem ;
 }
 
-.product-card, .item-card {
+.product-card, 
+.item-card {
     box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 5px 1px;
     transition: 0.2s;
 }
 
-.product-card:hover, .item-card:hover {
+.product-card:hover, 
+.item-card:hover {
     box-shadow: rgba(99, 99, 99, 0.1) 0px 0px 15px 10px;
     scale: 1.01
 }
 
-.product-card:active, .item-card:active {
+.product-card:active, 
+.item-card:active {
     box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 5px 1px;
     scale: 1;
 }
