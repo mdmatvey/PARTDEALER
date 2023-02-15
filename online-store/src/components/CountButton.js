@@ -11,13 +11,13 @@ const CountButton = ({ item, productPage }) => {
 
   return (
         <div className="d-flex col-md-6" style={{ width: 120, height: productPage ? '100%' : null }}>
-            <Button
+            <button
                 onClick={() => changeCount(-1)}
-                className="shadow-none count-button"
-                style={{ color: productPage ? '#fff' : '#000', background: 'none', borderWidth: 3, borderColor: PRIMARY_COLOR, borderRadius: '5px 0 0 5px' }}
+                className="shadow-none count-button inverted"
+                style={{ color: productPage ? '#fff' : '#000', borderRadius: '5px 0 0 5px' }}
             >
                 <strong>-</strong>
-            </Button>
+            </button>
             <Form>
                 <Form.Control
                     className="form-inline text-center shadow-none"
@@ -29,13 +29,13 @@ const CountButton = ({ item, productPage }) => {
                     maxLength="2"
                 />
             </Form>
-            <Button
+            <button
                 onClick={() => changeCount(1)}
-                className="shadow-none count-button"
-                style={{ color: productPage ? '#fff' : '#000', background: 'none', borderWidth: 3, borderColor: PRIMARY_COLOR, borderRadius: '0 5px 5px 0' }}
+                className="shadow-none count-button inverted"
+                style={{ color: productPage ? '#fff' : '#000', borderRadius: '0 5px 5px 0' }}
             >
                 <strong>+</strong>
-            </Button>
+            </button>
         </div>
   )
 }

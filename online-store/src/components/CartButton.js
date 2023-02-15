@@ -14,8 +14,8 @@ const Product = ({ item, productPage }) => {
                 cart.setCartItems([...cart.cartItems, item])
               }
             }}
-            className='d-flex align-items-center justify-content-center main-button'
-            style={{ color: productPage ? '#fff' : '#000', height: productPage ? '100%' : null }}
+            className={`d-flex align-items-center justify-content-center main-button ${productPage ? 'inverted' : null}`}
+            style={{ height: productPage ? '100%' : null }}
         >
               В корзину&nbsp;<TbShoppingCartPlus />
         </button>
