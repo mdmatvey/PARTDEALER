@@ -121,21 +121,45 @@ const Cart = observer(() => {
                         </Fade>
                       </Col>
                       <Col md={md2}>
-                        <Fade right>
-                          <Card
-                              style={{ background: SECONDARY_COLOR, height: 250, marginTop: 20, width: '100%', border: 'none', padding: 10 }}
-                          >
-                              <Total itemsCount={itemsCount} />
-                              <button
-                                  disabled={!(cart.cartItems.length > 0)}
-                                  onClick={() => navigate(ORDERING_ROUTE)}
-                                  className="main-button inverted cartpage-button"
-                                  style={{ marginTop: 'auto', padding: 10 }}
-                              >
-                                  Перейти к оформлению
-                              </button>
-                          </Card>
-                        </Fade>
+                        {
+                          user.userWidth < 768
+                            ? <Fade bottom>
+                            <Card
+                                style={{ background: SECONDARY_COLOR, height: 250, marginTop: 20, width: '100%', border: 'none', padding: 10 }}
+                            >
+                                <Total itemsCount={itemsCount} />
+                                <button
+                                    disabled={!(cart.cartItems.length > 0)}
+                                    onClick={() => {
+                                      window.scrollTo(0, 0)
+                                      navigate(ORDERING_ROUTE)
+                                    }}
+                                    className="main-button inverted cartpage-button"
+                                    style={{ marginTop: 'auto', padding: 10 }}
+                                >
+                                    Перейти к оформлению
+                                </button>
+                            </Card>
+                          </Fade>
+                            : <Fade right>
+                            <Card
+                                style={{ background: SECONDARY_COLOR, height: 250, marginTop: 20, width: '100%', border: 'none', padding: 10 }}
+                            >
+                                <Total itemsCount={itemsCount} />
+                                <button
+                                    disabled={!(cart.cartItems.length > 0)}
+                                    onClick={() => {
+                                      window.scrollTo(0, 0)
+                                      navigate(ORDERING_ROUTE)
+                                    }}
+                                    className="main-button inverted cartpage-button"
+                                    style={{ marginTop: 'auto', padding: 10 }}
+                                >
+                                    Перейти к оформлению
+                                </button>
+                            </Card>
+                          </Fade>
+                        }
                       </Col>
                     </Row>
                 </>

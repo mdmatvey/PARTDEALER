@@ -55,13 +55,23 @@ const ProductPage = observer(() => {
                 </Fade>
                 <Row className='mt-5' style={{ background: '#fff' }}>
                     <Col md={md1} className='productpage-col'>
-                        <Fade left>
-                          {
-                              isLoading
-                                ? <Skeleton style={{ display: 'block', margin: '0 auto', width: 300, height: 300 }} />
-                                : <Image style={{ objectFit: 'contain', display: 'block', margin: '0 auto', width: '100%' }} width={300} height={300} src={product.products.image} />
-                          }
-                        </Fade>
+                        {
+                          user.userWidth < 768
+                            ? <Fade bottom>
+                              {
+                                  isLoading
+                                    ? <Skeleton style={{ display: 'block', margin: '0 auto', width: 300, height: 300 }} />
+                                    : <Image style={{ objectFit: 'contain', display: 'block', margin: '0 auto', width: '100%' }} width={300} height={300} src={product.products.image} />
+                              }
+                            </Fade>
+                            : <Fade left>
+                            {
+                                isLoading
+                                  ? <Skeleton style={{ display: 'block', margin: '0 auto', width: 300, height: 300 }} />
+                                  : <Image style={{ objectFit: 'contain', display: 'block', margin: '0 auto', width: '100%' }} width={300} height={300} src={product.products.image} />
+                            }
+                          </Fade>
+                        }
                     </Col>
                     <Col md={md2} className='productpage-col'>
                         <Fade>
@@ -87,36 +97,69 @@ const ProductPage = observer(() => {
                         </Fade>
                     </Col>
                     <Col md={md2} className='productpage-col'>
-                        <Fade right>
-                          <Card
-                              className="d-flex flex-column"
-                              style={{ width: '100%', height: '100%', fontSize: 30, border: 'none', color: '#fff', background: SECONDARY_COLOR, padding: 20 }}
-                          >
-                              {
-                                  isLoading
-                                    ? <>
-                                          <h3 style={{ marginBottom: 0 }}><Skeleton style={{ width: '15%' }} /></h3>
-                                          <span><Skeleton style={{ width: '30%' }} /></span>
-                                          <Skeleton style={{ width: '30%' }} />
-                                          <Skeleton style={{ width: '30%' }} />
-                                          <Skeleton style={{ width: '50%' }} />
-                                          <Skeleton />
-                                          <Skeleton style={{ width: '80%' }} />
-                                      </>
-                                    : <>
-                                          <span style={{ color: PRIMARY_COLOR, fontWeight: 'bold', fontSize: '3rem' }}>{(product.products.price * product.products.count).toFixed(2)}₽</span>
-                                          Срок: 1 д.<br/>
-                                          Наличие: 1 шт.
-                                          <span className='mb-1' id='productpage-total'>
-                                            <CountButton item={product.products} count={product.products.count} productPage={true} />
-                                            <CartButton item={product.products} productPage={true} />
-                                          </span>
-                                          <span style={{ fontSize: '1rem' }}>Картой онлайн, наличными</span>
-                                      </>
-                              }
+                        {
+                          user.userWidth < 768
+                            ? <Fade bottom>
+                            <Card
+                                className="d-flex flex-column"
+                                style={{ width: '100%', height: '100%', fontSize: 30, border: 'none', color: '#fff', background: SECONDARY_COLOR, padding: 20 }}
+                            >
+                                {
+                                    isLoading
+                                      ? <>
+                                            <h3 style={{ marginBottom: 0 }}><Skeleton style={{ width: '15%' }} /></h3>
+                                            <span><Skeleton style={{ width: '30%' }} /></span>
+                                            <Skeleton style={{ width: '30%' }} />
+                                            <Skeleton style={{ width: '30%' }} />
+                                            <Skeleton style={{ width: '50%' }} />
+                                            <Skeleton />
+                                            <Skeleton style={{ width: '80%' }} />
+                                        </>
+                                      : <>
+                                            <span style={{ color: PRIMARY_COLOR, fontWeight: 'bold', fontSize: '3rem' }}>{(product.products.price * product.products.count).toFixed(2)}₽</span>
+                                            Срок: 1 д.<br/>
+                                            Наличие: 1 шт.
+                                            <span className='mb-1' id='productpage-total'>
+                                              <CountButton item={product.products} count={product.products.count} productPage={true} />
+                                              <CartButton item={product.products} productPage={true} />
+                                            </span>
+                                            <span style={{ fontSize: '1rem' }}>Картой онлайн, наличными</span>
+                                        </>
+                                }
 
-                          </Card>
-                        </Fade>
+                            </Card>
+                          </Fade>
+                            : <Fade right>
+                            <Card
+                                className="d-flex flex-column"
+                                style={{ width: '100%', height: '100%', fontSize: 30, border: 'none', color: '#fff', background: SECONDARY_COLOR, padding: 20 }}
+                            >
+                                {
+                                    isLoading
+                                      ? <>
+                                            <h3 style={{ marginBottom: 0 }}><Skeleton style={{ width: '15%' }} /></h3>
+                                            <span><Skeleton style={{ width: '30%' }} /></span>
+                                            <Skeleton style={{ width: '30%' }} />
+                                            <Skeleton style={{ width: '30%' }} />
+                                            <Skeleton style={{ width: '50%' }} />
+                                            <Skeleton />
+                                            <Skeleton style={{ width: '80%' }} />
+                                        </>
+                                      : <>
+                                            <span style={{ color: PRIMARY_COLOR, fontWeight: 'bold', fontSize: '3rem' }}>{(product.products.price * product.products.count).toFixed(2)}₽</span>
+                                            Срок: 1 д.<br/>
+                                            Наличие: 1 шт.
+                                            <span className='mb-1' id='productpage-total'>
+                                              <CountButton item={product.products} count={product.products.count} productPage={true} />
+                                              <CartButton item={product.products} productPage={true} />
+                                            </span>
+                                            <span style={{ fontSize: '1rem' }}>Картой онлайн, наличными</span>
+                                        </>
+                                }
+
+                            </Card>
+                          </Fade>
+                        }
                     </Col>
                 </Row>
                 <Col md={md3}>

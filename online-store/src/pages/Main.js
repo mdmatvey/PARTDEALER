@@ -142,44 +142,86 @@ const Shop = observer(() => {
                 className="cataloge-container mt-5 pb-5"
             >
                 <Col style={{ display: 'block', margin: '0 auto', maxWidth: 600 }}>
-                    <Fade left>
-                        <Card
-                            className="border-0"
-                            style={{ cursor: 'pointer', width: '100%' }}
-                            onClick={() => {
-                              window.scrollTo(0, 0)
-                              navigate(CATEGORIES_ROUTE)
-                            }}
-                        >
-                            <Image
-                                style={{ width: '100%' }}
-                                src="https://snipboard.io/YiIAy9.jpg"
-                            />
-                            <div className="image-overlay">
-                                <div className="image-title" unselectable="on">К каталогам категорий</div>
-                            </div>
-                        </Card>
-                    </Fade>
+                    {
+                        user.userWidth < 768
+                          ? <Fade bottom>
+                            <Card
+                                className="border-0"
+                                style={{ cursor: 'pointer', width: '100%' }}
+                                onClick={() => {
+                                  window.scrollTo(0, 0)
+                                  navigate(CATEGORIES_ROUTE)
+                                }}
+                            >
+                                <Image
+                                    style={{ width: '100%' }}
+                                    src="https://snipboard.io/YiIAy9.jpg"
+                                />
+                                <div className="image-overlay">
+                                    <div className="image-title" unselectable="on">К каталогам категорий</div>
+                                </div>
+                            </Card>
+                        </Fade>
+                          : <Fade left>
+                            <Card
+                                className="border-0"
+                                style={{ cursor: 'pointer', width: '100%' }}
+                                onClick={() => {
+                                  window.scrollTo(0, 0)
+                                  navigate(CATEGORIES_ROUTE)
+                                }}
+                            >
+                                <Image
+                                    style={{ width: '100%' }}
+                                    src="https://snipboard.io/YiIAy9.jpg"
+                                />
+                                <div className="image-overlay">
+                                    <div className="image-title" unselectable="on">К каталогам категорий</div>
+                                </div>
+                            </Card>
+                        </Fade>
+                    }
                 </Col>
                 <Col style={{ display: 'block', margin: '0 auto', maxWidth: 600 }}>
-                    <Fade right>
-                        <Card
-                            className="border-0"
-                            style={{ cursor: 'pointer', width: '100%' }}
-                            onClick={() => {
-                              window.scrollTo(0, 0)
-                              navigate(BRANDS_ROUTE)
-                            }}
-                        >
-                            <Image
-                                style={{ width: '100%' }}
-                                src="https://snipboard.io/YiIAy9.jpg"
-                            />
-                            <div className="image-overlay">
-                                <div className="image-title" unselectable="on">К каталогам брендов</div>
-                            </div>
-                        </Card>
-                    </Fade>
+                    {
+                        user.userWidth < 768
+                          ? <Fade bottom>
+                            <Card
+                                className="border-0"
+                                style={{ cursor: 'pointer', width: '100%' }}
+                                onClick={() => {
+                                  window.scrollTo(0, 0)
+                                  navigate(BRANDS_ROUTE)
+                                }}
+                            >
+                                <Image
+                                    style={{ width: '100%' }}
+                                    src="https://snipboard.io/YiIAy9.jpg"
+                                />
+                                <div className="image-overlay">
+                                    <div className="image-title" unselectable="on">К каталогам брендов</div>
+                                </div>
+                            </Card>
+                        </Fade>
+                          : <Fade right>
+                            <Card
+                                className="border-0"
+                                style={{ cursor: 'pointer', width: '100%' }}
+                                onClick={() => {
+                                  window.scrollTo(0, 0)
+                                  navigate(BRANDS_ROUTE)
+                                }}
+                            >
+                                <Image
+                                    style={{ width: '100%' }}
+                                    src="https://snipboard.io/YiIAy9.jpg"
+                                />
+                                <div className="image-overlay">
+                                    <div className="image-title" unselectable="on">К каталогам брендов</div>
+                                </div>
+                            </Card>
+                        </Fade>
+                    }
                 </Col>
             </Container>
         </>

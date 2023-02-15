@@ -42,28 +42,53 @@ const ControlPanel = observer(({ button1, button2, FirstTab, SecondTab, userTemp
                     {secondTabDisplay ? <Fade bottom><SecondTab userTemp={userTemp} /></Fade> : null}
                   </Col>
                   <Col md={md2}>
-                    <Fade right>
-                      <Container className='d-flex align-items-start flex-column'>
-                          <Button
-                              onClick={(e) => {
-                                click(setFirstTabDisplay, setSecondTabDisplay, document.getElementById('SecondButton'), e)
-                              }}
-                              style={{ ...NAVLINK_STYLE, fontSize: '2.5rem', fontWeight: 'bold', transition: '0.1s', padding: 0 }}
-                              id="FirstButton"
-                          >
-                              {button1}
-                          </Button>
-                          <Button
-                              onClick={(e) => {
-                                click(setSecondTabDisplay, setFirstTabDisplay, document.getElementById('FirstButton'), e)
-                              }}
-                              style={{ ...NAVLINK_STYLE, fontSize: '2.5rem', transition: '0.1s', padding: 0 }}
-                              id="SecondButton"
-                          >
-                              {button2}
-                          </Button>
-                      </Container>
-                    </Fade>
+                    {
+                      user.userWidth
+                        ? <Fade top>
+                        <Container className='d-flex align-items-start flex-column'>
+                            <Button
+                                onClick={(e) => {
+                                  click(setFirstTabDisplay, setSecondTabDisplay, document.getElementById('SecondButton'), e)
+                                }}
+                                style={{ ...NAVLINK_STYLE, fontSize: '2.5rem', fontWeight: 'bold', transition: '0.1s', padding: 0 }}
+                                id="FirstButton"
+                            >
+                                {button1}
+                            </Button>
+                            <Button
+                                onClick={(e) => {
+                                  click(setSecondTabDisplay, setFirstTabDisplay, document.getElementById('FirstButton'), e)
+                                }}
+                                style={{ ...NAVLINK_STYLE, fontSize: '2.5rem', transition: '0.1s', padding: 0 }}
+                                id="SecondButton"
+                            >
+                                {button2}
+                            </Button>
+                        </Container>
+                      </Fade>
+                        : <Fade right>
+                        <Container className='d-flex align-items-start flex-column'>
+                            <Button
+                                onClick={(e) => {
+                                  click(setFirstTabDisplay, setSecondTabDisplay, document.getElementById('SecondButton'), e)
+                                }}
+                                style={{ ...NAVLINK_STYLE, fontSize: '2.5rem', fontWeight: 'bold', transition: '0.1s', padding: 0 }}
+                                id="FirstButton"
+                            >
+                                {button1}
+                            </Button>
+                            <Button
+                                onClick={(e) => {
+                                  click(setSecondTabDisplay, setFirstTabDisplay, document.getElementById('FirstButton'), e)
+                                }}
+                                style={{ ...NAVLINK_STYLE, fontSize: '2.5rem', transition: '0.1s', padding: 0 }}
+                                id="SecondButton"
+                            >
+                                {button2}
+                            </Button>
+                        </Container>
+                      </Fade>
+                    }
                   </Col>
                </Row>
             </Container>

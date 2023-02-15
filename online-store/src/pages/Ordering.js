@@ -89,7 +89,7 @@ const Cart = observer(() => {
                         </Card>
                     </Fade>
                     <Fade bottom>
-                        <Card className='   p-3 mb-3'>
+                        <Card className='p-3 mb-3'>
                             <h2>Адрес </h2>
                             <Form>
                                 <Form.Group className="mb-3">
@@ -154,20 +154,37 @@ const Cart = observer(() => {
                         </div>
                     </Fade>
                 </Container>
-                <Fade right>
-                    <div>
-                        <Card id='orderingpage-card'>
-                            <Total itemsCount={itemsCount} />
-                            <button
-                                onClick={() => navigate()}
-                                className="mt-4 main-button inverted"
-                                style={{ position: 'absolute', width: '90%', top: 'auto', bottom: 10, left: '5%', display: 'block', margin: '0 auto', fontSize: '1.2rem', padding: 20 }}
-                            >
-                                Оформить заказ
-                            </button>
-                        </Card>
-                    </div>
-                </Fade>
+                {
+                    user.userWidth < 768
+                      ? <Fade bottom>
+                        <div>
+                            <Card id='orderingpage-card'>
+                                <Total itemsCount={itemsCount} />
+                                <button
+                                    onClick={() => navigate()}
+                                    className="mt-4 main-button inverted"
+                                    style={{ position: 'absolute', width: '90%', top: 'auto', bottom: 10, left: '5%', display: 'block', margin: '0 auto', fontSize: '1.2rem', padding: 20 }}
+                                >
+                                    Оформить заказ
+                                </button>
+                            </Card>
+                        </div>
+                    </Fade>
+                      : <Fade right>
+                        <div>
+                            <Card id='orderingpage-card'>
+                                <Total itemsCount={itemsCount} />
+                                <button
+                                    onClick={() => navigate()}
+                                    className="mt-4 main-button inverted"
+                                    style={{ position: 'absolute', width: '90%', top: 'auto', bottom: 10, left: '5%', display: 'block', margin: '0 auto', fontSize: '1.2rem', padding: 20 }}
+                                >
+                                    Оформить заказ
+                                </button>
+                            </Card>
+                        </div>
+                    </Fade>
+                }
             </div>
         </Container>
   )

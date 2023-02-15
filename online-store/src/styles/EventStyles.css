@@ -1,3 +1,13 @@
+.count-button {
+    padding: 6px 12px;
+    background: transparent;
+    background-position: center;
+    border: 3px solid #00CCCC;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: 0.75s;
+}
+
 .main-button {
     color: #000;
     margin: 10px;
@@ -15,7 +25,8 @@
     color: #fff;
 }
 
-.main-button:hover {
+.main-button:hover, 
+.count-button:hover {
     background: #00CCCC radial-gradient(circle, transparent 1%, #fff 1%) center/15000%;
 }
 
@@ -25,7 +36,8 @@
     
 }
 
-.main-button:active {
+.main-button:active,
+.count-button:active {
     background-color: #00CCCC;
     background-size: 100%;
     transition: background 0s;
