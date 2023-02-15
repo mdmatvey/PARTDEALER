@@ -7,7 +7,6 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import { fetchOneProduct } from '../components/http/productAPI'
 import CountButton from '../components/CountButton'
 import CartButton from '../components/CartButton'
-import Comments from '../components/Comments'
 import { PRIMARY_COLOR, SECONDARY_COLOR } from '../utils/uiConsts'
 import { observer } from 'mobx-react-lite'
 import { Context } from '..'
@@ -162,11 +161,6 @@ const ProductPage = observer(() => {
                         }
                     </Col>
                 </Row>
-                <Col md={md3}>
-                    <Fade bottom>
-                      <Comments product={product} />
-                    </Fade>
-                </Col>
             </div>
         </div>
   )
