@@ -8,6 +8,7 @@ import Footer from './components/Footer'
 import { check } from './components/http/userAPI'
 import NavBar from './components/NavBar'
 import WebFont from 'webfontloader'
+import ScrollbarStyles from './styles/ScrollbarStyles.css'
 
 const App = observer(() => {
   const { user } = useContext(Context)
