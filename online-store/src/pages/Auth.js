@@ -8,6 +8,7 @@ import { Context } from '../index'
 import { PRIMARY_COLOR, SECONDARY_COLOR } from '../utils/uiConsts'
 import BootstrapReStyles from '../styles/BootstrapReStyles.css'
 import EventStyles from '../styles/EventStyles.css'
+import ResponsiveStyles from '../styles/ResponsiveStyles.css'
 
 const Auth = observer(() => {
   const { user } = useContext(Context)
@@ -65,13 +66,14 @@ const Auth = observer(() => {
                             : <span>Уже есть аккаунт? <Link to={LOGIN_ROUTE} className='anchor inverted'>Авторизируйтесь!</Link></span>
                         }
                       </div>
-                      <Button
-                          style={{ width: 100, color: '#fff' }}
-                          className='nav-button'
+                      <button
+                          style={{ width: 100 }}
+                          className='main-button inverted auth-button'
                           onClick={click}
+                          type='button'
                       >
                           {isLogin ? 'Войти' : 'Зарегистрироваться'}
-                      </Button>
+                      </button>
                     </Row>
                 </Form>
             </Card>

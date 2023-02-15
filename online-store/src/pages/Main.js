@@ -10,8 +10,8 @@ import { BsGearWideConnected } from 'react-icons/bs'
 import { TbTruckDelivery } from 'react-icons/tb'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 import Logo from '../logo.svg'
-import EventStyles from '../styles/EventStyles.css'
 import MainStyles from '../styles/MainStyles.css'
+import EventStyles from '../styles/EventStyles.css'
 
 const Shop = observer(() => {
   const carouselInterval = 3000
@@ -45,8 +45,8 @@ const Shop = observer(() => {
 
   return (
         <>
-            <div id='topping' style={{ height: '100vh', color: '#fff' }}>
-                <div style={{ height: '100%', paddingLeft: '10%', background: 'rgba(0, 0, 0, 0.6)' }}>
+            <div id='topping' style={{ minHeight: '100vh', color: '#fff' }}>
+                <div style={{ minHeight: '100vh', paddingLeft: '10%', background: 'rgba(0, 0, 0, 0.6)' }}>
                     <Fade top>
                         <div className="flip-card">
                             <div className="flip-card-inner">
@@ -69,16 +69,18 @@ const Shop = observer(() => {
                         </div>
                     </Fade>
                     <Fade bottom>
-                        <Button
+                        <button
                             onClick={() => {
                               window.scrollTo(0, 0)
                               navigate(SHOP_ROUTE)
                             }}
-                            style={{ background: PRIMARY_COLOR, borderWidth: '4px', padding: '3px 9px', fontWeight: 500, color: '#000', borderColor: '#00CCCC', fontSize: '1.75rem', marginLeft: 45, marginTop: '4%' }}
+                            style={{ background: PRIMARY_COLOR, borderWidth: '4px', padding: '3px 9px', fontWeight: 500, color: '#000', border: '3px solid #00CCCC', borderRadius: 5, fontSize: '1.75rem', margin: '4% 0 0 45px' }}
                             id='major-button'
+                            type='button'
                         >
                             Перейти в каталог
-                        </Button>
+                        </button>
+                        <br/>
                     </Fade>
                 </div>
             </div>

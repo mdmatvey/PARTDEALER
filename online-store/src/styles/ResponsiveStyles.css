@@ -159,8 +159,14 @@
         height: 92px;
     } 
 
-    .main-button {
+    .main-button:not(.auth-button) {
         margin-left: 0 !important;
+    }
+
+    .auth-button {
+        display: block !important;
+        margin: 0 auto !important;
+        margin-top: 20px !important;
     }
 
     #productpage-container {
