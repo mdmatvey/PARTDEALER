@@ -65,8 +65,7 @@
     color: #fff;
 }
 
-.nav-button:hover, 
-.count-button:hover {
+.nav-button:hover {
     color: #000 !important;
     background-color: #00CCCC !important;
 }
@@ -80,6 +79,15 @@
     color: #fff !important;
     background-color: #222222 !important;
     border-color: #222222 !important;
+}
+
+#tomain-button {
+    text-decoration: underline 2px #00CCCC;
+    transition: .3s;
+}
+
+#tomain-button:hover {
+    color: #00CCCC !important;
 }
 
 #nav-logo {

@@ -13,7 +13,7 @@ const CountButton = ({ item, productPage }) => {
         <div className="d-flex col-md-6" style={{ width: 120, height: productPage ? '100%' : null }}>
             <button
                 onClick={() => changeCount(-1)}
-                className="shadow-none count-button inverted"
+                className={`shadow-none count-button ${productPage ? 'inverted' : ''}`}
                 style={{ color: productPage ? '#fff' : '#000', borderRadius: '5px 0 0 5px' }}
             >
                 <strong>-</strong>
@@ -31,7 +31,7 @@ const CountButton = ({ item, productPage }) => {
             </Form>
             <button
                 onClick={() => changeCount(1)}
-                className="shadow-none count-button inverted"
+                className={`shadow-none count-button ${productPage ? 'inverted' : ''}`}
                 style={{ color: productPage ? '#fff' : '#000', borderRadius: '0 5px 5px 0' }}
             >
                 <strong>+</strong>

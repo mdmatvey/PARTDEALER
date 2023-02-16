@@ -24,6 +24,15 @@
     margin-bottom: 10px
 }
 
+.orderspage-card {
+    display: grid; 
+    align-items: center; 
+    grid-template-columns: 2fr 6fr 1fr; 
+    grid-template-rows: 170px; 
+    width: 100%; 
+    margin-bottom: 10px
+}
+
 #orderingpage-card {
     position: relative;
     border: none; 
@@ -64,6 +73,29 @@
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
+}
+
+.orderspage-container {
+    padding: 24px;
+}
+
+#emptycart-message {
+    padding-top: 5%;
+    text-align: center;
+    padding-bottom: 10%
+}
+
+#emptycart-message h3 {
+    font-size: 4rem;
+}
+
+#emptycart-message span {
+    font-size: 1.5rem;
+}
+
+#emptycart-buttons button,
+#emptycart-buttons a {
+    font-size: 1.25rem;
 }
 
 .cartpage-button {
@@ -158,6 +190,18 @@
     #adminpage-dropdown button {
         margin-left: 0
     }
+
+    .orderspage-card {
+        grid-template-columns: 1fr; 
+    }
+
+    #emptycart-message h3 {
+        font-size: 3rem;
+    }
+    
+    #emptycart-message span {
+        font-size: 1.3rem;
+    }
 }
 
 @media only screen and (max-width: 427px) {
@@ -166,6 +210,10 @@
         align-items: flex-start;
         height: 92px;
     } 
+
+    .orderspage-container {
+        padding: 24px 0;
+    }
 
     .main-button:not(.auth-button) {
         margin-left: 0 !important;
@@ -190,5 +238,10 @@
     #adminpage-dropdown button {
         font-size: 0.85rem;
         padding: 3px;
+    }
+
+    #emptycart-buttons button,
+    #emptycart-buttons a {
+        font-size: 1.1rem !important; 
     }
 }

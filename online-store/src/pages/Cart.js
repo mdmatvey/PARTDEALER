@@ -10,6 +10,7 @@ import { SHOP_ROUTE, ORDERING_ROUTE } from '../utils/routeConsts'
 import { setEnding } from '../utils/functions'
 import { SECONDARY_COLOR, TEXTBUTTON_STYLE } from '../utils/uiConsts'
 import EventStyles from '../styles/EventStyles.css'
+import ResponsiveStyles from '../styles/ResponsiveStyles.css'
 
 const Cart = observer(() => {
   const { user, product, cart } = useContext(Context)
@@ -43,30 +44,32 @@ const Cart = observer(() => {
                 itemsCount === 0
                   ? <div
                         className="d-flex flex-column align-items-center mt-5"
-                        style={{ paddingTop: '5%', textAlign: 'center', paddingBottom: '10%' }}
+                        id='emptycart-message'
                     >
                         <Fade top>
-                          <h3 style={{ fontSize: '4rem' }}>В вашей корзине пока ничего нет</h3>
+                          <h3>В вашей корзине пока ничего нет</h3>
                           <span
                               className="mt-3"
-                              style={{ fontSize: '1.5rem' }}
                           >
                               Посмотрите товары в нашем каталоге или воспользуйтесь поиском
                           </span>
                         </Fade>
                         <Fade bottom>
-                          <div className="d-inline-flex justify-content-between align-items-baseline mt-5">
+                          <div
+                            className="d-inline-flex justify-content-between align-items-baseline mt-5"
+                            id='emptycart-buttons'
+                          >
                               <button
                                   onClick={() => {
                                     product.setCategoriesToDisplay([])
                                     navigate(SHOP_ROUTE)
                                   }}
                                   className='main-button'
-                                  style={{ padding: '10px 20px', fontSize: '1.25rem' }}
+                                  style={{ padding: '10px 20px' }}
                               >
                                   В каталог
                               </button>
-                              <Link to="/" style={{ ...TEXTBUTTON_STYLE, fontSize: '1.25rem', textDecoration: 'underline 2px #00CCCC' }}>На главную</Link>
+                              <Link to="/" id='tomain-button' style={{ ...TEXTBUTTON_STYLE }}>На главную</Link>
                           </div>
                         </Fade>
                     </div>

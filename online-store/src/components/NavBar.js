@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Context } from '../index'
 import { MAIN_ROUTE, ADMIN_ROUTE, USER_ROUTE, LOGIN_ROUTE, CART_ROUTE, SHOP_ROUTE } from '../utils/routeConsts'
 import { Button, Container, Form, Nav, Navbar } from 'react-bootstrap'
@@ -17,7 +17,7 @@ import NavbarStyles from '../styles/NavbarStyles.css'
 import EventStyles from '../styles/EventStyles.css'
 
 const NavBar = observer(() => {
-  const { user } = useContext(Context)
+  const { user, cart } = useContext(Context)
   const navigate = useNavigate()
 
   const [cartOpen, setCartOpen] = useState(false)
@@ -35,16 +35,11 @@ const NavBar = observer(() => {
     localStorage.removeItem('token') // temporarily
   }
 
-  const navbarCollapses = document.querySelectorAll('.navbar-collapse')
-
   useEffect(() => {
     if (user.userWidth < 992) {
       setCartOpen(false)
-      navbarCollapses.forEach(element => { element.style.height = '250px' })
-    } else {
-      navbarCollapses.forEach(element => { element.style.height = '0' })
     }
-  }, [user.userWidth])
+  }, [user.userWidth, user.isAuth])
 
   return (
         <>
@@ -61,34 +56,37 @@ const NavBar = observer(() => {
                     fluid
                 >
                     <Navbar.Brand
-                        onClick={() => navigate(MAIN_ROUTE)}
+                        onClick={() => {
+                          window.scrollTo(0, 0)
+                          navigate(MAIN_ROUTE)
+                        }}
                         id='nav-logo'
-                        style={{ cursor: 'pointer', fontFamily: 'Amaranth', fontWeight: 'bold', fontSize: '1.5rem', letterSpacing: '.05rem', padding: 0 }}
+                        style={{ cursor: 'pointer', fontFamily: 'Amaranth, Helvetica, sans-serif', fontWeight: 'bold', fontSize: '1.5rem', letterSpacing: '.05rem', padding: 0 }}
                     >
                         PART DEALER
                     </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="navbarScroll" />
-                    <Navbar.Collapse id="navbarScroll">
+                    <Navbar.Toggle />
+                    <Navbar.Collapse>
                         <Nav className="ms-auto">
                             <Button
                                 style={NAVLINK_STYLE}
                             >
-                                <span className='d-flex align-items-center navbar-contact'><FaTelegram />&nbsp;dubstepchik</span>
+                                <span className='d-flex align-items-center navbar-contact'><FaTelegram />&nbsp;contact</span>
                             </Button>
                             <Button
                                 style={NAVLINK_STYLE}
                             >
-                                <span className='d-flex align-items-center navbar-contact'><FaWhatsapp />&nbsp;dubstepchik</span>
+                                <span className='d-flex align-items-center navbar-contact'><FaWhatsapp />&nbsp;contact</span>
                             </Button>
                             <Button
                                 style={NAVLINK_STYLE}
                             >
-                                <span className='d-flex align-items-center navbar-contact'><BsTelephoneFill />&nbsp;dubstepchik</span>
+                                <span className='d-flex align-items-center navbar-contact'><BsTelephoneFill />&nbsp;contact</span>
                             </Button>
                             <Button
                                 style={NAVLINK_STYLE}
                             >
-                                <span className='d-flex align-items-center navbar-contact'><MdOutlineMailOutline />&nbsp;dubstepchik</span>
+                                <span className='d-flex align-items-center navbar-contact'><MdOutlineMailOutline />&nbsp;contact</span>
                             </Button>
                         </Nav>
                     </Navbar.Collapse>
@@ -98,6 +96,7 @@ const NavBar = observer(() => {
                 sticky="top"
                 bg="light"
                 expand="lg"
+                collapseOnSelect
                 className="d-flex flex-column"
                 style={{ top: -1, padding: 0, margin: 0, zIndex: 10 }}
             >
@@ -106,8 +105,8 @@ const NavBar = observer(() => {
                     style={{ background: SECONDARY_COLOR, height: 60 }}
                     fluid
                 >
-                    <Navbar.Toggle aria-controls="navbarScroll" />
-                    <Navbar.Collapse id="navbarScroll">
+                    <Navbar.Toggle />
+                    <Navbar.Collapse>
                         <Form className="d-flex align-items-center">
                             <Form.Control
                                 value={query}
@@ -130,72 +129,88 @@ const NavBar = observer(() => {
                         {user.isAuth
                           ? <Nav
                                 className="ms-auto my-2 my-lg-0"
-                                style={{ maxHeight: '100px' }}
                                 navbarScroll
                             >
-                                <Button
-                                    className={`d-flex align-items-center ms-2 me-2 ${cartOpen && 'open'} nav-button`}
-                                    style={NAVBUTTON_STYLE}
-                                    onClick={() => {
-                                      user.userWidth < 992 ? (window.scrollTo(0, 0), navigate(CART_ROUTE)) : setCartOpen(!cartOpen)
-                                    }}
-                                >
-                                    <TbShoppingCart style={{ fontSize: '1.5rem' }} />&nbsp;Корзина
-                                </Button>
+                                {
+                                    user.userWidth < 992
+                                      ? <Nav.Link
+                                        as={Link}
+                                        to={CART_ROUTE}
+                                        href={CART_ROUTE}
+                                        className={`d-flex align-items-center ms-2 me-2 ${cartOpen && 'open'} nav-button`}
+                                        style={NAVBUTTON_STYLE}
+                                        onClick={() => {
+                                          window.scrollTo(0, 0)
+                                          navigate(CART_ROUTE)
+                                        }}
+                                    >
+                                        <span className='d-flex align-items-center ps-2 pe-1'><TbShoppingCart style={{ fontSize: '1.5rem' }} />&nbsp;Корзина</span>
+                                    </Nav.Link>
+                                      : <Nav.Link
+                                        className={`d-flex align-items-center ms-2 me-2 ${cartOpen && 'open'} nav-button`}
+                                        style={NAVBUTTON_STYLE}
+                                        onClick={() => setCartOpen(!cartOpen)}
+                                    >
+                                        <span className='d-flex align-items-center ps-2 pe-1'><TbShoppingCart style={{ fontSize: '1.5rem' }} />&nbsp;Корзина</span>
+                                    </Nav.Link>
+                                }
                                 <div style={{ position: 'absolute', top: cartOpen ? 58 : -430, transition: '1s', right: 0, width: 600, height: 400, borderRadius: '0 0 5px 5px', background: SECONDARY_COLOR, zIndex: -1, boxShadow: cartOpen ? 'rgba(0, 0, 0, 0.35) 0px 5px 15px' : 'none' }}>
                                     <CartList cartPage={false} />
                                     <button
                                         onClick={() => {
                                           setCartOpen(false)
                                           window.scrollTo(0, 0)
-                                          navigate(CART_ROUTE)
+                                          navigate(cart.cartItems.length ? CART_ROUTE : SHOP_ROUTE)
                                         }}
                                         style={{ display: 'block', margin: '20px auto 0 auto' }}
                                         className='main-button inverted'
                                     >
-                                        Перейти в корзину
+                                        Перейти в {cart.cartItems.length !== 0 ? 'корзину' : 'каталог'}
                                     </button>
                                 </div>
-                                <Button
+                                <Nav.Link
+                                    as={Link}
+                                    to={USER_ROUTE}
+                                    href={USER_ROUTE}
+                                    style={NAVBUTTON_STYLE}
+                                    className='d-flex align-items-center ms-2 me-2 nav-button'
+                                    onClick={() => window.scrollTo(0, 0)}
+                                >
+                                    <span className='d-flex align-items-center ps-2 pe-1'><FaRegUser />&nbsp;Личный кабинет</span>
+                                </Nav.Link>
+                                <Nav.Link
+                                    as={Link}
+                                    to={ADMIN_ROUTE}
+                                    href={ADMIN_ROUTE}
+                                    style={NAVBUTTON_STYLE}
+                                    className='d-flex align-items-center ms-2 me-2 nav-button'
+                                    onClick={() => window.scrollTo(0, 0)}
+                                    >
+                                    <span className='d-flex align-items-center ps-2 pe-1'><FaRegUser />&nbsp;Админ-панель</span>
+                                </Nav.Link>
+                                <Nav.Link
                                     style={NAVBUTTON_STYLE}
                                     className='d-flex align-items-center nav-button'
-                                    onClick={() => navigate(ADMIN_ROUTE)}
-                                >
-                                    <FaRegUser />&nbsp;Админ-панель
-                                </Button>
-                                <Button
-                                    style={NAVBUTTON_STYLE}
-                                    className='d-flex align-items-center nav-button'
-                                    onClick={() => {
-                                      window.scrollTo(0, 0)
-                                      navigate(USER_ROUTE)
-                                    }}
-                                >
-                                    <FaRegUser />&nbsp;Личный кабинет
-                                </Button>
-                                <Button
-                                    style={NAVBUTTON_STYLE}
-                                    className='nav-button'
                                     onClick={() => logOut()}
                                 >
-                                    <span className='d-flex align-items-center'><BiLogOut style={{ fontSize: '1.5rem' }} />&nbsp;Выйти</span>
-                                </Button>
+                                    <span className='d-flex align-items-center ps-2 pe-1'><BiLogOut style={{ fontSize: '1.5rem', rotate: '180deg' }} /></span>
+                                </Nav.Link>
                             </Nav>
                           : <Nav
                                 className="ms-auto my-2 my-lg-0"
                                 style={{ maxHeight: '100px' }}
                                 navbarScroll
                             >
-                                <Button
+                                <Nav.Link
+                                    as={Link}
+                                    to={LOGIN_ROUTE}
+                                    href={LOGIN_ROUTE}
                                     style={NAVBUTTON_STYLE}
-                                    className='nav-button'
-                                    onClick={() => {
-                                      window.scrollTo(0, 0)
-                                      navigate(LOGIN_ROUTE)
-                                    }}
+                                    className='d-flex align-items-center ms-2 me-2 nav-button'
+                                    onClick={() => window.scrollTo(0, 0)}
                                 >
-                                    <span className='d-flex align-items-center'><BiLogIn style={{ fontSize: '1.5rem' }} />&nbsp;Войти</span>
-                                </Button>
+                                    <span className='d-flex align-items-center ps-2 pe-1'><BiLogIn style={{ fontSize: '1.5rem' }} />&nbsp;Войти</span>
+                                </Nav.Link>
                             </Nav>
                         }
                     </Navbar.Collapse>

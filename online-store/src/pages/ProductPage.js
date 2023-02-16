@@ -18,7 +18,6 @@ const ProductPage = observer(() => {
   const [isLoading, setIsLoading] = useState(true)
   const [md1, setMd1] = useState(4)
   const [md2, setMd2] = useState(4)
-  const [md3, setMd3] = useState(8)
 
   useEffect(() => {
     fetchOneProduct(id)
@@ -32,11 +31,9 @@ const ProductPage = observer(() => {
     if (user.userWidth < 1077) {
       setMd1(12)
       setMd2(6)
-      setMd3(12)
     } else if (user.userWidth >= 1077) {
       setMd1(4)
       setMd2(4)
-      setMd3(8)
     }
   }, [user.userWidth])
 
