@@ -4,8 +4,9 @@ import { Card, Container, Modal, Row, Tab, Tabs, Form, Image } from 'react-boots
 import Fade from 'react-reveal/Fade'
 import { useNavigate } from 'react-router-dom'
 import { Context } from '..'
+import { createOrder } from '../components/http/ordersAPI'
 import Total from '../components/Total'
-import { CART_ROUTE } from '../utils/routeConsts'
+import { CART_ROUTE, USER_ROUTE } from '../utils/routeConsts'
 import { SECONDARY_COLOR } from '../utils/uiConsts'
 import BootstrapReStyles from '../styles/BootstrapReStyles.css'
 import ResponsiveStyles from '../styles/ResponsiveStyles.css'
@@ -60,6 +61,23 @@ const Cart = observer(() => {
       setFlexClassStyles('flex-row align-items-end')
     }
   }, [user.userWidth])
+
+  const placeOrder = () => {
+    if (cart.cartItems.length !== 0) {
+      const data = {
+        cart: cart.cartItems,
+        userID: user.id
+      }
+
+      createOrder(data)
+        .then(data => {
+          window.scrollTo(0, 0)
+          navigate(USER_ROUTE)
+        })
+    } else {
+      alert('Вы не добавили ни одного товара')
+    }
+  }
 
   return (
         <Container className="pt-5 pb-5">
@@ -175,7 +193,7 @@ const Cart = observer(() => {
                             <Card id='orderingpage-card'>
                                 <Total itemsCount={itemsCount} />
                                 <button
-                                    onClick={() => navigate()}
+                                    onClick={() => placeOrder()}
                                     className="mt-4 main-button inverted"
                                     style={{ position: 'absolute', width: '90%', top: 'auto', bottom: 10, left: '5%', display: 'block', margin: '0 auto', fontSize: '1.2rem', padding: 20 }}
                                 >

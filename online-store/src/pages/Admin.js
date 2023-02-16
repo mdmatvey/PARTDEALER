@@ -12,7 +12,7 @@ const Admin = () => {
   /* HARD CODED USER DATA */
 
   return (
-        <ControlPanel button1={'Управление'} button2={'Заказы'} FirstTab={AdminControl} SecondTab={Orders} userTemp={userTemp} />
+        <ControlPanel button1={'Заказы'} button2={'Управление'} FirstTab={Orders} SecondTab={AdminControl} userTemp={userTemp} />
   )
 }
 

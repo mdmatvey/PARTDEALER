@@ -15,7 +15,7 @@ const User = () => {
   /* HARD CODED USER DATA */
 
   return (
-        <ControlPanel button1={'Данные'} button2={'Заказы'} FirstTab={UserControl} SecondTab={Orders} userTemp={userTemp} />
+        <ControlPanel button1={'Заказы'} button2={'Данные'} FirstTab={Orders} SecondTab={UserControl} userTemp={userTemp} />
   )
 }
 

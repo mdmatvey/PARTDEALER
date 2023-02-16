@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Accordion, Dropdown, Row } from 'react-bootstrap'
 import { Context } from '../index'
+import { changeStatus } from './http/ordersAPI'
 import OrderItem from './OrderItem'
 import BootstrapReStyles from '../styles/BootstrapReStyles.css'
 import EventStyles from '../styles/EventStyles.css'
@@ -10,6 +11,11 @@ const Order = ({ userTemp }) => {
   const { user, cart } = useContext(Context)
 
   const [orderStatus, setOrderStatus] = useState('Платёж обрабатывается')
+
+  const changeOrderStatus = () => {
+    changeStatus({ status: orderStatus })
+      .then(data => setOrderStatus(orderStatus))
+  }
 
   const [flexDirection, setFlexDirection] = useState('flex-row')
 
@@ -44,10 +50,10 @@ const Order = ({ userTemp }) => {
                                         {orderStatus}
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
-                                        <Dropdown.Item onClick={(e) => setOrderStatus(e.target.textContent)} >Платёж обрабатывается</Dropdown.Item>
-                                        <Dropdown.Item onClick={(e) => setOrderStatus(e.target.textContent)} >Платёж подтвержден</Dropdown.Item>
-                                        <Dropdown.Item onClick={(e) => setOrderStatus(e.target.textContent)} >Передано в доставку</Dropdown.Item>
-                                        <Dropdown.Item onClick={(e) => setOrderStatus(e.target.textContent)} >Доставлено</Dropdown.Item>
+                                        <Dropdown.Item onClick={(e) => changeOrderStatus(e.target.textContent)} >Платёж обрабатывается</Dropdown.Item>
+                                        <Dropdown.Item onClick={(e) => changeOrderStatus(e.target.textContent)} >Платёж подтвержден</Dropdown.Item>
+                                        <Dropdown.Item onClick={(e) => changeOrderStatus(e.target.textContent)} >Передано в доставку</Dropdown.Item>
+                                        <Dropdown.Item onClick={(e) => changeOrderStatus(e.target.textContent)} >Доставлено</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                               : 'оплачено'
