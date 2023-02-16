@@ -25,6 +25,11 @@
     color: #fff;
 }
 
+.disabled {
+    cursor: not-allowed !important;
+    border-color: gray;
+}
+
 .main-button:hover, 
 .count-button:hover {
     background: #00CCCC radial-gradient(circle, transparent 1%, #fff 1%) center/15000%;
@@ -33,7 +38,15 @@
 .inverted:hover {
     color: #000;
     background: #00CCCC radial-gradient(circle, transparent 1%, #222222 1%) center/15000%;
-    
+}
+
+.disabled:hover {
+    color: #fff;
+    background: gray radial-gradient(circle, transparent 1%, #fff 1%) center/15000%;
+}
+
+.inverted.disabled:hover {
+    color: #000;
 }
 
 .main-button:active,
@@ -41,6 +54,11 @@
     background-color: #00CCCC;
     background-size: 100%;
     transition: background 0s;
+}
+
+.disabled:active {
+    color: #000;
+    background-color: gray;
 }
 
 .inverted:active {
