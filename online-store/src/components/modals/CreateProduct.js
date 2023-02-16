@@ -46,15 +46,6 @@ const CreateProduct = observer(({ show, onHide }) => {
   }
 
   const addProduct = () => {
-    // const formData = new FormData()
-    // formData.append('title', name);
-    // formData.append('price', price);
-    // formData.append('description', `${info[0].title}: ${info[0].description}`);
-    // formData.append('category', product.selectedCategory.name);
-
-    // createProduct(formData)
-    //     .then(data => onHide())
-
     const data = {
       title: name,
       price,

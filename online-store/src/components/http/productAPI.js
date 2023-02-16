@@ -1,130 +1,128 @@
-// import { $authHost, $host } from "./index";
-import jwt_decode from 'jwt-decode'
+// СОЗДАТЬ КАТЕГОРИЮ
+export const createCategory = async (category) => { // category === { name: value }
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(category)
+  }
 
-export const createCategory = async (category) => {
-  // const {data} = await $authHost.post('api/type', category);
+  const response = await fetch('https://fakestoreapi.com/products/', options) // URL API АДРЕСА
+  const responseJSON = await response.json()
 
-  fetch('https://api.storerestapi.com/categories',
-    {
-      method: 'POST',
-      body: JSON.stringify({
-        name: category.name
-      }),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8'
-      }
-    })
-    .then(response => response.json())
-    .then(json => console.log(json))
-
-  // return data
+  return responseJSON
 }
 
+// ПОЛУЧИТЬ ВСЕ КАТЕГОРИИ
 export const fetchCategories = async () => {
-  // const {data} = await $host.get('api/type');
-
-  const response = await fetch('https://fakestoreapi.com/products/categories')
+  const response = await fetch('https://fakestoreapi.com/products/categories') // URL API ЗАПРОСА
   const responseJSON = await response.json()
 
-  responseJSON.push('category5', 'category6', 'category7', 'category8')
-
-  const responseObj = []
-  responseJSON.map((category, index) => {
-    responseObj[index] = {
-      id: index,
-      name: category,
-      image: 'http://via.placeholder.com/640x360'
-    }
-  })
-
-  return responseObj
-
-  // return data
+  return responseJSON
 }
 
-export const createBrand = async (brand) => {
-  // const {data} = await $authHost.post('api/brand', brand);
+// СОЗДАТЬ БРЕНД
+export const createBrand = async (brand) => { // brand === { name: value }
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(brand)
+  }
 
-  fetch('https://api.storerestapi.com/categories',
-    {
-      method: 'POST',
-      body: JSON.stringify({
-        name: brand.name
-      }),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8'
-      }
-    })
-    .then(response => response.json())
-    .then(json => {
-      json.message = 'Success! Brand created'
-      console.log(json)
-    })
+  const response = await fetch('https://fakestoreapi.com/products/', options) // URL API АДРЕСА
+  const responseJSON = await response.json()
 
-  // return data
+  return responseJSON
 }
 
+// ПОЛУЧИТЬ ВСЕ БРЕНДЫ
 export const fetchBrands = async () => {
-  // const {data} = await $host.get('api/brand');
-
-  const response = await fetch('https://fakestoreapi.com/products/categories')
-  let responseJSON = await response.json()
-
-  responseJSON = ['brand1', 'brand2', 'brand3', 'brand4', 'brand5', 'brand6', 'brand7', 'brand8']
-
-  const responseObj = []
-  responseJSON.map((category, index) => {
-    responseObj[index] = {
-      id: index,
-      name: category,
-      image: 'http://via.placeholder.com/640x360'
-    }
-  })
-
-  return responseObj
-
-  // return data
-}
-
-export const createProduct = async (product) => {
-  // const {data} = await $authHost.post('api/product', product);
-
-  fetch('https://api.storerestapi.com/products',
-    {
-      method: 'POST',
-      body: JSON.stringify(product),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8'
-      }
-    })
-    .then(response => response.json())
-    .then(json => console.log(json))
-
-  // return data
-}
-
-export const fetchProducts = async (categoryId, brandId, page, limit = 8) => {
-  // const {data} = await $host.get('api/product', {params: {
-  //     categoryId, brandId, page, limit
-  // }});
-
-  const response = await fetch('https://fakestoreapi.com/products?limit=' + limit)
+  const response = await fetch('https://fakestoreapi.com/products/brands') // URL API ЗАПРОСА
   const responseJSON = await response.json()
-  responseJSON.map(product => product.count = 1)
 
   return responseJSON
-
-  // return data
 }
 
+export const createProduct = async (data) => {
+  /* ОБРАЗЕЦ ТЕЛА ЗАПРОСА
+
+  const data = {
+    title: name,
+    price,
+    description: `${info[0].title}: ${info[0].description}`,
+    category: product.selectedCategory.name
+  }
+
+  ОБРАЗЕЦ ТЕЛА ЗАПРОСА */
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  }
+
+  const response = await fetch('https://fakestoreapi.com/products/', options) // URL API АДРЕСА
+  const responseJSON = await response.json()
+
+  return responseJSON
+}
+
+// ПОЛУЧИТЬ ПРОДУКТЫ
+export const fetchProducts = async (categoryID, brands, page, limit = 8) => {
+  const data = {
+    categoryID, // [number] - id категории товары которой нужно получить
+    brands, // [array] - массив из id брендов товары которых нужно получить
+    page, // [number] - текущая страница
+    limit // [number] - количество товаров на странице пагинации
+  }
+
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  }
+
+  const response = await fetch('https://fakestoreapi.com/products/', options) // URL API АДРЕСА
+  const responseJSON = await response.json()
+
+  return responseJSON
+}
+
+// ПОЛУЧИТЬ КОНКРЕТНЫЙ ПРОДУКТ
 export const fetchOneProduct = async (id) => {
-  // const {data} = await $host.get('api/product/' + id);
-
-  const response = await fetch('https://fakestoreapi.com/products/' + id)
+  const response = await fetch(`https://fakestoreapi.com/products/${id}`) // URL API АДРЕСА + ID ТОВАРА
   const responseJSON = await response.json()
-  responseJSON.count = 1
 
   return responseJSON
+}
 
-  // return data
+// ПОЛУЧИТЬ РЕЗУЛЬТАТ ПОИСКА ПО ПРОДУКТАМ
+export const fetchFoundProducts = async (query) => {
+  const response = await fetch(`https://fakestoreapi.com/products/search?query=${query}`) // URL API АДРЕСА + ПОИСКОВОЙ ЗАПРОС
+  const responseJSON = await response.json()
+
+  return responseJSON
+}
+
+// ПОЛУЧИТЬ СОРТИРОВКУ ПО ЦЕНЕ
+export const fetchSortProductsPrice = async (order) => {
+  const response = await fetch(`https://fakestoreapi.com/?ordering=${order}price`) // order === '-' / '+'
+  const responseJSON = await response.json()
+
+  return responseJSON
+}
+
+// ПОЛУЧИТЬ СОРТИРОВКУ ПО ПОПУЛЯРНОСТИ
+export const fetchSortProductsPopularity = async (order) => {
+  const response = await fetch(`https://fakestoreapi.com/?ordering=${order}popularity`) // order === '-' / '+'
+  const responseJSON = await response.json()
+
+  return responseJSON
 }
