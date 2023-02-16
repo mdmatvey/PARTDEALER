@@ -34,6 +34,16 @@ const SortdBar = observer(({ setIsProductsLoading }) => {
     }
   }, [user.userWidth])
 
+  const [viewType, setViewType] = useState('d-flex align-items-baseline')
+
+  useEffect(() => {
+    if (user.userWidth < 509) {
+      setViewType('d-none')
+    } else if (user.userWidth >= 509) {
+      setViewType('d-flex align-items-baseline')
+    }
+  }, [user.userWidth])
+
   const itemsOnPage = (e, num) => {
     product.setLimit(num)
 
@@ -44,6 +54,12 @@ const SortdBar = observer(({ setIsProductsLoading }) => {
     e.target.style.color = 'gray'
   }
 
+  const listType = (bool, element1, element2) => {
+    product.setDisplayGrid(bool)
+    element1.style.color = 'gray'
+    element2.style.color = '#000'
+  }
+
   const [priceCaretDisplay, setPrcieCaretDisplay] = useState({ display: 'none' })
   const [popularityCaretDisplay, setPopularityCaretDisplay] = useState({ display: 'inline-block' })
   const [nbspDisplay, setNbspDisplay] = useState({ display: 'inline-block' })
@@ -52,7 +68,7 @@ const SortdBar = observer(({ setIsProductsLoading }) => {
     if (user.userWidth < 485) {
       setNbspDisplay({ display: 'none' })
     } else if (user.userWidth >= 485) {
-      setNbspDisplay({ display: 'inline-block' })
+      setNbspDisplay({ display: 'flex' })
     }
   }, [user.userWidth])
 
@@ -164,7 +180,7 @@ const SortdBar = observer(({ setIsProductsLoading }) => {
                                 12
                             </Button>
                         </span>
-                        <span className='d-flex align-items-baseline'>
+                        <span className={viewType}>
                             <h5><strong>Вид:</strong></h5>
                             <Button onClick={(e) => listType(true, document.getElementById('grid'), document.getElementById('list'))} style={TEXTBUTTON_STYLE}>
                                 <TiThLarge id="grid" style={{ color: 'gray', transition: '0.25s' }} />

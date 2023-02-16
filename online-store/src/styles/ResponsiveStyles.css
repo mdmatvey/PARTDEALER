@@ -74,6 +74,10 @@
     margin-left: 16px
 }
 
+#cartbutton-list {
+    margin-left: auto
+}
+
 @media only screen and (max-width: 1216px) {
     .cartpage-button {
         font-size: 0.85rem;
@@ -94,6 +98,10 @@
 @media only screen and (max-width: 992px) {
     .cartpage-button {
         font-size: 1.03rem;
+    }
+
+    #cartbutton-list button {
+        margin: 0
     }
 
     #orderingpage-bottom {
