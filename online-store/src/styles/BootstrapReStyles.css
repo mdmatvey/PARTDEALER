@@ -1,15 +1,11 @@
-.pagination li span {
-    background-color: #222222 !important;
-    border-color: #222222 !important;
+ul.pagination li.active span {
+    color: #00CCCC;
+    background-color: #000 !important;
+    border-color: #000
 }
 
-.pagination li a {
-    color: #222222 !important;
-}
-
-.page-link {
-    color: #00CCCC !important;
-    outline: none;
+ul.pagination li a {
+    color: #000 !important;
 }
 
 .nav-link {

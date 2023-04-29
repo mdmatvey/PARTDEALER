@@ -7,7 +7,7 @@ import { fetchBrands, fetchCategories, fetchProducts } from '../components/http/
 import Pages from '../components/Pages'
 import ProductList from '../components/ProductList'
 import FilterBar from '../components/FilterBar'
-import ResponsiveStyles from '../styles/ResponsiveStyles.css'
+import '../styles/ResponsiveStyles.css'
 
 const Shop = observer(() => {
   const { product } = useContext(Context)
@@ -27,20 +27,14 @@ const Shop = observer(() => {
         product.setBrands(data)
         setIsBrandsIsLoading(false)
       })
-
-    fetchProducts(null, null, 1, product.limit)
-      .then(data => {
-        product.setProducts(data)
-        setIsProductsLoading(false)
-        // product.setTotalCount(data.length)
-      })
   }, [])
 
   useEffect(() => {
-    fetchProducts(product.selectedCategory.id, product.selectedBrand.id, product.page, product.limit)
+    fetchProducts(null, product.selectedCategory.id, product.selectedBrand.id, product.page, product.limit)
       .then(data => {
-        product.setProducts(data)
-        // product.setTotalCount(data.length)
+        product.setProducts(data.results)
+        product.setTotalCount(data.count)
+        setIsProductsLoading(false)
       })
   }, [product.page, product.limit, product.selectedCategory, product.selectedBrand])
 

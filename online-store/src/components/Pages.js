@@ -2,18 +2,11 @@ import { observer } from 'mobx-react-lite'
 import React, { useContext } from 'react'
 import { Pagination } from 'react-bootstrap'
 import { Context } from '../index'
-import BootstrapReStyles from '../styles/BootstrapReStyles.css'
-import EventStyles from '../styles/EventStyles.css'
+import '../styles/BootstrapReStyles.css'
+import '../styles/EventStyles.css'
 
 const Pages = observer(() => {
-  const { product } = useContext(Context);
-
-  (async function getTotalProductCount () {
-    const response = await fetch('https://fakestoreapi.com/products')
-    const responseJSON = await response.json()
-
-    product.setTotalCount(responseJSON.length)
-  })()
+  const { product } = useContext(Context)
 
   const pageCount = Math.ceil(product.totalCount / product.limit)
   const pages = []
@@ -22,8 +15,52 @@ const Pages = observer(() => {
     pages.push(i + 1)
   }
 
+  const midLow = Math.ceil(product.page - 1)
+  const mid = Math.ceil(product.page)
+  const midHigh = Math.ceil(product.page + 1)
+
   return (
-        <Pagination className='mt-5 mb-5 justify-content-center'>
+    Math.ceil(product.totalCount / product.limit) > 10
+      ? <Pagination className='mt-5' style={{ justifyContent: 'center' }}>
+          { midLow > 0 &&
+            <>
+              <Pagination.First
+                onClick={() => product.setPage(1)}
+              />
+              <Pagination.Ellipsis disabled />
+              <Pagination.Item
+                key={midLow}
+                active={product.page === midLow}
+                onClick={() => product.setPage(midLow)}
+              >
+                {midLow}
+              </Pagination.Item>
+            </>
+          }
+          <Pagination.Item
+            key={mid}
+            active={product.page === mid}
+            onClick={() => product.setPage(mid)}
+          >
+            {mid}
+          </Pagination.Item>
+          { midHigh <= pageCount &&
+            <>
+              <Pagination.Item
+                key={midHigh}
+                active={product.page === midHigh}
+                onClick={() => product.setPage(midHigh)}
+              >
+                {midHigh}
+              </Pagination.Item>
+              <Pagination.Ellipsis disabled />
+              <Pagination.Last
+                onClick={() => product.setPage(pageCount)}
+              />
+            </>
+          }
+        </Pagination>
+      : <Pagination className='mt-5' style={{ justifyContent: 'center' }}>
             {pages.map(page =>
                 <Pagination.Item
                     key={page}

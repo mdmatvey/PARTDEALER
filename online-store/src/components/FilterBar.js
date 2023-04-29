@@ -5,7 +5,7 @@ import { Card, Form } from 'react-bootstrap'
 import Fade from 'react-reveal/Fade'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import BootstrapReStyles from '../styles/BootstrapReStyles.css'
+import '../styles/BootstrapReStyles.css'
 
 const FilterBar = observer(({ isCategoriesLoading, isBrandsLoading }) => {
   const { user, product } = useContext(Context)
@@ -25,11 +25,6 @@ const FilterBar = observer(({ isCategoriesLoading, isBrandsLoading }) => {
       setColumns(2)
     }
   }, [user.userWidth])
-
-  // const [brands, setBrands] = useState([]);
-  // useEffect(() => {
-  //     setBrands(product.brands)
-  // }, [product.brands])
 
   useEffect(() => {
     if (document.getElementsByClassName('filterBarChecked')[0]) {

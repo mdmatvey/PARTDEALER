@@ -57,14 +57,18 @@ const ProductPage = observer(() => {
                               {
                                   isLoading
                                     ? <Skeleton style={{ display: 'block', margin: '0 auto', width: 300, height: 300 }} />
-                                    : <Image style={{ objectFit: 'contain', display: 'block', margin: '0 auto', width: '100%' }} width={300} height={300} src={product.products.image} />
+                                    : product.products.images.length !== 0
+                                      ? <Image style={{ objectFit: 'contain', display: 'block', margin: '0 auto', width: '100%' }} width={300} height={300} src={product.products.images[0].imageName} />
+                                      : <Image style={{ objectFit: 'contain', display: 'block', margin: '0 auto', width: '100%' }} width={300} height={300} src={'https://media.istockphoto.com/id/1147544807/ru/%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F/%D0%BD%D0%B5%D1%82-thumbnail-%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80-%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9.jpg?s=612x612&w=0&k=20&c=qA0VzNlwzqnnha_m2cHIws9MJ6vRGsZmys335A0GJW4='} />
                               }
                             </Fade>
                             : <Fade left>
                             {
                                 isLoading
                                   ? <Skeleton style={{ display: 'block', margin: '0 auto', width: 300, height: 300 }} />
-                                  : <Image style={{ objectFit: 'contain', display: 'block', margin: '0 auto', width: '100%' }} width={300} height={300} src={product.products.image} />
+                                  : product.products.images.length !== 0
+                                    ? <Image style={{ objectFit: 'contain', display: 'block', margin: '0 auto', width: '100%' }} width={300} height={300} src={product.products.images[0].imageName} />
+                                    : <Image style={{ objectFit: 'contain', display: 'block', margin: '0 auto', width: '100%' }} width={300} height={300} src={'https://media.istockphoto.com/id/1147544807/ru/%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F/%D0%BD%D0%B5%D1%82-thumbnail-%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80-%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9.jpg?s=612x612&w=0&k=20&c=qA0VzNlwzqnnha_m2cHIws9MJ6vRGsZmys335A0GJW4='} />
                             }
                           </Fade>
                         }
@@ -84,10 +88,21 @@ const ProductPage = observer(() => {
                                           <Skeleton style={{ width: '95%' }} />
                                           <Skeleton style={{ width: '40%' }} />
                                       </>
-                                    : <div style={{ fontSize: '1.7rem' }}>
-                                          <h3 style={{ textDecoration: 'underline', textDecorationColor: '#00CCCC', textDecorationThickness: 5 }}><strong>Описание товара:</strong></h3>
-                                          {product.products.description}
-                                      </div>
+                                    : <>
+                                          <div style={{ fontSize: '1.7rem' }}>
+                                              <h3 style={{ fontSize: '2.4rem', textDecoration: 'underline', textDecorationColor: '#00CCCC', textDecorationThickness: 5 }}><strong>Описание товара:</strong></h3>
+                                              <strong>Название: </strong> {product.products.description}
+                                          </div>
+                                          <div style={{ fontSize: '1.7rem' }}>
+                                            <strong>Бренд: </strong>{product.products.brand}
+                                          </div>
+                                          <div style={{ fontSize: '1.7rem' }}>
+                                            <strong>Артикул: </strong>{product.products.article}
+                                          </div>
+                                          <div style={{ fontSize: '1.7rem' }}>
+                                            <strong>Номенклатура: </strong>{product.products.guid}
+                                          </div>
+                                      </>
                               }
                           </Card>
                         </Fade>

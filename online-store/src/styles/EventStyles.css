@@ -131,7 +131,7 @@
     border-color: #222222;
 }
 
-.form-control:focus {
+.form-control.search-bar:focus {
     border-color: #00CCCC;
     background: #fff !important;
     box-shadow: 0 0 0 0.25rem rgba(34, 34, 34, 0.2) !important;

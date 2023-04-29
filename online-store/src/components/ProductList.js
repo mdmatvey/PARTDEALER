@@ -41,22 +41,22 @@ const ProductList = observer(({ isProductsLoading }) => {
       {
         product.displayGrid
           ? <Container style={{ padding: 10, overflow: 'visible' }}>
-          <Row style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%' }}>
-            {
-              isProductsLoading
-                ? <SkeletonProduct products={4} />
-                : product.currentProducts.length !== undefined
-                  ? product.currentProducts.map(product =>
-                      <Product key={product.key} item={product} />
-                  )
-                  : null
-            }
-          </Row>
-        </Container>
+              <Row style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%' }}>
+                {
+                  isProductsLoading
+                    ? <SkeletonProduct products={24} />
+                    : product.currentProducts.length !== undefined
+                      ? product.currentProducts.map(product =>
+                          <Product key={product.key} item={product} />
+                      )
+                      : null
+                }
+              </Row>
+            </Container>
           : <Container style={{ padding: 10, overflow: 'visible' }}>
             {
               isProductsLoading
-                ? <SkeletonProduct products={4} />
+                ? <SkeletonProduct products={24} />
                 : product.currentProducts.length !== undefined
                   ? product.currentProducts.map(product =>
                       <Product key={product.key} item={product} />

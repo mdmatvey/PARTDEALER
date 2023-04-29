@@ -12,7 +12,7 @@ export default class ProductStore {
     this._displayGrid = true
     this._page = 1
     this._totalCount = 0
-    this._limit = 8
+    this._limit = 24
     makeAutoObservable(this)
   }
 

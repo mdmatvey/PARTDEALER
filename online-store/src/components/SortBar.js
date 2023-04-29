@@ -7,7 +7,7 @@ import { TEXTBUTTON_STYLE } from '../utils/uiConsts'
 // import { fetchSortProductsPrice, fetchSortProductsPopularity } from './http/productAPI'
 import { TiThList, TiThLarge } from 'react-icons/ti'
 import { BsCaretDownFill } from 'react-icons/bs'
-import ResponsiveStyles from '../styles/ResponsiveStyles.css'
+import '../styles/ResponsiveStyles.css'
 
 let i = 0
 let j = 0
@@ -47,10 +47,9 @@ const SortdBar = observer(({ setIsProductsLoading }) => {
   const itemsOnPage = (e, num) => {
     product.setLimit(num)
 
-    document.getElementById('four').style.color = '#000'
-    document.getElementById('eight').style.color = '#000'
     document.getElementById('twelve').style.color = '#000'
-    document.getElementById('all').style.color = '#000'
+    document.getElementById('twenty_four').style.color = '#000'
+    document.getElementById('forty_eight').style.color = '#000'
     e.target.style.color = 'gray'
   }
 
@@ -159,34 +158,34 @@ const SortdBar = observer(({ setIsProductsLoading }) => {
                         <span className="d-flex align-items-baseline">
                             <h5><strong>На странице:</strong></h5>
                             <Button
-                                onClick={(e) => itemsOnPage(e, 4)}
-                                id="four"
-                                style={{ ...TEXTBUTTON_STYLE, color: '#000' }}
-                            >
-                                4
-                            </Button>
-                            <Button
-                                onClick={(e) => itemsOnPage(e, 8)}
-                                id="eight"
-                                style={{ ...TEXTBUTTON_STYLE, color: 'gray' }}
-                            >
-                                8
-                            </Button>
-                            <Button
                                 onClick={(e) => itemsOnPage(e, 12)}
                                 id="twelve"
-                                style={{ ...TEXTBUTTON_STYLE, color: '#000' }}
+                                style={{ ...TEXTBUTTON_STYLE, color: product.limit === 12 ? 'gray' : '#000' }}
                             >
                                 12
+                            </Button>
+                            <Button
+                                onClick={(e) => itemsOnPage(e, 24)}
+                                id="twenty_four"
+                                style={{ ...TEXTBUTTON_STYLE, color: product.limit === 24 ? 'gray' : '#000' }}
+                            >
+                                24
+                            </Button>
+                            <Button
+                                onClick={(e) => itemsOnPage(e, 48)}
+                                id="forty_eight"
+                                style={{ ...TEXTBUTTON_STYLE, color: product.limit === 48 ? 'gray' : '#000' }}
+                            >
+                                48
                             </Button>
                         </span>
                         <span className={viewType}>
                             <h5><strong>Вид:</strong></h5>
                             <Button onClick={(e) => listType(true, document.getElementById('grid'), document.getElementById('list'))} style={TEXTBUTTON_STYLE}>
-                                <TiThLarge id="grid" style={{ color: 'gray', transition: '0.25s' }} />
+                                <TiThLarge id="grid" style={{ color: product.displayGrid === true ? 'gray' : '#000', transition: '0.25s' }} />
                             </Button>
                             <Button onClick={(e) => listType(false, document.getElementById('list'), document.getElementById('grid'))} style={TEXTBUTTON_STYLE}>
-                                <TiThList id="list" style={{ transition: '0.25s' }} />
+                                <TiThList id="list" style={{ color: product.displayGrid === false ? 'gray' : '#000', transition: '0.25s' }} />
                             </Button>
                         </span>
                     </div>

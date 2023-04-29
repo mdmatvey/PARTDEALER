@@ -1,8 +1,12 @@
-import React from 'react'
-import { Button, Form } from 'react-bootstrap'
+import React, { useEffect } from 'react'
+import { Form } from 'react-bootstrap'
 import { PRIMARY_COLOR } from '../utils/uiConsts'
 
 const CountButton = ({ item, productPage }) => {
+  useEffect(() => {
+    item.count = 1
+  }, [])
+
   const changeCount = (num) => {
     if (Number(item.count) + num > 0) {
       item.count = Number(item.count) + num
@@ -23,7 +27,7 @@ const CountButton = ({ item, productPage }) => {
                     className="form-inline text-center shadow-none"
                     value={item.count}
                     style={{ color: productPage ? '#fff' : '#000', height: '100%', background: 'none', borderWidth: '3px 0 3px 0', borderColor: PRIMARY_COLOR, borderRadius: 0 }}
-                    onChange={e => isNaN(Number(e.target.value)) ? NaN : e.target.value.length !== 0 ? item.count = e.target.value : 1 }
+                    onChange={e => isNaN(Number(e.target.value)) ? NaN : e.target.value.length !== 0 ? e.target.value == 0 ? item.count = 1 : item.count = e.target.value : 1 }
                     type="text"
                     minLength="0"
                     maxLength="2"

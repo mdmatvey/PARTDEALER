@@ -12,7 +12,7 @@ const Product = ({ item, productPage }) => {
   return (
     user.isAuth
       ? <button
-        onClick={() => {
+        onClick={(e) => {
           if (!cart.cartItems.map(item => item.id).includes(item.id)) {
             cart.setCartItems([...cart.cartItems, item])
           }
@@ -23,7 +23,7 @@ const Product = ({ item, productPage }) => {
           В корзину&nbsp;<TbShoppingCartPlus />
     </button>
       : <button
-        onClick={() => {
+        onClick={(e) => {
           window.scrollTo(0, 0)
           navigate(LOGIN_ROUTE)
         }}

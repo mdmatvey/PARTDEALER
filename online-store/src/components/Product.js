@@ -29,13 +29,13 @@ const Product = ({ item }) => {
     }
   }, [user.userWidth])
 
-  const [title, setTitle] = useState(item.title)
+  const [title, setTitle] = useState(item.description)
 
   useEffect(() => {
     if (user.userWidth < 537) {
-      setTitle(item.title.substring(0, 30) + '...')
+      setTitle(item.description.substring(0, 30) + '...')
     } else if (user.userWidth >= 537) {
-      setTitle(item.title)
+      setTitle(item.description)
     }
   }, [user.userWidth])
 
@@ -48,13 +48,17 @@ const Product = ({ item }) => {
                     style={{ cursor: 'pointer', border: 'none', padding: 5 }}
                     onClick={() => {
                       window.scrollTo(0, 0)
-                      navigate(PRODUCT_ROUTE + '/' + item.id)
+                      navigate(PRODUCT_ROUTE + '/' + item.guid)
                     }}
                 >
-                    <Image style={{ objectFit: 'contain', marginLeft: 'auto', marginRight: 'auto' }} width={150} height={150} src={item.image} />
-                    <div style={{ fontSize: '1.7rem', display: 'block', marginLeft: 'auto' }}><strong>{item.price.toFixed(2)}₽</strong></div>
+                    {
+                      item.images.length !== 0
+                        ? <Image style={{ objectFit: 'contain', marginLeft: 'auto', marginRight: 'auto' }} width={150} height={150} src={item.images[0].imageName} />
+                        : <Image style={{ objectFit: 'contain', marginLeft: 'auto', marginRight: 'auto' }} width={150} height={150} src={'https://media.istockphoto.com/id/1147544807/ru/%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F/%D0%BD%D0%B5%D1%82-thumbnail-%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80-%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9.jpg?s=612x612&w=0&k=20&c=qA0VzNlwzqnnha_m2cHIws9MJ6vRGsZmys335A0GJW4='} />
+                    }
+                    <div style={{ fontSize: '1.7rem', display: 'block', marginLeft: 'auto' }}><strong>{item.price}₽</strong></div>
                     <div>
-                        <div style={{ fontSize: '1rem' }}><strong>Brand </strong>{item.title.length > 50 ? item.title.substring(0, 50) + '...' : item.title}</div>
+                        <div style={{ fontSize: '1rem' }}><strong>{item.brand} </strong>{item.description.length > 50 ? item.description.substring(0, 50) + '...' : item.description}</div>
                         <div style={{ color: '#808080', marginTop: '5px' }}>4UP03831</div>
                     </div>
                 </Card>
@@ -64,25 +68,30 @@ const Product = ({ item }) => {
             </div>
         </Col>
       : <>
+          <div className='product-card list' style={{ height: '100%', position: 'relative' }}>
             <Card
-                className='pt-2 pb-2 product-card list'
-                style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '3fr 7fr 4fr 1fr', gridTemplateRows: 170, width: '100%', marginBottom: 20, cursor: 'pointer', border: 'none' }}
-                onClick={(e) => {
-                  window.e.stopPropagation()
+                className='pt-2 pb-2'
+                style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '3fr 7fr 4fr', gridTemplateRows: 170, width: '100%', marginBottom: 20, cursor: 'pointer', border: 'none' }}
+                onClick={() => {
                   window.scrollTo(0, 0)
-                  navigate(PRODUCT_ROUTE + '/' + item.id)
+                  navigate(PRODUCT_ROUTE + '/' + item.guid)
                 }}
             >
-                <Card.Img style={{ height: '80%', width: '80%', objectFit: 'contain', marginLeft: 'auto', marginRight: 'auto' }} src={item.image} />
+              {
+                item.images.length !== 0
+                  ? <Card.Img style={{ height: '80%', width: '80%', objectFit: 'contain', marginLeft: 'auto', marginRight: 'auto' }} src={item.images[0].imageName} />
+                  : <Image style={{ objectFit: 'contain', marginLeft: 'auto', marginRight: 'auto' }} width={150} height={150} src={'https://media.istockphoto.com/id/1147544807/ru/%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F/%D0%BD%D0%B5%D1%82-thumbnail-%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80-%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9.jpg?s=612x612&w=0&k=20&c=qA0VzNlwzqnnha_m2cHIws9MJ6vRGsZmys335A0GJW4='} />
+              }
                 <Card.Body>
-                    <Card.Title style={{ fontSize: '1.1rem' }}><strong>Brand</strong>{title}</Card.Title>
+                    <Card.Title style={{ fontSize: '1.1rem' }}><strong>{item.brand} </strong>{title}</Card.Title>
                     <Card.Subtitle>{item.category}</Card.Subtitle>
-                    <Card.Text><h2>{(item.price).toFixed(2)}₽</h2></Card.Text>
+                    <Card.Text><h2>{item.price}₽</h2></Card.Text>
                 </Card.Body>
-                <div id='cartbutton-list'>
-                    <CartButton item={item} productPage={false} />
-                </div>
             </Card>
+            <div id='cartbutton-list' style={{ position: 'absolute', top: '35%', right: '5%' }}>
+                <CartButton item={item} productPage={false} />
+            </div>
+          </div>
         </>
   )
 }
