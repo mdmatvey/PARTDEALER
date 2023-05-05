@@ -44,7 +44,7 @@ const ProductList = observer(({ isProductsLoading }) => {
               <Row style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%' }}>
                 {
                   isProductsLoading
-                    ? <SkeletonProduct products={24} />
+                    ? <SkeletonProduct products={product.limit} />
                     : product.currentProducts.length !== undefined
                       ? product.currentProducts.map(product =>
                           <Product key={product.key} item={product} />
@@ -56,7 +56,7 @@ const ProductList = observer(({ isProductsLoading }) => {
           : <Container style={{ padding: 10, overflow: 'visible' }}>
             {
               isProductsLoading
-                ? <SkeletonProduct products={24} />
+                ? <SkeletonProduct products={product.limit} />
                 : product.currentProducts.length !== undefined
                   ? product.currentProducts.map(product =>
                       <Product key={product.key} item={product} />
