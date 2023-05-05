@@ -6,9 +6,10 @@ export default class ProductStore {
     this._categoriesToDisplay = []
     this._brands = []
     this._products = []
+    this._searchQuery = ''
     this._currentProducts = []
-    this._selectedCategory = {}
-    this._selectedBrand = {}
+    this._selectedCategory = []
+    this._selectedBrand = []
     this._displayGrid = true
     this._page = 1
     this._totalCount = 0
@@ -30,6 +31,12 @@ export default class ProductStore {
 
   setProducts (product) {
     this._products = product
+  }
+
+  setSearchQuery (query) {
+    this.setSelectedCategory([])
+    this.setSelectedBrand([])
+    this._searchQuery = query
   }
 
   setCurrentProducts (products) {
@@ -76,6 +83,10 @@ export default class ProductStore {
 
   get products () {
     return this._products
+  }
+
+  get searchQuery () {
+    return this._searchQuery
   }
 
   get currentProducts () {

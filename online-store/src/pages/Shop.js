@@ -30,13 +30,31 @@ const Shop = observer(() => {
   }, [])
 
   useEffect(() => {
-    fetchProducts(null, product.selectedCategory.id, product.selectedBrand.id, product.page, product.limit)
+    setIsProductsLoading(true)
+
+    let query = null
+    let category = null
+    let brands = null
+
+    if (product.searchQuery.length > 0) {
+      query = product.searchQuery
+    }
+
+    if (product.selectedCategory.length > 0) {
+      category = product.selectedCategory
+    }
+
+    if (product.selectedBrand.length > 0) {
+      brands = product.selectedBrand.map(brand => brand.name)
+    }
+
+    fetchProducts(query, category, brands, product.page, product.limit)
       .then(data => {
         product.setProducts(data.results)
         product.setTotalCount(data.count)
         setIsProductsLoading(false)
       })
-  }, [product.page, product.limit, product.selectedCategory, product.selectedBrand])
+  }, [product.searchQuery, product.page, product.limit, product.selectedCategory, product.selectedBrand])
 
   return (
         <Container className='pt-4'>

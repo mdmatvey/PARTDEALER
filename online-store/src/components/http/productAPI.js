@@ -40,7 +40,7 @@ export const createBrand = async (brand) => { // brand === { name: value }
 
 // ПОЛУЧИТЬ ВСЕ БРЕНДЫ
 export const fetchBrands = async () => {
-  // const response = await fetch('https://fakestoreapi.com/products/brands') // URL API ЗАПРОСА
+  const response = await fetch('https://partdealer.vanaheimr.ru/api/brands/') // URL API ЗАПРОСА
   const responseJSON = await response.json()
 
   return responseJSON

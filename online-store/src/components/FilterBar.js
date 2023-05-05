@@ -32,6 +32,14 @@ const FilterBar = observer(({ isCategoriesLoading, isBrandsLoading }) => {
     }
   }, [product.categories])
 
+  const checkBrand = (e, brand) => {
+    if (e.target.checked) {
+      product.setSelectedBrand([...product.selectedBrand, brand])
+    } else {
+      product.setSelectedBrand(product.selectedBrand.filter(brandToDisplay => brand.id !== brandToDisplay.id))
+    }
+  }
+
   const chooseCategory = (e, category) => {
     if (e.target.checked) {
       product.setCategoriesToDisplay([...product.categoriesToDisplay, category])
@@ -45,7 +53,7 @@ const FilterBar = observer(({ isCategoriesLoading, isBrandsLoading }) => {
       ? <Fade top>
       <Card style={{ width: '100%', border: 'none' }}>
           <h2 style={{ textDecoration: 'underline', textDecorationColor: '#00CCCC', textDecorationThickness: 5 }}><strong>Бренды:</strong></h2>
-          <Form style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%' }}>
+          <Form style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, height: 285, width: '100%', overflowY: 'scroll', overflowX: 'hidden' }}>
               {
                   isBrandsLoading
                     ? <>
@@ -93,12 +101,12 @@ const FilterBar = observer(({ isCategoriesLoading, isBrandsLoading }) => {
       : <Fade left>
       <Card style={{ width: '100%', border: 'none' }}>
           <h2 style={{ textDecoration: 'underline', textDecorationColor: '#00CCCC', textDecorationThickness: 5 }}><strong>Бренды:</strong></h2>
-          <Form style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, width: '100%' }}>
+          <Form style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, alignContent: 'start', justifyContent: 'top', width: '100%', height: 285, overflowY: 'scroll', overflowX: 'hidden' }}>
               {
                   isBrandsLoading
                     ? <>
-                          <Skeleton count={4} style={{ width: '80%' }} />
-                          <Skeleton count={4} style={{ width: '80%' }} />
+                          <Skeleton count={12} style={{ width: '80%' }} />
+                          <Skeleton count={12} style={{ width: '80%' }} />
                       </>
                     : product.brands.filter(brand => {
                       if (brand.name.toLowerCase().includes(query.toLowerCase())) {
@@ -106,10 +114,10 @@ const FilterBar = observer(({ isCategoriesLoading, isBrandsLoading }) => {
                       }
 
                       return false
-                    }).map(brand => <Form.Check key={brand.id} label={brand.name} />)
+                    }).map(brand => <Form.Check onClick={(e) => checkBrand(e, brand)} key={brand.id} label={brand.name.length > 10 ? brand.name.substring(0, 10) + '...' : brand.name} />)
               }
           </Form>
-          <Form className="mt-3 d-inline-flex brandbar-form w-75 local-searchbar">
+          <Form className="mt-3 d-inline-flex brandbar-form local-searchbar">
               <Form.Control
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
