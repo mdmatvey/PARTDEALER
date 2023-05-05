@@ -12,21 +12,23 @@ import { FaTelegram, FaWhatsapp, FaRegUser } from 'react-icons/fa'
 import { TbShoppingCart } from 'react-icons/tb'
 import { GoSearch } from 'react-icons/go'
 import { BiLogIn, BiLogOut } from 'react-icons/bi'
-import BootstrapReStyles from '../styles/BootstrapReStyles.css'
-import NavbarStyles from '../styles/NavbarStyles.css'
-import EventStyles from '../styles/EventStyles.css'
+import '../styles/BootstrapReStyles.css'
+import '../styles/NavbarStyles.css'
+import '../styles/EventStyles.css'
 
 const NavBar = observer(() => {
-  const { user, cart } = useContext(Context)
+  const { user, product, cart } = useContext(Context)
   const navigate = useNavigate()
 
   const [cartOpen, setCartOpen] = useState(false)
 
   const [query, setQuery] = useState('')
 
-  const searchAPI = searchQuery => {
-    console.log(searchQuery)
+  const searchAPI = (e, searchQuery) => {
+    e.preventDefault()
     navigate(SHOP_ROUTE)
+    product.setSearchQuery(searchQuery)
+    setQuery('')
   }
 
   const logOut = () => {
@@ -107,7 +109,7 @@ const NavBar = observer(() => {
                 >
                     <Navbar.Toggle />
                     <Navbar.Collapse>
-                        <Form className="d-flex align-items-center">
+                        <Form className="d-flex align-items-center" onSubmit={(e) => searchAPI(e, query)}>
                             <Form.Control
                                 value={query}
                                 onChange={(e) => setQuery(e.target.value)}
@@ -119,9 +121,8 @@ const NavBar = observer(() => {
                                 aria-label="Search"
                         />
                             <button
-                                onClick={() => searchAPI(query)}
                                 className='main-button inverted'
-                                type='button'
+                                type="submit"
                             >
                                 <span className='d-flex align-items-center'><GoSearch />&nbsp;Искать</span>
                             </button>
